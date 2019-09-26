@@ -47,7 +47,9 @@ app.get('/names', (req, res) => {
   con.query('SELECT * FROM users', function (error, results, fields) {  
       if (error) throw error;
       else {
-           res.send(results);
+           return res.json({
+             data: results
+           })
       };
   });
 });

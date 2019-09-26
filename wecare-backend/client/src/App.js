@@ -5,21 +5,26 @@ import './App.css';
 class App extends Component{
 
   
-  state = {users: []}
+  state = {names: []}
 
   componentDidMount() {
-    fetch('/users')
-    .then(res => res.json())
-    .then(users => this.setState({users}));
+    this.getNames();
   }
+
+  getNames = _ => {
+    fetch('http://localhost:3001/names')
+    .then(res => res.json())
+    .then(res => this.setState({names: res.data}));
+  }
+
+  renderName = ({last,first}) => <div key={last}>{first} {last}</div>
+
 render(){
+  const {names} = this.state;
 
  return (
     <div className="App">
-      <h1>Users</h1>
-      <ul>
-        {this.state.users.map(user => <li key = {user.id}>{user.username} </li>)}
-      </ul>
+      {names.map(this.renderName)}
     </div>
   );
 }}
