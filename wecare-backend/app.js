@@ -43,10 +43,21 @@ app.use('/users', usersRouter);
 
 app.use(cors());
 
+app.get('/names', (req, res) => {
+  con.query('SELECT * FROM users', function (error, results, fields) {  
+      if (error) throw error;
+      else {
+           res.send(results);
+      };
+  });
+});
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
 });
+
+
 
 
 con.query('SELECT * from users', function (err, users, fields) {
