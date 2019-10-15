@@ -87,7 +87,7 @@ appt int NOT NULL,
 patient varchar(50) NOT NULL,
 doctor varchar(50) NOT NULL,
 diagnosis varchar(40) NOT NULL,
-prescription varchar(20) NOT NULL,
+prescription varchar(50) NOT NULL,
 FOREIGN KEY (appt) REFERENCES Appointment (uid),
 FOREIGN KEY (patient) REFERENCES Patient (email),
 FOREIGN KEY (doctor) REFERENCES DoctorNurse (email)
@@ -275,6 +275,7 @@ VALUES
 ('muyrapido55@gmail.com',15)
 ;
 
+#These values need to be changed, because I had a failed creation set, so it started at 16 for the auto increment. Basically, this is only for my screenshot, do 1-15
 INSERT INTO ApptInRoom(room,appt)
 VALUES
 (1, 1),
@@ -293,3 +294,24 @@ VALUES
 (28, 14),
 (29, 15)
 ;
+
+INSERT INTO diagnose(appt,patient,doctor,diagnosis,prescription)
+VALUES
+(1,'imsosick@gmail.com','Nick.Nolte@MetroGrand.gov', 'Major bloating due to allergy', 'Ibuprofen as needed'),
+(2,'pikachugrrl83@gmail.com', 'SandyRaimi@MetroGrand.gov', 'Muscle tightness/soreness', 'Stretch morning/night and before workouts'),
+(3,'Spam&Rice@hotmail.com', 'Bob.Grundy@MetroGrand.gov', 'Prehypertension', 'Heart Medication'),
+(4,'jonisthebest@yahoo.com','Tanya.Hilton@MetroGrand.gov','Osteoarthritis', 'none'),
+(5,'lightning2456@gmail.com','Sam.Worthington@MetroGrand.gov', 'Heartburn', 'Heartburn medication'),
+(6,'honeybunches@gmail.com','Winston.Johnson@MetroGrand.gov', 'Obesity', 'none'),
+(7,'thecia@us.gov', 'Priya.Rajanpal@MetroGrand.gov', 'Atherosclerosis', 'See nutritionist'),
+(8,'orangesherbert13@gmail.com','Lichiang.Yi@MetroGrand.gov', 'Allergic Reaction to Dairy', 'none'),
+(9,'Wunderbar24@gmail.com', 'Weston.Thurston@MetroGrand.gov', 'Shin Splints', 'See: PT'),
+(10,'its2am@sjsu.edu', 'Ignacio.Mundo@MetroGrand.gov', 'Caffeine Withdrawal', 'Caffeine pills, wean off'),
+(11,'timeconsuming@sjsu.edu', 'Padma.Patil@MetroGrand.gov', 'Insomnia', 'Melatonin'),
+(12,'boris.dyokovic@ibm.com', 'Remus.Lupin@MetroGrand.gov', 'Anxiety', 'See Psych'),
+(13,'thewindu@sbcglobal.net', 'Harry.Housen@MetroGrand.gov', 'Cancer', 'See Oncologist'),
+(14,'honkytonk66@gmail.com', 'Tuco.Salamanca@MetroGrand.gov', 'Whooping cough', 'none'),
+(15,'muyrapido55@gmail.com', 'Tommy.Gunn@MetroGrand.gov', 'Shoulder Impingement', 'See PT')
+;
+
+INSERT 
