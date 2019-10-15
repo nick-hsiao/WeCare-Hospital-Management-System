@@ -102,7 +102,7 @@ FOREIGN KEY (sched) REFERENCES Schedule (uid)
 
 CREATE TABLE DocsHaveSchedules(
 sched int NOT NULL,
-doctor varchar(20) NOT NULL,
+doctor varchar(50) NOT NULL,
 FOREIGN KEY (sched) REFERENCES Schedule (uid),
 FOREIGN KEY (doctor) REFERENCES DoctorNurse (email)
 );
@@ -331,4 +331,23 @@ VALUES
 (13,013),
 (14,014),
 (15,015)
+;
+
+INSERT INTO DocsHaveSchedules(sched,doctor)
+VALUES
+(001,'Nick.Nolte@MetroGrand.gov'),
+(002,'SandyRaimi@MetroGrand.gov'),
+(003,'Bob.Grundy@MetroGrand.gov'),
+(004,'Tanya.Hilton@MetroGrand.gov'),
+(005,'Sam.Worthington@MetroGrand.gov'),
+(006,'Winston.Johnson@MetroGrand.gov'),
+(007,'Priya.Rajanpal@MetroGrand.gov'),
+(008,'Lichiang.Yi@MetroGrand.gov'),
+(009,'Weston.Thurston@MetroGrand.gov'),
+(010,'Ignacio.Mundo@MetroGrand.gov'),
+(011,'Padma.Patil@MetroGrand.gov'),
+(012,'Remus.Lupin@MetroGrand.gov'),
+(013,'Harry.Housen@MetroGrand.gov'),
+(014,'Tuco.Salamanca@MetroGrand.gov'),
+(015,'Tommy.Gunn@MetroGrand.gov')
 ;
