@@ -217,3 +217,22 @@ VALUES
 ('08','1', 'MG Oncology', 'AVAILABLE'),
 ('09','1', 'MG ER 2', 'AVAILABLE')
 ;
+
+INSERT INTO DoctorNurse(email, gender, password, uid, name)
+VALUES
+('Nick.Nolte@MetroGrand.gov', 'male', '123teehee', 99001, 'Nick Nolte'),
+('SandyRaimi@MetroGrand.gov', 'female', 'yeehaw', 99002, 'Sandy Raimi'),
+('Bob.Grundy@MetroGrand.gov', 'male', '123tee4', 99003, 'Bob Grundy'),
+('Tanya.Hilton@MetroGrand.gov', 'female', '122hee', 99004, 'Tanya Hilton'),
+('Sam.Worthington@MetroGrand.gov', 'male', 'avatar2021', 99005, 'Sam Worthington'),
+('Winston.Johnson@MetroGrand.gov', 'male', 'banana', 99006, 'Winston Johnson'),
+('Priya.Rajanpal@MetroGrand.gov', 'female', 'goodeats', 99007, 'Priya Rajanpal'),
+('Lichiang.Yi@MetroGrand.gov', 'male', 'hk4vr', 99008, 'Li-Chiang Yi'),
+('Weston.Thurston@MetroGrand.gov', 'male', 'easton', 99009, 'Weston Thurston'),
+('Ignacio.Mundo@MetroGrand.gov', 'male', 'NACHO24', 99010, 'Ignacio del Mundo'),
+('Padma.Patil@MetroGrand.gov', 'female', 'harry', 99011, 'Padma Patil'),
+('Remus.Lupin@MetroGrand.gov', 'male', 'lycanthrope', 99012, 'Remus Lupin'),
+('Harry.Housen@MetroGrand.gov', 'male', 'googlybear', 99013, 'Harry Housen'),
+('Tuco.Salamanca@MetroGrand.gov', 'male', 'tight', 99014, 'Tuco Salamanca'),
+('Tommy.Gunn@MetroGrand.gov', 'male', 'thebest124134', 99015, 'Tommy Gunn')
+;
