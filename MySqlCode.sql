@@ -160,3 +160,22 @@ VALUES
 (13, 'thewindu@sbcglobal.net', 'none', 'male', 'Eye pain', 'none', 'none'),
 (14, 'honkytonk66@gmail.com', 'none', 'female', 'Splinters in right arm', 'none', 'none'),
 (15, 'muyrapido55@gmail.com', 'red meat', 'male', 'Swollen face', 'none','none');
+
+INSERT INTO Appointment(uid,date,starttime,endtime,status)
+VALUES
+(1, '01/14/2019', 0730, 0900, 'Done'),
+(2, '05/30/2019', 0900, 1200, 'Done'),
+(3, '04/10/2019', 0900, 1200, 'Done'),
+(4, '10/31/2019', 0700, 1200, 'NotDone'),
+(5, '11/11/2019', 0900, 1200, 'NotDone'),
+(6, '01/11/2020', 0830, 1100, 'NotDone'),
+(7, '03/26/2020', 1400, 1700, 'NotDone'),
+(8, '11/23/2019', 0900, 1200, 'NotDone'),
+(9, '08/10/2019', 1000, 1100, 'Done'),
+(10, '09/09/2019', 1200, 1300, 'Done'),
+(11, '02/04/2020', 1400, 1600, 'NotDone'),
+(12, '08/24/2018', 0900, 1200, 'Done'),
+(13, '04/14/2019', 0900, 1200, 'Done'),
+(14, '10/14/2016', 1800, 1900, 'Done'),
+(15, '03/19/2019', 0900, 1200, 'Done')
+;
