@@ -370,3 +370,22 @@ VALUES
 (14,'Tuco.Salamanca@MetroGrand.gov')  ,
 (15,'Tommy.Gunn@MetroGrand.gov')
 ;
+
+INSERT INTO PatientsViewAppointments(patient,appt,concerns,symptoms)
+VALUES
+('imsosick@gmail.com',1, 'none', 'itchy throat'),
+('pikachugrrl83@gmail.com',2, 'infection', 'fever'),
+('Spam&Rice@hotmail.com',3, 'none','none'),
+('jonisthebest@yahoo.com',4,'none','none'),
+('lightning2456@gmail.com',5,'none','itchy palms'),
+('honeybunches@gmail.com',6,'none','heat risk'),
+('thecia@us.gov',7, 'new Diet', 'none'),
+('orangesherbert13@gmail.com',8, 'medical question','none'),
+('Wunderbar24@gmail.com',9,'birth control', 'none'),
+('its2am@sjsu.edu',10,'allergy to latex', 'hard to breathe'),
+('timeconsuming@sjsu.edu',11, 'none', 'none'),
+('boris.dyokovic@ibm.com',12, 'Acne out of control', 'acne'),
+('thewindu@sbcglobal.net',13, 'none', 'none'),
+('honkytonk66@gmail.com',14, 'weight', 'Cant stop eating'),
+('muyrapido55@gmail.com',15, 'addiction', 'itchiness, irritability')
+;
