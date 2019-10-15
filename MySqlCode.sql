@@ -351,3 +351,22 @@ VALUES
 (014,'Tuco.Salamanca@MetroGrand.gov'),
 (015,'Tommy.Gunn@MetroGrand.gov')
 ;
+
+INSERT INTO DoctorViewsMed(medhistory,doctor)
+VALUES
+(1,'Nick.Nolte@MetroGrand.gov' )     ,
+(2,'SandyRaimi@MetroGrand.gov'      ),
+(3,'Bob.Grundy@MetroGrand.gov'      ),
+(4,'Tanya.Hilton@MetroGrand.gov'    ),
+(5,'Sam.Worthington@MetroGrand.gov' ),
+(6,'Winston.Johnson@MetroGrand.gov' ),
+(7,'Priya.Rajanpal@MetroGrand.gov'  ),
+(8,'Lichiang.Yi@MetroGrand.gov'     ),
+(9,'Weston.Thurston@MetroGrand.gov' ),
+(10,'Ignacio.Mundo@MetroGrand.gov'   ),
+(11,'Padma.Patil@MetroGrand.gov'     ),
+(12,'Remus.Lupin@MetroGrand.gov'    ) ,
+(13,'Harry.Housen@MetroGrand.gov'  )  ,
+(14,'Tuco.Salamanca@MetroGrand.gov')  ,
+(15,'Tommy.Gunn@MetroGrand.gov')
+;
