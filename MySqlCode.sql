@@ -199,4 +199,21 @@ VALUES
 ('MG Oncology', '1113 Main Street, San Jose, CA')
 ;
 
-INSERT 
+INSERT INTO Room(room_num,floor,bldg,status)
+VALUES
+('04','2', 'MG ER 2', 'AVAILABLE'),
+('01','1', 'MG Academy', 'AVAILABLE'),
+('06','2', 'MG Surgery', 'AVAILABLE'),
+('05','2', 'MG Psychiatry', 'AVAILABLE'),
+('01','3', 'MG Oncology', 'AVAILABLE'),
+('04','2', 'MG Pediatrics', 'AVAILABLE'),
+('04','1', 'MG Drug Rehab', 'AVAILABLE'),
+('09','2', 'MG Clinic 2', 'AVAILABLE'),
+('12','1', 'MG Clinic 1', 'AVAILABLE'),
+('06','3', 'MG Clinic 3', 'AVAILABLE'),
+('05','2', 'MG Clinic 2', 'AVAILABLE'),
+('02','1', 'MG Clinic 1', 'AVAILABLE'),
+('04','1', 'MG Pediatrics', 'AVAILABLE'),
+('08','1', 'MG Oncology', 'AVAILABLE'),
+('09','1', 'MG ER 2', 'AVAILABLE')
+;
