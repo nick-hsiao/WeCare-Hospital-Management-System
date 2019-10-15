@@ -1,3 +1,5 @@
+############ Database and Schema Creation ###################
+
 CREATE DATABASE HospitalManagementSystem;
 
 \u HospitalManagementSystem
@@ -118,3 +120,26 @@ appt int NOT NULL,
 FOREIGN KEY (room) REFERENCES Room (id),
 FOREIGN KEY (appt) REFERENCES Appointment (uid)
 );
+
+
+
+######### Table Fill ###########
+
+INSERT INTO Patient(email,password,name,address)
+VALUES
+('imsosick@gmail.com','wowzers','Ai Minh Payne','1212 Twelve Rd, San Jose, CA'),
+('pikachugrrl83@gmail.com','kentucky','King Kong','3151 Spam, Milpitas, CA'),
+('Spam&Rice@hotmail.com','nashville','Bert Ernie', '1000 Sesame Street'),
+('jonisthebest@yahoo.com','ilovejon','Jon Jon', '2400 Jon Ct, Reno, CA'),
+('lightning2456@gmail.com','kachow', 'Mcqueen', '1111 Washington, Forks, WA'),
+('honeybunches@gmail.com','OFOATS','Post Nihon', '949 Wild Ave, San Francisco, CA'),
+('thecia@us.gov', 'pass123', 'John Doe', '1234 Big Rd, Washington DC'),
+('orangesherbert13@gmail.com', 'nodairy', 'Owen G. Herbert', '31313 Tigr, Krakow, Russia'),
+('Wunderbar24@gmail.com','kalel','Hans Landa','5666 Hemmel, Berlin, Germany'),
+('its2am@sjsu.edu','helpme','Kevin McCallister','1344 Yonkers, NYC, NY'),
+('timeconsuming@sjsu.edu','dataentry','Andy M. Dunn','1441 Pringles, NY'),
+('boris.dyokovic@ibm.com','bears4lyfe','Boris Dyokovic','555 Bailey Ave, San Jose, CA'),
+('thewindu@sbcglobal.net','purpleflurp','Samuel Jackson','4554 Sandy Str, Milpitas, CA'),
+('honkytonk66@gmail.com','CountryBoy','Monty Houston','4444 Sprout Ave, Nashville, NJ'),
+('muyrapido55@gmail.com','notActually','Matthew Murdock','9987 Trimball, Fremont, CA');
+
