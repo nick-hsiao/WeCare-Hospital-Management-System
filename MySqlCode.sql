@@ -143,3 +143,20 @@ VALUES
 ('honkytonk66@gmail.com','CountryBoy','Monty Houston','4444 Sprout Ave, Nashville, NJ'),
 ('muyrapido55@gmail.com','notActually','Matthew Murdock','9987 Trimball, Fremont, CA');
 
+INSERT INTO MedicalHistory(uid,email,allergies,gender,conditions,surgeries,medications)
+VALUES
+(1,'imsosick@gmail.com','sand,fish','male','Pain in abdomen,Asthma','Appendectomy','Albuterol'),
+(2,'pikachugrrl83@gmail.com','none','female','Frequent Indigestion','none','none'),
+(3,'Spam&Rice@hotmail.com','rice','male','Inflamed throat','Wisdom teeth removal','none'),
+(4,'jonisthebest@yahoo.com', 'none' ,'male','Parkinsons','none','none'),
+(5, 'lightning2456@gmail.com', 'none', 'female', 'Pre-hypertension', 'none', 'none'),
+(6, 'honeybunches@gmail.com','nut/nut oils', 'female', 'Fatigue', 'none', 'none'),
+(7, 'thecia@us.gov', 'none', 'male', 'Paranoia/Anxiety','none','none'),
+(8, 'orangesherbert13@gmail.com','dairy', 'male', 'Food poisoning/indigestion','none','none'),
+(9, 'Wunderbar24@gmail.com', 'none', 'male', 'Overweight','none','none'),
+(10, 'its2am@sjsu.edu', 'none', 'male', 'Caffeine Withdrawal', 'Growth removal', 'none'),
+(11, 'timeconsuming@sjsu.edu', 'alcohol','male','Insomnia','none','none'),
+(12, 'boris.dyokovic@ibm.com', 'none', 'male', 'Back pain', 'none', 'none'),
+(13, 'thewindu@sbcglobal.net', 'none', 'male', 'Eye pain', 'none', 'none'),
+(14, 'honkytonk66@gmail.com', 'none', 'female', 'Splinters in right arm', 'none', 'none'),
+(15, 'muyrapido55@gmail.com', 'red meat', 'male', 'Swollen face', 'none','none');
