@@ -314,4 +314,21 @@ VALUES
 (15,'muyrapido55@gmail.com', 'Tommy.Gunn@MetroGrand.gov', 'Shoulder Impingement', 'See PT')
 ;
 
-INSERT 
+INSERT INTO apptstoschedules(appt,sched)
+VALUES
+(1,001),
+(2,002),
+(3,003),
+(4,004),
+(5,005),
+(6,006),
+(7,007),
+(8,008),
+(9,009),
+(10,010),
+(11,011),
+(12,012),
+(13,013),
+(14,014),
+(15,015)
+;
