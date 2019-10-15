@@ -255,3 +255,23 @@ VALUES
 (014,0900,1700,'1200','Sa'),
 (015,0900,1700,'1200','Su')
 ;
+
+INSERT INTO PatientsFillHistory(patient,medhistory)
+VALUES
+('imsosick@gmail.com',1),
+('pikachugrrl83@gmail.com',2),
+('Spam&Rice@hotmail.com',3),
+('jonisthebest@yahoo.com',4),
+('lightning2456@gmail.com',5),
+('honeybunches@gmail.com',6),
+('thecia@us.gov',7),
+('orangesherbert13@gmail.com',8),
+('Wunderbar24@gmail.com',9),
+('its2am@sjsu.edu',10),
+('timeconsuming@sjsu.edu',11),
+('boris.dyokovic@ibm.com',12),
+('thewindu@sbcglobal.net',13),
+('honkytonk66@gmail.com',14),
+('muyrapido55@gmail.com',15)
+;
+
