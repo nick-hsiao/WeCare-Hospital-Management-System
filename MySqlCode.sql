@@ -179,3 +179,22 @@ VALUES
 (14, '10/14/2016', 1800, 1900, 'Done'),
 (15, '03/19/2019', 0900, 1200, 'Done')
 ;
+
+INSERT INTO Building(name,address)
+VALUES
+('Metro Grand Surgery', '1100 Main Street, San Jose, CA'),
+('Metro Grand Clinic 1', '1101 Main Street, San Jose, CA'),
+('Metro Grand Clinic 2', '1102 Main Street, San Jose, CA'),
+('Metro Grand Clinic 3', '1103 Main Street, San Jose, CA'),
+('Metro Grand Clinic 4', '1104 Main Street, San Jose, CA'),
+('Metro Grand ER', '1105 Main Street, San Jose, CA'),
+('Metro Grand Physical Therapy', '1106 Main Street, San Jose, CA'),
+('Metro Grand Pediatrics', '1107 Main Street, San Jose, CA'),
+('Metro Grand Surgery 2', '1108 Main Street, San Jose, CA'),
+('Metro Grand ER 2', '1109 Main Street, San Jose, CA'),
+('Metro Grand Academy', '1110 Main Street, San Jose, CA'),
+('Metro Grand Drug Rehabilitation', '1100 Main Street, San Jose, CA'),
+('Metro Grand Clinic 5', '1111 Main Street, San Jose, CA'),
+('Metro Grand Psychiatry', '1112 Main Street, San Jose, CA'),
+('Metro Grand Oncology', '1113 Main Street, San Jose, CA')
+;
