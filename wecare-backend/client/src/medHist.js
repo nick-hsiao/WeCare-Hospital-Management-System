@@ -55,7 +55,7 @@ const INITIAL_STATE = {
   error: null,
 };
 
-class MedHist extends Component{
+export class MedHist extends Component{
   constuctor() {
   }
 
