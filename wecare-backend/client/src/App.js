@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import MedHist from './MedHist.js';
+import MedHist from './MedHistory.js';
 import Home from './Home';
 
 export default function App() {
