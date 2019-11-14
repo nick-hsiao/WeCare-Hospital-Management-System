@@ -7,6 +7,9 @@ import {
 } from "react-router-dom";
 import MedHist from './MedHistory.js';
 import Home from './Home';
+import LogIn from './logIn.js';
+import NewMedHist from './newPatientMedHist.js'; 
+import CreateAccount from './CreateAccount.js'; 
 
 export default function App() {
   return (
@@ -15,13 +18,19 @@ export default function App() {
         <nav>
           <ul>
             <li>
-              <Link to="/">Home</Link>
+              <Link to="/Home">Home</Link>
             </li>
             <li>
               <Link to="/MedHist">MedHist</Link>
             </li>
             <li>
               <Link to="/users">Users</Link>
+            </li>
+            <li>
+              <Link to="/newPatientMedHist">New Patient MedHist</Link>
+            </li>
+            <li>
+              <Link to="/createAcc">pleasseeee</Link>
             </li>
           </ul>
         </nav>
@@ -35,8 +44,17 @@ export default function App() {
           <Route path="/users">
             <Users />
           </Route>
-          <Route path="/">
+          <Route path="/newPatientMedHist">
+            <NewMedHist />
+          </Route>
+          <Route path="/Home">
             <Home />
+          </Route>
+          <Route path="/createAcc">
+            <CreateAccount />
+          </Route>
+          <Route path="/">
+            <LogIn />
           </Route>
         </Switch>
       </div>
