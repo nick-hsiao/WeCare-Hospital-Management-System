@@ -1,5 +1,5 @@
 import React,{Component,Image,StyleSheet, useState} from 'react';
-import { FormClose, Notification } from 'grommet-icons';
+import { FormClose, Notification, Aid } from 'grommet-icons';
 import logo from './logo.svg';
 
 import {
@@ -8,6 +8,7 @@ import {
   ResponsiveContext,
   Box,
   Button,
+  CheckBox,
   Heading,
   Grommet,
   Menu,
@@ -17,6 +18,7 @@ import {
   Select,
   Text,
   RadioButton,
+  DropButton,
   
 
 } from 'grommet';
@@ -45,8 +47,7 @@ const AppBar = (props) => (
   pad={{ left: 'medium', right: 'small', vertical: 'small' }}
     //elevation='medium'
     style={{ zIndex: '1' }}
-    {...props}
-    />
+    {...props} />
 );
 
 const INITIAL_STATE = {
@@ -59,63 +60,94 @@ export class MedHist extends Component{
   constuctor() {
   }
 
-  state = {}
+  state = { aspirinChecked: false,
+            penicillinChecked: false,
+            latexChecked: false,
+            anemiaChecked: false,
+            anxietyChecked: false, 
+            arthritisChecked: false, 
+            asthmaChecked: false, 
+            cancerChecked: false, 
+            depressionChecked: false,
+            diabetesChecked: false,
+            ulcersChecked: false,
+          }
   
   render(){
-const { selected } = this.state;
-   return (
-    <Grommet theme={theme} full>
+    const { aspirinChecked, 
+            penicillinChecked, 
+            latexChecked, 
+            fluorideChecked,
+            anemiaChecked,
+            anxietyChecked, 
+            arthritisChecked, 
+            asthmaChecked, 
+            cancerChecked, 
+            depressionChecked,
+            diabetesChecked,
+            ulcersChecked, } = this.state;
+    return (
+      <Grommet theme={theme} full>
       <Box fill>
         <AppBar>
           <Heading level='3' margin='none'>WeCare</Heading>
         </AppBar>
-        <form onSubmit={<Text>hi</Text>}>
-          <Menu
-              align="start"
-              label="Gender"
-              items={[
-              { label: 'Female', onClick: () => {} },
-              { label: 'Male', onClick: () => {} },
-              ]}
-           />
-      
-      <Text align="start">allergic reaction to</Text>
 
-           <Box align='start'>
-          {['aspirin, ipuprofen, codeine', 'penicillin', 'erythromycin', 'tetracyline' ].map(label => (
-            <Box key={label} margin={{ vertical: 'small' }}>
-              <RadioButton
-                name='prop'
-                checked={selected === label}
-                label={label}
-                onChange={() => this.setState({ selected: label })}
-              />
-            </Box>
-          ))}
-        </Box>
+        <Text>Check any known allergies:</Text>
+        <CheckBox
+          checked={aspirinChecked}
+          label='aspirin'
+          onChange={event => this.setState({ aspirinChecked: event.target.checked })} />
+        <CheckBox
+          checked={penicillinChecked}
+          label='penicillin'
+          onChange={event => this.setState({ penicillinChecked: event.target.checked })} />
+        <CheckBox
+          checked={latexChecked}
+          label='latex'
+          onChange={event => this.setState({ latexChecked: event.target.checked })} />
 
+        <Text>Check if you have ever experienced the following conditions:</Text>
+        <CheckBox
+          checked={anemiaChecked}
+          label='anemia'
+          onChange={event => this.setState({ anemiaChecked: event.target.checked })} />
+        <CheckBox
+          checked={anxietyChecked}
+          label='anxiety'
+          onChange={event => this.setState({ anxietyChecked: event.target.checked })} />
+        <CheckBox
+          checked={arthritisChecked}
+          label='arthritis'
+          onChange={event => this.setState({ arthritisChecked: event.target.checked })} />
+        <CheckBox
+          checked={asthmaChecked}
+          label='asthma'
+          onChange={event => this.setState({ asthmaChecked: event.target.checked })} />
+        <CheckBox
+          checked={cancerChecked}
+          label='cancer'
+          onChange={event => this.setState({ cancerChecked: event.target.checked })} />
+        <CheckBox
+          checked={depressionChecked}
+          label='depression'
+          onChange={event => this.setState({ depressionChecked: event.target.checked })} />
+        <CheckBox
+          checked={diabetesChecked}
+          label='diabetes'
+          onChange={event => this.setState({ diabetesChecked: event.target.checked })} />
+        <CheckBox
+          checked={ulcersChecked}
+          label='ulcers'
+          onChange={event => this.setState({ ulcersChecked: event.target.checked })} />
 
-
-          <Form>
-            <FormField 
-              name="age" 
-              label="age"
-              placeholder="probably change this age form later"
-            />
-            <Button 
-              type="submit" 
-              primary label="submit"
-              onSubmit={<Text>probs something here</Text>}
-            />
-          </Form>
-        </form>
-        <Button 
-          type="cool" 
-          primary label="for something maybe idk" 
-        />
+        <Button
+          icon={<Aid />}
+          label="Submit"
+          onClick={() => {}} />
       </Box>
 
-    </Grommet>
+      </Grommet>
     );
 
 
