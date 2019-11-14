@@ -28,7 +28,7 @@ export class Home extends Component{
   }
 
   getNames = _ => {
-    fetch('http://localhost:3001/names')
+    fetch('http://localhost:3000/names')
     .then(res => res.json())
     .then(res => this.setState({names: res.data}));
   }
