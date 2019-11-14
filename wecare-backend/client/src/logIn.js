@@ -1,6 +1,11 @@
 import React,{Component,Image,StyleSheet, useState} from 'react';
-import { FormClose, Notification } from 'grommet-icons';
 import logo from './logo.svg';
+import{ withRouter} from 'react-router-dom';
+import { 
+  FormClose, 
+  Notification ,
+
+} from 'grommet-icons';
 
 import {
   Collapsible, 
@@ -59,6 +64,12 @@ const INITIAL_STATE = {
 
 class LogIn extends Component{
   constuctor() {
+    this.routeChange = this.routeChange.bind(this);
+  }
+
+  routeChange() {
+    let path = '/Home';
+    this.props.history.push(path);
   }
   
   render(){
@@ -70,18 +81,17 @@ class LogIn extends Component{
     </AppBar>
     <Box fill align="center" justify="top">
       <Box width="medium">
-        <Form
-          onReset={event => console.log(event)}
-          onSubmit={({ value }) => console.log("Submit", value)} 
-        >
+        <Form>
           <FormField label="Email" name="email" type="email" required />
           <FormField
             label="Password"
             name="password"
             required />
-          <Box direction="column" justify="center">
-            <Button type="submit" label="Log In" primary />
-            <Button label="Sign Up" />
+          <Box direction="column" align="center" >
+            <Button type="submit" label="Log In" fill = "horizontal" primary/>
+            <Button label="Sign Up" 
+              fill = "horizontal" 
+              href="/createAcc"/>
           </Box>
         </Form>
       </Box>
@@ -95,4 +105,4 @@ class LogIn extends Component{
 
 }}
 
-export default LogIn;
+export default withRouter(LogIn);
