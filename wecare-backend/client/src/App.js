@@ -10,6 +10,7 @@ import Home from './Home';
 import LogIn from './logIn.js';
 import NewMedHist from './newPatientMedHist.js'; 
 import CreateAccount from './CreateAccount.js'; 
+import SchedulingAppt from './schedulingAppt.js'; 
 
 export default function App() {
   return (
@@ -30,7 +31,10 @@ export default function App() {
               <Link to="/newPatientMedHist">New Patient MedHist</Link>
             </li>
             <li>
-              <Link to="/createAcc">pleasseeee</Link>
+              <Link to="/createAcc">Create an Account</Link>
+            </li>
+            <li>
+              <Link to="/scheduleAppt">Schedule an Appointment</Link>
             </li>
           </ul>
         </nav>
@@ -40,6 +44,9 @@ export default function App() {
         <Switch>
           <Route path="/MedHist">
             <MedHist />
+          </Route>
+          <Route path="/scheduleAppt">
+            <SchedulingAppt />
           </Route>
           <Route path="/users">
             <Users />
