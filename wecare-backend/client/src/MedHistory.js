@@ -8,7 +8,6 @@ import {
   ResponsiveContext,
   Box,
   Button,
-  CheckBox,
   Heading,
   Grommet,
   Menu,
@@ -18,7 +17,11 @@ import {
   Select,
   Text,
   RadioButton,
-  DropButton,
+  CheckBox,
+  RadioButtonGroup,
+  TextArea,
+  Range,
+  RangeInput
   
 
 } from 'grommet';
@@ -87,66 +90,110 @@ export class MedHist extends Component{
             diabetesChecked,
             ulcersChecked, } = this.state;
     return (
-      <Grommet theme={theme} full>
+      <Grommet theme={theme}>
       <Box fill>
         <AppBar>
           <Heading level='3' margin='none'>WeCare</Heading>
         </AppBar>
 
-        <Text>Check any known allergies:</Text>
-        <CheckBox
+        <Box align = "left" pad = "small">
+        <Text >Check any known allergies:</Text>
+        <Form action="/insert" method="post">
+        <FormField
           checked={aspirinChecked}
+          component={CheckBox}
+          name = 'Aspirin'
           label='aspirin'
           onChange={event => this.setState({ aspirinChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={penicillinChecked}
+          component={CheckBox}
+          name = 'Penicillin'
           label='penicillin'
           onChange={event => this.setState({ penicillinChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={latexChecked}
+          component={CheckBox}
+          name = 'Latex'
           label='latex'
           onChange={event => this.setState({ latexChecked: event.target.checked })} />
 
         <Text>Check if you have ever experienced the following conditions:</Text>
-        <CheckBox
+        <FormField
           checked={anemiaChecked}
+          component={CheckBox}
+          name = 'Anemia'
           label='anemia'
           onChange={event => this.setState({ anemiaChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={anxietyChecked}
+          component={CheckBox}
+          name = 'Anxiety'
           label='anxiety'
           onChange={event => this.setState({ anxietyChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={arthritisChecked}
+          component={CheckBox}
+          name = 'Arthritis'
           label='arthritis'
           onChange={event => this.setState({ arthritisChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={asthmaChecked}
+          component={CheckBox}
+          name = 'Asthma'
           label='asthma'
           onChange={event => this.setState({ asthmaChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={cancerChecked}
+          component={CheckBox}
+          name = 'Cancer'
           label='cancer'
           onChange={event => this.setState({ cancerChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={depressionChecked}
+          component={CheckBox}
+          name = 'Depression'
           label='depression'
           onChange={event => this.setState({ depressionChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={diabetesChecked}
+          component={CheckBox}
+          name = 'Diabetes'
           label='diabetes'
           onChange={event => this.setState({ diabetesChecked: event.target.checked })} />
-        <CheckBox
+        <FormField
           checked={ulcersChecked}
+          component={CheckBox}
+          name = 'Ulcers'
           label='ulcers'
           onChange={event => this.setState({ ulcersChecked: event.target.checked })} />
-
         <Button
           icon={<Aid />}
           label="Submit"
-          onClick={() => {}} />
-      </Box>
+          action="/insert"
+          method="post"
+          onClick={() => {        fetch("/insert", {
+            method: 'POST'
+            
+        }).then(function(response) {
+            if (response.status >= 400) {
+              throw new Error("Bad response from server");
+            }
+            return response.json();
+        }).then(function(data) {
+            console.log(data)    
+            if(data == "success"){
+               this.setState({msg: "Thanks for registering"});  
+            }
+        }).catch(function(err) {
+            console.log(err)
+        }); }} />
+      </Form>
+        
+        </Box>
 
+
+      </Box>      
       </Grommet>
     );
 
