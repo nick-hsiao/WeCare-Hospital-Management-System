@@ -73,7 +73,7 @@ export class CreateAccount extends Component{
         onReset={event => console.log(event)}
         onSubmit={({ value }) => {
           console.log("Submit", value);
-          window.location="http://localhost:3001/newPatientMedHist";}
+          window.location="/newPatientMedHist";}
           // var link = document.getElementById("/createAcc");
           // link.setAttribute("href", "newPatientMedHist");}
         }

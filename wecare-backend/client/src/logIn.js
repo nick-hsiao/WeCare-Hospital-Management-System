@@ -81,7 +81,12 @@ class LogIn extends Component{
     </AppBar>
     <Box fill align="center" justify="top">
       <Box width="medium">
-        <Form>
+        <Form
+          onReset={event => console.log(event)}
+          onSubmit={({ value }) => {
+            console.log("Submit", value);
+            window.location="/Home";}
+        }>
           <FormField label="Email" name="email" type="email" required />
           <FormField
             label="Password"
@@ -89,7 +94,7 @@ class LogIn extends Component{
             required />
           <Box direction="column" align="center" >
             <Button type="submit" label="Log In" fill = "horizontal" primary/>
-            <Button label="Sign Up" 
+            <Button label="Create Account" 
               fill = "horizontal" 
               href="/createAcc"/>
           </Box>
@@ -99,10 +104,6 @@ class LogIn extends Component{
 
     </Grommet>
     );
-
-
-
-
 }}
 
 export default withRouter(LogIn);
