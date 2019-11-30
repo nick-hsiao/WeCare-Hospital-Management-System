@@ -29,7 +29,6 @@ import {
   TextInput,
   Select,
   Text,
-  CheckBox,
   RadioButtonGroup,
   TextArea,
   RangeInput,
