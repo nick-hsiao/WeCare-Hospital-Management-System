@@ -46,9 +46,8 @@ const AppBar = (props) => (
   justify='between'
   background='brand'
   pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    //elevation='medium'
-    style={{ zIndex: '1' }}
-    {...props} />
+  style={{ zIndex: '1' }}
+  {...props} />
 );
 
 const INITIAL_STATE = {
@@ -70,10 +69,10 @@ export class CreateAccount extends Component{
     </AppBar>
     <Box fill align="center" justify="top">
       <Box width="medium">
-        <Form
-          onReset={event => console.log(event)}
-          onSubmit={({ value }) => console.log("Submit", value)} 
-        >
+      <Form 
+        onReset={event => console.log(event)}
+        onSubmit={({ value }) => console.log("Submit", value)}
+        action="/insert">
           <FormField
             label="First Name"
             name="firstName"
@@ -90,10 +89,14 @@ export class CreateAccount extends Component{
             name="password"
             required
             validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 digits, 2 nums" }} />
-          <Box direction="row" justify="between" margin={{ top: "medium" }}>
-            <Button label="Cancel" />
-            <Button type="submit" label="Update" primary />
+          <Box direction="row" align="center" >
+            <Button label="cancel" fill = "horizontal" href="/" primary/>
+            <Button label="Sign Up" 
+              fill = "horizontal" 
+              type="submit" 
+              href="/newPatientMedHist"/>
           </Box>
+
         </Form>
       </Box>
     </Box>
