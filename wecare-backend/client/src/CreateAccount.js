@@ -71,7 +71,12 @@ export class CreateAccount extends Component{
       <Box width="medium">
       <Form 
         onReset={event => console.log(event)}
-        onSubmit={({ value }) => console.log("Submit", value)}
+        onSubmit={({ value }) => {
+          console.log("Submit", value);
+          window.location="http://localhost:3001/newPatientMedHist";}
+          // var link = document.getElementById("/createAcc");
+          // link.setAttribute("href", "newPatientMedHist");}
+        }
         action="/insert">
           <FormField
             label="First Name"
@@ -93,8 +98,7 @@ export class CreateAccount extends Component{
             <Button label="cancel" fill = "horizontal" href="/" primary/>
             <Button label="Sign Up" 
               fill = "horizontal" 
-              type="submit" 
-              href="/newPatientMedHist"/>
+              type="submit" />
           </Box>
 
         </Form>
