@@ -71,13 +71,17 @@ export class CreateAccount extends Component{
       <Box width="medium">
       <Form 
         onReset={event => console.log(event)}
+        method = "post"
         onSubmit={({ value }) => {
           console.log("Submit", value);
-          window.location="/newPatientMedHist";}
+          fetch("http://localhost:3001/please?name=" + value.firstName + "&email=" + value.email
+          + "&password=" + value.password + "&address=" + value.address);
+          // window.location="/newPatientMedHist";}
           // var link = document.getElementById("/createAcc");
           // link.setAttribute("href", "newPatientMedHist");}
-        }
-        action="/insert">
+        }}
+        //action="/insert"
+        >
           <FormField
             label="First Name"
             name="firstName"
@@ -88,6 +92,10 @@ export class CreateAccount extends Component{
             name="lastName"
             required
             validate={{ regexp: /^[a-z]/i }} />
+          <FormField
+            label="Address"
+            name="address"
+            required />
           <FormField label="Email" name="email" type="email" required />
           <FormField
             label="Password"
@@ -95,10 +103,16 @@ export class CreateAccount extends Component{
             required
             validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 digits, 2 nums" }} />
           <Box direction="row" align="center" >
-            <Button label="cancel" fill = "horizontal" href="/" primary/>
-            <Button label="Sign Up" 
+            <Button 
+              label="cancel" 
               fill = "horizontal" 
-              type="submit" />
+              href="/" 
+              primary />
+            <Button 
+              label="Sign Up" 
+              fill = "horizontal" 
+              type="submit"
+              primary />
           </Box>
 
         </Form>

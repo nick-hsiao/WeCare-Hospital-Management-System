@@ -8,15 +8,15 @@ var cors = require('cors');
 var port = 3001; //process.env.PORT || was 3000
 
 var con = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'root',
-  database : 'wecare',
+  host: 'localhost',
+  user: 'root',
+  password: 'i@mr00t!',
+  database: 'wecare',
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
 });
 
-con.connect(function(err) {
+con.connect(function (err) {
   if (err) throw err;
   console.log("Connected!");
 });
@@ -44,62 +44,83 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.get('/names', (req, res) => {
-  con.query('SELECT * FROM Patient', function (error, results, fields) {  
-      if (error) throw error;
-      else {
-           return res.json({
-             data: results
-           })
-      };
+  con.query('SELECT * FROM Patient', function (error, results, fields) {
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    };
   });
 });
 
-app.post('/please', (req, res) => {
-    let ah = req.query;
-    let name = ah.name;
-    let email = ah.email;
-    let password = ah.password;
-    console.log(email);
-    console.log(name);
-    console.log(password);
+app.get('/please', (req, res) => {
+  console.log("hi");
+  let ah = req.query;
+  let name = ah.name;
+  let email = ah.email;
+  let password = ah.password;
+  let address = ah.address;
+  // console.log(email);
+  // console.log(name);
+  // console.log(password);
+  // console.log(address)
+  // con.query(`INSERT INTO Patient (email, password, name, address) VALUES (${email}, ${password}, ${firstName}, ${address})`, function (error, results, fields) {
+  //   if (error) throw error;
+  //   else {
+  //     return res.json({
+  //       data: results
+  //     })
+  //   };
+  // });
+  let sql_statement = "INSERT INTO Patient (email, password, name, address) VALUES "  + `("${email}", "${password}", "${name}", "${address}")`;
+  console.log(sql_statement);
+  con.query(sql_statement,function (error, results, fields) {
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    };
+  });
 });
 
 app.get('/MedHistView', (req, res) => {
-    let stupid = req.query;
-    let crap = "'" + stupid.email + "'";
-    let crap2 = "" + stupid.variable;
-    console.log(crap);
-    console.log(crap2);
-    con.query("SELECT name,email,gender,conditions,surgeries,medication FROM Patient,patientsfillhistory,MedicalHistory WHERE Patient.email = patientsfillhistory.patient AND patientsfillhistory.medhistory = MedicalHistory.uid AND Patient.email=" + crap, function (error, results, fields) {
-        if (error) throw error;
-        else {
-            return res.json({
-                data: results
-            })
-        };
-    });
+  let stupid = req.query;
+  let crap = "'" + stupid.email + "'";
+  let crap2 = "" + stupid.variable;
+  console.log(crap);
+  console.log(crap2);
+  con.query("SELECT name,email,gender,conditions,surgeries,medication FROM Patient,patientsfillhistory,MedicalHistory WHERE Patient.email = patientsfillhistory.patient AND patientsfillhistory.medhistory = MedicalHistory.uid AND Patient.email=" + crap, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    };
+  });
 });
 
 app.get('/checklogin', (req, res) => {
-  con.query('SELECT * FROM Patient', function (error, results, fields) {  
-      if (error) throw error;
-      else {
-           return res.json({
-             data: results
-           })
-      };
+  con.query('SELECT * FROM Patient', function (error, results, fields) {
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    };
   });
 });
 
 
 app.post('/insert', (req, res) => {
   console.log("hello ive touched");
-  con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {  
-      //console.log(query.sql);
-      if (error) throw error;
-      else {
-        console.log("im hippie");
-      };
+  con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
+    //console.log(query.sql);
+    if (error) throw error;
+    else {
+      console.log("im hippie");
+    };
   });
 });
 
@@ -111,7 +132,7 @@ app.post('/insert', (req, res) => {
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
@@ -126,7 +147,7 @@ con.query('SELECT * from Patient', function (err, users, fields) {
 
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
