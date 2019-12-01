@@ -11,6 +11,7 @@ import LogIn from './logIn.js';
 import NewMedHist from './newPatientMedHist.js'; 
 import CreateAccount from './CreateAccount.js'; 
 import SchedulingAppt from './schedulingAppt.js'; 
+import ViewMedHist from './ViewMedHist.js';
 
 export default function App() {
   return (
@@ -36,6 +37,9 @@ export default function App() {
             <li>
               <Link to="/scheduleAppt">Schedule an Appointment</Link>
             </li>
+            <li>
+              <Link to="/MedHistView">Medical History View</Link>
+            </li>
           </ul>
         </nav>
 
@@ -44,7 +48,10 @@ export default function App() {
         <Switch>
           <Route path="/MedHist">
             <MedHist />
-          </Route>
+                      </Route>
+          <Route path="/MedHistView">
+                          <ViewMedHist />
+                    </Route>
           <Route path="/scheduleAppt">
             <SchedulingAppt />
           </Route>
