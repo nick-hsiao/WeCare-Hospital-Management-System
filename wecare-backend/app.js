@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'i@mr00t!',
+  password: 'root',
   database: 'wecare',
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
