@@ -86,19 +86,23 @@ app.get('/please', (req, res) => {
 });
 
 app.get('/MedHistView', (req, res) => {
-  let stupid = req.query;
-  let crap = "'" + stupid.email + "'";
-  let crap2 = "" + stupid.variable;
-  console.log(crap);
-  console.log(crap2);
-  con.query("SELECT name,email,gender,conditions,surgeries,medication FROM Patient,patientsfillhistory,MedicalHistory WHERE Patient.email = patientsfillhistory.patient AND patientsfillhistory.medhistory = MedicalHistory.uid AND Patient.email=" + crap, function (error, results, fields) {
-    if (error) throw error;
-    else {
-      return res.json({
-        data: results
-      })
-    };
-  });
+
+    let stupid = req.query;
+    let crap = "'" + stupid.email + "'";
+    let crap2 = "" + stupid.variable;
+    console.log(crap);
+    console.log(crap2);
+    let statement = "SELECT name,email,gender,conditions,surgeries,medication FROM Patient,patientsfillhistory,MedicalHistory WHERE Patient.email = patientsfillhistory.patient AND patientsfillhistory.medhistory = MedicalHistory.uid";
+    if (crap != "''")
+        statement+=" AND Patient.email=" + crap
+    con.query(statement, function (error, results, fields) {
+        if (error) throw error;
+        else {
+            return res.json({
+                data: results
+            })
+        };
+    });
 });
 
 app.get('/checklogin', (req, res) => {
