@@ -98,7 +98,7 @@ export class MedHist extends Component{
 
         <Box align = "left" pad = "small">
         <Text >Check any known allergies:</Text>
-        <Form action="/insert" method="post">
+        <Form action="http://localhost:3001/insert" method="post">
         <FormField
           checked={aspirinChecked}
           component={CheckBox}
@@ -170,9 +170,8 @@ export class MedHist extends Component{
         <Button
           icon={<Aid />}
           label="Submit"
-          action="/insert"
-          method="post"
-          onClick={() => {        fetch("/insert", {
+
+          onClick={() => {        fetch("http://localhost:3000/insert", {
             method: 'POST'
             
         }).then(function(response) {
@@ -187,7 +186,8 @@ export class MedHist extends Component{
             }
         }).catch(function(err) {
             console.log(err)
-        }); }} />
+        }); }}
+ />
       </Form>
         
         </Box>

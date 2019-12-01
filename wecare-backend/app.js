@@ -5,12 +5,12 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var mysql = require('mysql');
 var cors = require('cors');
-var port = process.env.PORT || 3001;
+var port = 3001; //process.env.PORT || was 3000
 
 var con = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'nickhsiao',
+  password : 'i@mr00t!',
   database : 'wecare',
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
@@ -38,8 +38,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/', indexRouter);
+// app.use('/users', usersRouter);
 
 app.use(cors());
 
@@ -53,6 +53,37 @@ app.get('/names', (req, res) => {
       };
   });
 });
+
+
+app.get('/checklogin', (req, res) => {
+  con.query('SELECT * FROM users', function (error, results, fields) {  
+      if (error) throw error;
+      else {
+           return res.json({
+             data: results
+           })
+      };
+  });
+});
+
+
+app.post('/insert', (req, res) => {
+  console.log("hello ive touched");
+  con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {  
+      //console.log(query.sql);
+      if (error) throw error;
+      else {
+        console.log("im hippie");
+      };
+  });
+});
+
+// 
+// var query = con.query('INSERT INTO users (first, last) VALUES ("hello", "there")', 
+//   function (error, results, fields){  
+//        if (error) throw error;});
+// console.log(query.sql);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -80,8 +111,12 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-/* app.listen(port, () => {
+
+// app.listen(3001);
+// console.log('Example app listening at port:3001');
+
+app.listen(port, () => {
   console.log(`Listening on port ${port} `);
-}); */
+}); 
 
 module.exports = app;
