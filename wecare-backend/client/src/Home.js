@@ -28,12 +28,12 @@ export class Home extends Component{
   }
 
   getNames = _ => {
-    fetch('http://localhost:3000/names')
+    fetch('http://localhost:3001/names')
     .then(res => res.json())
     .then(res => this.setState({names: res.data}));
   }
 
-  renderName = ({last,first}) => <div key={last}>{first} {last}</div>
+    renderName = ({ name, email }) => <div key={email}>{name} {name}</ div>
 
 render(){
   const {names} = this.state;
@@ -57,16 +57,29 @@ render(){
   );
   
   const Body = () => (
-    <Box flex={true} pad='medium' overflow='auto'>
-      <Box flex={false}>
-        <Heading level={3} margin='none'>
-          <strong>User List</strong>
-        </Heading>
-        <Box pad={{ top: 'medium' }} gap='small'>
-          {names.map(this.renderName)}
-        </Box>
-      </Box>
-    </Box>
+            <div className="container">
+                <div className="panel panel-default p50 uth-panel">
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>email</th>
+                                <th>address</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {names.map(patient =>
+                                <tr key={patient.id}>
+                                    <td>{patient.name} </td>
+                                    <td>{patient.email}</td>
+                                    <td>{patient.address}</td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
   );
   
 

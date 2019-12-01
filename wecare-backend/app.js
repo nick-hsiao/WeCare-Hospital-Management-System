@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'i@mr00t!',
+  password : 'root',
   database : 'wecare',
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
@@ -44,7 +44,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(cors());
 
 app.get('/names', (req, res) => {
-  con.query('SELECT * FROM users', function (error, results, fields) {  
+  con.query('SELECT * FROM Patient', function (error, results, fields) {  
       if (error) throw error;
       else {
            return res.json({
@@ -54,9 +54,34 @@ app.get('/names', (req, res) => {
   });
 });
 
+app.post('/please', (req, res) => {
+    let ah = req.query;
+    let name = ah.name;
+    let email = ah.email;
+    let password = ah.password;
+    console.log(email);
+    console.log(name);
+    console.log(password);
+});
+
+app.get('/MedHistView', (req, res) => {
+    let stupid = req.query;
+    let crap = "'" + stupid.email + "'";
+    let crap2 = "" + stupid.variable;
+    console.log(crap);
+    console.log(crap2);
+    con.query("SELECT name,email,gender,conditions,surgeries,medication FROM Patient,patientsfillhistory,MedicalHistory WHERE Patient.email = patientsfillhistory.patient AND patientsfillhistory.medhistory = MedicalHistory.uid AND Patient.email=" + crap, function (error, results, fields) {
+        if (error) throw error;
+        else {
+            return res.json({
+                data: results
+            })
+        };
+    });
+});
 
 app.get('/checklogin', (req, res) => {
-  con.query('SELECT * FROM users', function (error, results, fields) {  
+  con.query('SELECT * FROM Patient', function (error, results, fields) {  
       if (error) throw error;
       else {
            return res.json({
@@ -93,7 +118,7 @@ app.use(function(req, res, next) {
 
 
 
-con.query('SELECT * from users', function (err, users, fields) {
+con.query('SELECT * from Patient', function (err, users, fields) {
   if (err) throw err
   console.log(users);
 
@@ -117,6 +142,6 @@ app.use(function(err, req, res, next) {
 
 app.listen(port, () => {
   console.log(`Listening on port ${port} `);
-}); 
+});
 
 module.exports = app;
