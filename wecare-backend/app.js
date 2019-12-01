@@ -54,6 +54,23 @@ app.get('/names', (req, res) => {
   });
 });
 
+app.get('/OneHistory', (req, res) => {
+    console.log("in one history");
+    let params = req.query;
+    let uid = params.uid;
+    console.log(uid);
+    let statement = "SELECT name, gender, conditions, surgeries, medication FROM patientsfillhistory,patient,medicalhistory WHERE medhistory=uid AND patient=email"
+    statement += " AND uid =" + uid;
+    con.query(statement, function (error, results, fields) {
+        if (error) throw error;
+        else {
+            return res.json({
+                data: results
+            })
+        }
+    })
+});
+
 app.get('/please', (req, res) => {
   console.log("hi");
   let ah = req.query;
@@ -86,15 +103,14 @@ app.get('/please', (req, res) => {
 });
 
 app.get('/MedHistView', (req, res) => {
-
     let stupid = req.query;
     let crap = "'" + stupid.email + "'";
     let crap2 = "" + stupid.variable;
     console.log(crap);
     console.log(crap2);
-    let statement = "SELECT name,email,gender,conditions,surgeries,medication FROM Patient,patientsfillhistory,MedicalHistory WHERE Patient.email = patientsfillhistory.patient AND patientsfillhistory.medhistory = MedicalHistory.uid";
+    let statement = "SELECT name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
     if (crap != "''")
-        statement+=" AND Patient.email=" + crap
+        statement += " AND Patient.name=" + crap
     con.query(statement, function (error, results, fields) {
         if (error) throw error;
         else {

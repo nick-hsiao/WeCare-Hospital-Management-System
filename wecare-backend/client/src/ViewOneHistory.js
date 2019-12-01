@@ -1,4 +1,4 @@
-import React, { Component, Image, StyleSheet, Link } from 'react';
+import React, { Component, Image, StyleSheet } from 'react';
 import logo from './logo.svg';
 import {
     Box,
@@ -16,21 +16,21 @@ import {
 import './App.css';
 import backdrop from './img/hmsbackdrop.jpg'
 
-export class ViewMedHist extends Component {
+export class ViewOneHistory extends Component {
 
 
     state = { medhiststate: [] }
 
     componentDidMount() {
 
-        this.getNames("");
+        this.getHistory(1);
         console.log(this.state.names);
     }
 
-    getNames(value) {
-        let patEmail = value;
-        console.log(patEmail);
-        fetch('http://localhost:3001/MedHistView?email='+ patEmail + '&variable=words')
+    getHistory(value) {
+        let uid = value;
+        console.log(uid);
+        fetch('http://localhost:3001/OneHistory?medHistUid='+ uid)
         .then(res => res.json())
         .then(res => this.setState({ medhiststate: res.data }));
     }
@@ -64,14 +64,15 @@ export class ViewMedHist extends Component {
                             <tr>
                                 <th>name</th>
                                 <th>email</th>
+                                <th>gender</th>
                             </tr>
                         </thead>
                         <tbody>
                             {medhiststate.map(patient =>
                                 <tr key={patient.id}>
-                                    <td>{patient.Name} </td>
-                                    <td>{patient.UID}
-                                    </td>
+                                    <td>{patient.name} </td>
+                                    <td>{patient.conditions}</td>
+                                    <td>{patient.gender}</td>
                                 </tr>
                             )}
                         </tbody>
@@ -86,14 +87,7 @@ export class ViewMedHist extends Component {
             <Grommet full={true}>
                 <Box fill={true}>
 
-                    <Form
-                        onSubmit={({ value }) => {
-                            console.log("Submit", value);
-                            this.getNames(value.email);
-                        }}>
-                        <FormField name="email" label="Name" />
-                        <Button type="submit" primary label="Submit" />
-                    </Form>
+                    
 
                     <Header />
                     <Body />
@@ -108,4 +102,4 @@ export class ViewMedHist extends Component {
     }
 }
 
-export default ViewMedHist;
+export default ViewOneHistory;
