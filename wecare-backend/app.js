@@ -71,25 +71,14 @@ app.get('/OneHistory', (req, res) => {
     })
 });
 
-app.get('/please', (req, res) => {
+app.get('/makeAccount', (req, res) => {
   console.log("hi");
   let ah = req.query;
   let name = ah.name;
   let email = ah.email;
   let password = ah.password;
   let address = ah.address;
-  // console.log(email);
-  // console.log(name);
-  // console.log(password);
-  // console.log(address)
-  // con.query(`INSERT INTO Patient (email, password, name, address) VALUES (${email}, ${password}, ${firstName}, ${address})`, function (error, results, fields) {
-  //   if (error) throw error;
-  //   else {
-  //     return res.json({
-  //       data: results
-  //     })
-  //   };
-  // });
+
   let sql_statement = "INSERT INTO Patient (email, password, name, address) VALUES "  + `("${email}", "${password}", "${name}", "${address}")`;
   console.log(sql_statement);
   con.query(sql_statement,function (error, results, fields) {
@@ -122,9 +111,19 @@ app.get('/MedHistView', (req, res) => {
 });
 
 app.get('/checklogin', (req, res) => {
-  con.query('SELECT * FROM Patient', function (error, results, fields) {
-    if (error) throw error;
+  let params = req.query;
+  let email = params.email;
+  let password = params.password;
+  let sql_statement = `SELECT * FROM Patient WHERE email="${email}" AND password="${password}"`;
+  console.log(sql_statement);
+  con.query(sql_statement, function (error, results, fields) {
+    if (error) {
+      console.log("eror");
+      return res.status(500).json({ failed: 'error ocurred'})
+    }
     else {
+      console.log(results);
+      //return results;
       return res.json({
         data: results
       })
