@@ -21,7 +21,8 @@ con.connect(function (err) {
   console.log("Connected!");
 });
 
-
+var email_in_use = "";
+var password_in_use = "";
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -84,6 +85,8 @@ app.get('/makeAccount', (req, res) => {
   con.query(sql_statement,function (error, results, fields) {
     if (error) throw error;
     else {
+      email_in_use = email;
+      password_in_use = password;
       return res.json({
         data: results
       })
@@ -124,11 +127,33 @@ app.get('/checklogin', (req, res) => {
     else {
       console.log(results);
       //return results;
+      if(results.length === 0) {
+        console.log("Sdadsdadasdadasdasdas");
+      } else {
+        var string=JSON.stringify(results);
+        var json =  JSON.parse(string);
+        email_in_use = json[0].email;
+        password_in_use = json[0].password;
+        console.log(email_in_use);
+        console.log(password_in_use);
+      }
       return res.json({
         data: results
       })
     };
   });
+});
+
+app.get('/userInSession', (req, res) => {
+  console.log("cowboy beep");
+  // var string=JSON.stringify(email_in_use);
+  // var json =  JSON.parse(string);
+  // console.log(string);
+  // console.log(json);
+  let json = {"email": `${email_in_use}`}
+  console.log(json);
+  return json;
+  
 });
 
 

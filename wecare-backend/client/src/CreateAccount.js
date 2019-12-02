@@ -74,9 +74,9 @@ export class CreateAccount extends Component{
         method = "post"
         onSubmit={({ value }) => {
           console.log("Submit", value);
-          fetch("http://localhost:3001/please?name=" + value.firstName + "&email=" + value.email
+          fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
           + "&password=" + value.password + "&address=" + value.address);
-          // window.location="/newPatientMedHist";}
+          window.location="/newPatientMedHist";
           // var link = document.getElementById("/createAcc");
           // link.setAttribute("href", "newPatientMedHist");}
         }}

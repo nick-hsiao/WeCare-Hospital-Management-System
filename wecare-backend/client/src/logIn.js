@@ -91,7 +91,7 @@ class LogIn extends Component {
                   "&password=" + value.password)
                   .then(res => res.json())
                   .then(res => {
-                    if (res.data.length == 0) {
+                    if (res.data.length === 0) {
                       console.log("nope");
                     } else {
                       window.location="/Home";
