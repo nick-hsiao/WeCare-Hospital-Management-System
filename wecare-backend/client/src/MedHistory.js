@@ -75,6 +75,11 @@ export class MedHist extends Component {
   // }
 
   state = {
+    sulfaChecked: false,
+    iodineChecked: false,
+    insulinChecked: false,
+    ampicillinChecked: false,
+    tetracylineChecked: false,
     aspirinChecked: false,
     penicillinChecked: false,
     latexChecked: false,
@@ -89,7 +94,13 @@ export class MedHist extends Component {
   }
 
   render() {
-    const { aspirinChecked,
+    const {
+      sulfaChecked,
+      iodineChecked,
+      insulinChecked,
+      ampicillinChecked,
+      tetracylineChecked,
+      aspirinChecked,
       penicillinChecked,
       latexChecked,
       fluorideChecked,
@@ -111,25 +122,31 @@ export class MedHist extends Component {
 
           <Box align="left" pad="small">
             <Text >Check any known allergies:</Text>
-            <Form 
+            <Form
               // action="http://localhost:3001/insert" 
               onSubmit={({ value }) => {
                 let email_in_use = "";
                 console.log(value);
                 fetch("http://localhost:3001/userInSession")
-                .then(res => res.json())
-                .then(res => {
-                  var string_json = JSON.stringify(res);
-                  var email_json = JSON.parse(string_json);
-                  email_in_use = email_json.email;
-                  console.log(email_in_use);
-                  // console.log(JSON.stringify(res));
-                  // console.log(res.data);
-                  console.log("eg");
-                });
+                  .then(res => res.json())
+                  .then(res => {
+                    var string_json = JSON.stringify(res);
+                    var email_json = JSON.parse(string_json);
+                    email_in_use = email_json.email;
+                    console.log(email_in_use);
+                    // console.log(JSON.stringify(res));
+                    // console.log(res.data);
+                    console.log("eg");
+                  });
 
 
               }}>
+              <FormField
+                checked={ampicillinChecked}
+                component={CheckBox}
+                name='Ampicillin'
+                label='ampicillin'
+                onChange={event => this.setState({ ampicillinChecked: event.target.checked })} />
               <FormField
                 checked={aspirinChecked}
                 component={CheckBox}
@@ -137,17 +154,42 @@ export class MedHist extends Component {
                 label='aspirin'
                 onChange={event => this.setState({ aspirinChecked: event.target.checked })} />
               <FormField
-                checked={penicillinChecked}
+                checked={insulinChecked}
                 component={CheckBox}
-                name='Penicillin'
-                label='penicillin'
-                onChange={event => this.setState({ penicillinChecked: event.target.checked })} />
+                name='insulin'
+                label='insulin drugs'
+                onChange={event => this.setState({ insulinChecked: event.target.checked })} />
+              <FormField
+                checked={iodineChecked}
+                component={CheckBox}
+                name='iodine'
+                label='iodine'
+                onChange={event => this.setState({ iodineChecked: event.target.checked })} />
               <FormField
                 checked={latexChecked}
                 component={CheckBox}
                 name='Latex'
                 label='latex'
                 onChange={event => this.setState({ latexChecked: event.target.checked })} />
+              <FormField
+                checked={penicillinChecked}
+                component={CheckBox}
+                name='Penicillin'
+                label='penicillin'
+                onChange={event => this.setState({ penicillinChecked: event.target.checked })} />
+              <FormField
+                checked={sulfaChecked}
+                component={CheckBox}
+                name='sulfa'
+                label='sulfa drugs'
+                onChange={event => this.setState({ sulfaChecked: event.target.checked })} />
+
+              <FormField
+                checked={tetracylineChecked}
+                component={CheckBox}
+                name='Tetracyline'
+                label='tetracyline'
+                onChange={event => this.setState({ tetracylineChecked: event.target.checked })} />
 
               <Text>Check if you have ever experienced the following conditions:</Text>
               <FormField
