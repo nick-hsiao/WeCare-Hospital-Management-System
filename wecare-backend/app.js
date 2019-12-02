@@ -150,9 +150,9 @@ app.get('/userInSession', (req, res) => {
   // var json =  JSON.parse(string);
   // console.log(string);
   // console.log(json);
-  let json = {"email": `${email_in_use}`}
-  console.log(json);
-  return json;
+//  let json = {"email": `${email_in_use}`}
+//   console.log(json);
+  return res.json({email: `${email_in_use}`});
   
 });
 

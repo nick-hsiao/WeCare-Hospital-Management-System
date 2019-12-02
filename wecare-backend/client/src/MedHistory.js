@@ -113,19 +113,18 @@ export class MedHist extends Component {
             <Text >Check any known allergies:</Text>
             <Form 
               // action="http://localhost:3001/insert" 
-              method="post"
               onSubmit={({ value }) => {
+                let email_in_use = "";
                 console.log(value);
                 fetch("http://localhost:3001/userInSession")
-                // .then(function (response) {
-                //   if (response.status >= 400) {
-                //     throw new Error("Bad response from server");
-                //   }
-                //   return response.json();
-                // })
                 .then(res => res.json())
                 .then(res => {
-                  console.log(res.data);
+                  var string_json = JSON.stringify(res);
+                  var email_json = JSON.parse(string_json);
+                  email_in_use = email_json.email;
+                  console.log(email_in_use);
+                  // console.log(JSON.stringify(res));
+                  // console.log(res.data);
                   console.log("eg");
                 });
 
