@@ -144,6 +144,38 @@ app.get('/checklogin', (req, res) => {
   });
 });
 
+
+app.get('/checkDoclogin', (req, res) => {
+  let params = req.query;
+  let email = params.email;
+  let password = params.password;
+  let sql_statement = `SELECT * FROM DoctorNurse WHERE email="${email}" AND password="${password}"`;
+  console.log(sql_statement);
+  con.query(sql_statement, function (error, results, fields) {
+    if (error) {
+      console.log("eror");
+      return res.status(500).json({ failed: 'error ocurred'})
+    }
+    else {
+      console.log(results);
+      //return results;
+      if(results.length === 0) {
+        console.log("Sdadsdadasdadasdasdas");
+      } else {
+        var string=JSON.stringify(results);
+        var json =  JSON.parse(string);
+        email_in_use = json[0].email;
+        password_in_use = json[0].password;
+        console.log(email_in_use);
+        console.log(password_in_use);
+      }
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
 app.get('/userInSession', (req, res) => {
   console.log("cowboy beep");
   // var string=JSON.stringify(email_in_use);

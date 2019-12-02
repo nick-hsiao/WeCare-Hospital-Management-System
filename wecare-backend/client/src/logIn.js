@@ -56,6 +56,17 @@ const AppBar = (props) => (
     {...props} />
 );
 
+// const FormFieldToggle = props => (
+//   <Grommet theme={grommet}>
+//     <Box align="center" pad="large">
+//       <FormField label="Are you a doctor?" htmlFor="check-box" {...props}>
+//         <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
+//           <CheckBox id="check-box" label="Doctor" toggle />
+//         </Box>
+//       </FormField>
+//     </Box>
+//   </Grommet>);
+
 const INITIAL_STATE = {
   email: "",
   password: "",
@@ -63,7 +74,7 @@ const INITIAL_STATE = {
 };
 
 class LogIn extends Component {
-  state = { logInState: [] }
+  state = { isDoctor: false }
 
   constuctor() {
     this.routeChange = this.routeChange.bind(this);
@@ -75,7 +86,10 @@ class LogIn extends Component {
   }
 
   render() {
-
+    const {
+      isDoctor
+    } = this.state;
+    //[isDoc, setChecked] = React.useState(true);
     return (
       <Grommet theme={theme} full>
         <AppBar>
@@ -83,45 +97,66 @@ class LogIn extends Component {
         </AppBar>
         <Box fill align="center" justify="top">
           <Box width="medium">
-            <Form 
+            <Form
               onReset={event => console.log(event)}
               onSubmit={({ value }) => {
                 console.log("Submit", value);
-                fetch("http://localhost:3001/checklogin?email=" + value.email +
-                  "&password=" + value.password)
-                  .then(res => res.json())
-                  .then(res => {
-                    if (res.data.length === 0) {
-                      console.log("nope");
-                    } else {
-                      window.location="/Home";
-                      console.log(res.data);
-                    }
-                    // console.log(JSON.stringify(res.data));
-                    // console.log(res.data);
-                    // console.log(typeof(res.data));
-                    // this.setState({
-                    //   data:res.data
-                    // });
-                  });
+                if (value.isDoc === true) {
+                  fetch("http://localhost:3001/checkDoclogin?email=" + value.email +
+                    "&password=" + value.password)
+                    .then(res => res.json())
+                    .then(res => {
+                      if (res.data.length === 0) {
+                        console.log("nope");
+                      } else {
+                        window.location = "DocHome";
+                        console.log(res.data);
+                      }
+                      // console.log(JSON.stringify(res.data));
+                      // console.log(res.data);
+                      // console.log(typeof(res.data));
+                      // this.setState({
+                      //   data:res.data
+                      // });
+                    });
+                } else {
+                  fetch("http://localhost:3001/checklogin?email=" + value.email +
+                    "&password=" + value.password)
+                    .then(res => res.json())
+                    .then(res => {
+                      if (res.data.length === 0) {
+                        console.log("nope");
+                      } else {
+                        window.location = "/Home";
+                        console.log(res.data);
+                      }
+                      // console.log(JSON.stringify(res.data));
+                      // console.log(res.data);
+                      // console.log(typeof(res.data));
+                      // this.setState({
+                      //   data:res.data
+                      // });
+                    });
+                }
+
 
               }
-              
-              //{"data":[]}
-                  //.then(response => console.log(JSON.stringify(response))
-                    // {
-                    // if (data.length === 0) {
-                    //   console.log("fail");
-                    // }
-                    // else {
-                    //   console.log(JSON.stringify(data))
-                    //   console.log(data.email);
-                    //   console.log(data.password);
-                    //   console.log(data.name);
-                    // }
-                    
-                 // }
-                  
+
+                //{"data":[]}
+                //.then(response => console.log(JSON.stringify(response))
+                // {
+                // if (data.length === 0) {
+                //   console.log("fail");
+                // }
+                // else {
+                //   console.log(JSON.stringify(data))
+                //   console.log(data.email);
+                //   console.log(data.password);
+                //   console.log(data.name);
+                // }
+
+                // }
+
                 // console.log("sca");
                 // console.log(resp);
                 // if (resp === []){
@@ -129,11 +164,23 @@ class LogIn extends Component {
                 // }
                 // );}
               }>
+
               <FormField label="Email" name="email" type="email" required />
               <FormField
                 label="Password"
                 name="password"
                 required />
+              <FormField
+                component={CheckBox}
+                checked={isDoctor}
+                label="I'm a doctor"
+                name="isDoc"
+                onChange={(event) => {
+                  this.setState({ isDoctor: event.target.checked })
+                  console.log("toggled");
+                }}
+
+              />
               <Box direction="column" align="center" >
                 <Button type="submit" label="Log In" fill="horizontal" primary />
                 <Button label="Create Account"
