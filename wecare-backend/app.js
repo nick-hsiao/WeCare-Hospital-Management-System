@@ -250,11 +250,13 @@ app.get('/schedule', (req, res) => {
   let params = req.query;
   let time = params.time;
   let date = params.date;
+  let endtime = params.endTime;
   let concerns = params.concerns;
   let symptoms = params.symptoms;
 
   console.log("back");
   console.log(time);
+  console.log(endtime);
   console.log(date);
   console.log(concerns);
   console.log(symptoms);

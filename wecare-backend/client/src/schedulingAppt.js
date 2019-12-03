@@ -56,6 +56,7 @@ const theme = {
 
 var theDate;
 var theTime;
+var endTime;
 var theConcerns;
 var theSymptoms;
 
@@ -79,7 +80,18 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
     const close = () => {
       theDate = date;
       theTime = time;
-      console.log(typeof theTime);
+
+      //time is string, store it as [hour, min]
+      let parsedTime = theTime.split(":");
+
+      //parse hr string to in and add one hour to start hour
+      let startHour = parseInt(parsedTime[0],10);
+      let endHour = startHour + 1;
+
+      //rejoin into string
+      endTime = `${endHour}:00`;
+
+      console.log(endTime);
       console.log(theDate);
       console.log(theTime);
       onClose(date || initialDate, time || initialTime);
@@ -279,7 +291,7 @@ export class SchedulingAppt extends Component{
                   console.log(theConcerns);
                   console.log(theSymptoms);
                   console.log("no");
-                  fetch("http://localhost:3001/schedule?time=" + theTime +
+                  fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
                   "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms)
                   .then(res => res.json())
                   .then(res => {
