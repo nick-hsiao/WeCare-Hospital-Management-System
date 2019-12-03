@@ -54,6 +54,11 @@ const theme = {
   },
 };
 
+var theDate;
+var theTime;
+var theConcerns;
+var theSymptoms;
+
 const AppBar = (props) => (
   <Box
   tag='header'
@@ -71,7 +76,13 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
     const [date, setDate] = React.useState();
     const [time, setTime] = React.useState();
   
-    const close = () => onClose(date || initialDate, time || initialTime);
+    const close = () => {
+      theDate = date;
+      theTime = time;
+      console.log(theDate);
+      console.log(theTime);
+      onClose(date || initialDate, time || initialTime);
+    };
   
     return (
       <Box align="center">
@@ -177,7 +188,10 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
   const ConcernsTextArea = () => {
     const [value, setValue] = React.useState("");
   
-    const onChange = event => setValue(event.target.value);
+    const onChange = event => {
+      setValue(event.target.value);
+      theConcerns = value;
+    };
   
     return (
       <Grommet theme={theme}>
@@ -195,7 +209,10 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
   const SymptomsTextArea = () => {
     const [value, setValue] = React.useState("");
   
-    const onChange = event => setValue(event.target.value);
+    const onChange = event =>{ 
+      setValue(event.target.value);
+      theSymptoms = value;
+    };
   
     return (
       <Grommet theme={theme}>
@@ -204,7 +221,10 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
           height="xsmall"
           border={{ color: "brand", size: "small" }}
         >
-          <TextArea placeholder="Enter your symptoms..." value={value} onChange={onChange} fill />
+          <TextArea 
+          placeholder="Enter your symptoms..." 
+          value={value} 
+          onChange={onChange} fill />
         </Box>
       </Grommet>
     );
@@ -236,7 +256,41 @@ export class SchedulingAppt extends Component{
                 </ConcernsTextArea> 
                 <SymptomsTextArea>
                 </SymptomsTextArea> 
-                <Button label = "attempt to schedule"/>
+                <Form
+                 onSubmit={({ value }) => {
+                  console.log("hi");
+                  console.log(theTime);
+                  console.log(theDate);                  
+                  console.log(theConcerns);
+                  console.log(theSymptoms);
+                  console.log("no");
+                  fetch("http://localhost:3001/schedule?time=" + theTime +
+                  "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms)
+                  .then(res => res.json())
+                  .then(res => {
+                    if (res.data.length === 0) {
+                      console.log("nope");
+                    } else {
+                      window.location = "DocHome";
+                      console.log(res.data);
+                    }
+                    // console.log(JSON.stringify(res.data));
+                    // console.log(res.data);
+                    // console.log(typeof(res.data));
+                    // this.setState({
+                    //   data:res.data
+                    // });
+                  });
+                  }}
+                 >
+                  
+                  <Button 
+                  label = "attempt to schedule"
+                  type = "submit"
+                  primary
+                  />
+                  
+                </Form>
             </Box> 
             
 
