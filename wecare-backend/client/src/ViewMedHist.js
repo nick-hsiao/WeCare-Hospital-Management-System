@@ -16,6 +16,17 @@ import {
 import './App.css';
 import backdrop from './img/hmsbackdrop.jpg'
 
+const theme = {
+    global: {
+      colors: {
+        brand: '#00739D',
+      },
+      font: {
+        family: 'Lato',
+      },
+    },
+  };
+
 export class ViewMedHist extends Component {
 
 
@@ -83,7 +94,9 @@ export class ViewMedHist extends Component {
 
 
         return (
-            <Grommet full={true}>
+            <Grommet full={true}
+            theme = {theme}>
+                <Header />
                 <Box fill={true}>
 
                     <Form
@@ -95,7 +108,7 @@ export class ViewMedHist extends Component {
                         <Button type="submit" primary label="Submit" />
                     </Form>
 
-                    <Header />
+                    
                     <Body />
 
                 </Box>
