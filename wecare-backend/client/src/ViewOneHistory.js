@@ -42,14 +42,22 @@ export class ViewOneHistory extends Component {
 
     componentDidMount() {
 
-        this.getHistory(1);
-        console.log(this.state.names);
+        let email_in_use = "";
+        fetch("http://localhost:3001/userInSession")
+            .then(res => res.json())
+            .then(res => {
+                var string_json = JSON.stringify(res);
+                var email_json = JSON.parse(string_json);
+                email_in_use = email_json.email;
+                console.log("email in use is :" + email_in_use);
+                this.getHistory(email_in_use);
+            });
     }
 
     getHistory(value) {
-        let uid = '1';
-        console.log(uid);
-        fetch('http://localhost:3001/OneHistory?medHistUid='+ uid)
+        let email = "'"+ value + "'";
+        console.log(email);
+        fetch('http://localhost:3001/OneHistory?patientEmail='+ email)
         .then(res => res.json())
         .then(res => this.setState({ medhiststate: res.data }));
     }
