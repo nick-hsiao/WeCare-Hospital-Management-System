@@ -64,12 +64,63 @@ const INITIAL_STATE = {
 };
 
 export class PatientsViewAppointments extends Component {
-    constuctor() {
+    state = { medhiststate: [] }
+
+    componentDidMount() {
+
+        this.getNames("");
+        console.log(this.state.names);
     }
 
+    getNames(value) {
+        let patName = value;
+        console.log(patName);
+        
+        fetch("http://localhost:3001/userInSession")
+                  .then(res => res.json())
+                  .then(res => {
+                    var string_json = JSON.stringify(res);
+                    var email_json = JSON.parse(string_json);
+                    let email_in_use = email_json.email;
+                    console.log(email_in_use);
+                    // console.log(JSON.stringify(res));
+                    // console.log(res.data);
+                    console.log("eg");
+                    fetch('http://localhost:3001/patientViewAppt?email=' + email_in_use)
+                    .then(res => res.json())
+                    .then(res => this.setState({ medhiststate: res.data }));
+                  });
+
+
+    }
 
     render() {
+        const { medhiststate } = this.state;
 
+        const Body = () => (
+            <div className="container">
+                <div className="panel panel-default p50 uth-panel">
+                    <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>name</th>
+                                <th>email</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {medhiststate.map(patient =>
+                                <tr key={patient.user}>
+                                    <td>{patient.theConcerns} </td>
+                                    <td>{patient.theSymptoms}
+                                    </td>
+                                </tr>
+                            )}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        );
 
         return (
             <Grommet theme={theme} full>
@@ -77,6 +128,7 @@ export class PatientsViewAppointments extends Component {
                     <AppBar>
                         <Heading level='3' margin='none'>WeCare</Heading>
                     </AppBar>
+                    <Body />
 
                     <Form
                     // onSubmit={({ value }) => {
