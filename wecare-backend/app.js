@@ -266,36 +266,7 @@ app.get('/schedule', (req, res) => {
   console.log("ow");
   let generated_uid;
 
-  //query current max uid
-  // con.query('SELECT uid FROM Appointment ORDER BY uid DESC LIMIT 1;', function (error, results, fields) {
-  //   //console.log(query.sql);
-  //   if (error) throw error;
-  //   else {
-  //     console.log("im cool");
-  //     console.log(results[0].uid);
-  //     let agenerated_uid = results[0].uid + 1;
-  //     generated_uid = agenerated_uid;
-  //     console.log(agenerated_uid);
-  //     console.log("die");
 
-  //     let ndate = date.substring(0,10);
-
-  //     let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
-  //     //sql to turn string to sql time obj
-  //     let sql_start = `CONVERT('${time}', TIME)`;
-
-  //     //sql to turn string to sql time obj
-  //     let sql_end = `CONVERT('${endtime}', TIME)`;
-  //     // console.log(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`);
-  //     // con.query(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES ("${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`, function (error, results, fields) {
-  //     //   //console.log(query.sql);
-  //     //   if (error) throw error;
-  //     //   else {
-  //     //     console.log("im hippie");
-  //     //   }});
-
-  //     };
-  //   });
     let ndate = date.substring(0,10);
 
     let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
@@ -313,16 +284,6 @@ app.get('/schedule', (req, res) => {
         console.log("im hippie");
       }});
 
-    
-  // let sql_statement = `INSERT INTO users (uid, date, starttime, endtime, status) VALUES 
-  // ("9999, ${date}, ${time}, ${password}, ${password})`;
-  // con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
-  //   //console.log(query.sql);
-  //   if (error) throw error;
-  //   else {
-  //     console.log("im hippie");
-  //   };
-  // });
 });
 
 app.get('/genApptUID', (req, res) => {
@@ -346,12 +307,7 @@ app.get('/genApptUID', (req, res) => {
 
 app.get('/userInSession', (req, res) => {
   console.log("cowboy beep");
-  // var string=JSON.stringify(email_in_use);
-  // var json =  JSON.parse(string);
-  // console.log(string);
-  // console.log(json);
-  //  let json = {"email": `${email_in_use}`}
-  //   console.log(json);
+
   return res.json({ email: `${email_in_use}` });
 
 });
