@@ -56,20 +56,20 @@ app.get('/names', (req, res) => {
 });
 
 app.get('/OneHistory', (req, res) => {
-    console.log("in one history");
-    let params = req.query;
-    let email = params.patientEmail;
-    console.log(email);
-    let statement = "SELECT * FROM patientsfillhistory,patient,medicalhistory WHERE medhistory=uid AND patient=email"
-    statement += " AND email = " + email;
-    con.query(statement, function (error, results, fields) {
-        if (error) throw error;
-        else {
-            return res.json({
-                data: results
-            })
-        }
-    })
+  console.log("in one history");
+  let params = req.query;
+  let email = params.patientEmail;
+  console.log(email);
+  let statement = "SELECT * FROM patientsfillhistory,patient,medicalhistory WHERE medhistory=uid AND patient=email"
+  statement += " AND email = " + email;
+  con.query(statement, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    }
+  })
 });
 
 app.get('/makeAccount', (req, res) => {
@@ -80,9 +80,9 @@ app.get('/makeAccount', (req, res) => {
   let password = ah.password;
   let address = ah.address;
 
-  let sql_statement = "INSERT INTO Patient (email, password, name, address) VALUES "  + `("${email}", "${password}", "${name}", "${address}")`;
+  let sql_statement = "INSERT INTO Patient (email, password, name, address) VALUES " + `("${email}", "${password}", "${name}", "${address}")`;
   console.log(sql_statement);
-  con.query(sql_statement,function (error, results, fields) {
+  con.query(sql_statement, function (error, results, fields) {
     if (error) throw error;
     else {
       email_in_use = email;
@@ -95,22 +95,22 @@ app.get('/makeAccount', (req, res) => {
 });
 
 app.get('/MedHistView', (req, res) => {
-    let stupid = req.query;
-    let crap = "'%" + stupid.name + "%'";
-    let crap2 = "" + stupid.variable;
-    console.log(stupid);
-    //console.log(crap2);
-    let statement = "SELECT name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
-    if (crap != "''")
-        statement += " AND Patient.name LIKE " + crap
-    con.query(statement, function (error, results, fields) {
-        if (error) throw error;
-        else {
-            return res.json({
-                data: results
-            })
-        };
-    });
+  let stupid = req.query;
+  let crap = "'%" + stupid.name + "%'";
+  let crap2 = "" + stupid.variable;
+  console.log(stupid);
+  //console.log(crap2);
+  let statement = "SELECT name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
+  if (crap != "''")
+    statement += " AND Patient.name LIKE " + crap
+  con.query(statement, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    };
+  });
 });
 
 
@@ -123,12 +123,12 @@ app.post('/resetPasswordPatient', (req, res) => {
   let statement = `UPDATE Patient SET password = "${newPassword}" WHERE email = "${email}" AND password = "${oldPassword}";`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
-      if (error) throw error;
-      else {
-          return res.json({
-              data: results
-          })
-      };
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    };
   });
 });
 
@@ -142,12 +142,12 @@ app.post('/resetPasswordDoctor', (req, res) => {
   let statement = `UPDATE DoctorNurse SET password = "${newPassword}" WHERE email = "${email}" AND password = "${oldPassword}";`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
-      if (error) throw error;
-      else {
-          return res.json({
-              data: results
-          })
-      };
+    if (error) throw error;
+    else {
+      return res.json({
+        data: results
+      })
+    };
   });
 });
 
@@ -160,16 +160,16 @@ app.get('/checklogin', (req, res) => {
   con.query(sql_statement, function (error, results, fields) {
     if (error) {
       console.log("eror");
-      return res.status(500).json({ failed: 'error ocurred'})
+      return res.status(500).json({ failed: 'error ocurred' })
     }
     else {
       console.log(results);
       //return results;
-      if(results.length === 0) {
+      if (results.length === 0) {
         console.log("Sdadsdadasdadasdasdas");
       } else {
-        var string=JSON.stringify(results);
-        var json =  JSON.parse(string);
+        var string = JSON.stringify(results);
+        var json = JSON.parse(string);
         email_in_use = json[0].email;
         password_in_use = json[0].password;
         console.log(email_in_use);
@@ -182,6 +182,36 @@ app.get('/checklogin', (req, res) => {
   });
 });
 
+app.get('/checkAppt', (req, res) => {
+  let params = req.query;
+  let email = params.email;
+  let password = params.password;
+  let sql_statement = `SELECT * FROM Patient WHERE email="${email}" AND password="${password}"`;
+  console.log(sql_statement);
+  con.query(sql_statement, function (error, results, fields) {
+    if (error) {
+      console.log("eror");
+      return res.status(500).json({ failed: 'error ocurred' })
+    }
+    else {
+      console.log(results);
+      //return results;
+      if (results.length === 0) {
+        console.log("Sdadsdadasdadasdasdas");
+      } else {
+        var string = JSON.stringify(results);
+        var json = JSON.parse(string);
+        email_in_use = json[0].email;
+        password_in_use = json[0].password;
+        console.log(email_in_use);
+        console.log(password_in_use);
+      }
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
 
 app.get('/checkDoclogin', (req, res) => {
   let params = req.query;
@@ -192,16 +222,16 @@ app.get('/checkDoclogin', (req, res) => {
   con.query(sql_statement, function (error, results, fields) {
     if (error) {
       console.log("eror");
-      return res.status(500).json({ failed: 'error ocurred'})
+      return res.status(500).json({ failed: 'error ocurred' })
     }
     else {
       console.log(results);
       //return results;
-      if(results.length === 0) {
+      if (results.length === 0) {
         console.log("Sdadsdadasdadasdasdas");
       } else {
-        var string=JSON.stringify(results);
-        var json =  JSON.parse(string);
+        var string = JSON.stringify(results);
+        var json = JSON.parse(string);
         email_in_use = json[0].email;
         password_in_use = json[0].password;
         console.log(email_in_use);
@@ -223,15 +253,37 @@ app.get('/schedule', (req, res) => {
   let concerns = params.concerns;
   let symptoms = params.symptoms;
 
-  let sql_statement = `INSERT INTO users (uid, date, starttime, endtime, status) VALUES 
-  ("9999, ${date}, ${time}, ${password}, ${password})`;
-  con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
+  console.log("back");
+  console.log(time);
+  console.log(date);
+  console.log(concerns);
+  console.log(symptoms);
+  console.log("ow");
+
+  //query current max uid
+  con.query('SELECT uid FROM Appointment ORDER BY uid DESC LIMIT 1;', function (error, results, fields) {
     //console.log(query.sql);
     if (error) throw error;
     else {
-      console.log("im hippie");
+      console.log("im cool");
+      console.log(results[0].uid);
+      let generated_uid = results[0].uid + 1;
+      console.log(generated_uid);
+      console.log("die");
+
+
+      
     };
   });
+  // let sql_statement = `INSERT INTO users (uid, date, starttime, endtime, status) VALUES 
+  // ("9999, ${date}, ${time}, ${password}, ${password})`;
+  // con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
+  //   //console.log(query.sql);
+  //   if (error) throw error;
+  //   else {
+  //     console.log("im hippie");
+  //   };
+  // });
 });
 
 app.get('/userInSession', (req, res) => {
@@ -240,18 +292,18 @@ app.get('/userInSession', (req, res) => {
   // var json =  JSON.parse(string);
   // console.log(string);
   // console.log(json);
-//  let json = {"email": `${email_in_use}`}
-//   console.log(json);
-  return res.json({email: `${email_in_use}`});
-  
+  //  let json = {"email": `${email_in_use}`}
+  //   console.log(json);
+  return res.json({ email: `${email_in_use}` });
+
 });
 
 app.get('/endSession', (req, res) => {
   console.log("attempting to end session");
   email_in_use = "";
-  password_in_use ="";
+  password_in_use = "";
   console.log("hit rock bottom");
-  
+
 });
 
 app.post('/insert', (req, res) => {

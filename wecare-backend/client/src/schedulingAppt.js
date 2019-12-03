@@ -123,7 +123,7 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
                 { fixed: ":" },
                 {
                   length: 2,
-                  options: ["00", "15", "30", "45"],
+                  options: ["00"],
                   regexp: /^[0-5][0-9]$|^[0-9]$/,
                   placeholder: "mm"
                 },

@@ -48,18 +48,21 @@ const SidebarButtons = () => {
     <Grommet full theme={theme}>
       <Box fill direction="row">
         <Box background="brand">
-          {["View Medical History", "Appointments", "New Medical History", "Settings", "Sign Out"].map(label => (
+          {["View Medical History", "View Appts", "Schedule Appt", "New Medical History", "Settings", "Sign Out"].map(label => (
             <SidebarButton
               key={label}
               label={label}
               active={label === active}
               onClick={() => {
-                if (label === "Appointments") {
+                if (label === "Schedule Appt") {
                   window.location = "/scheduleAppt"
                 }
                 else if (label === "Sign Out") {
                   fetch("http://localhost:3001/endSession");
                   window.location = "/"
+                }
+                else if (label === "View Appts") {
+                  window.location = "/PatientsViewAppt"
                 }
                 else if (label === "View Medical History") {
                   window.location = "/ViewOneHistory"

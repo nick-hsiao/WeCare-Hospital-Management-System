@@ -16,13 +16,14 @@ import DocHome from './DocHome.js';
 import ViewOneHistory from './ViewOneHistory.js';
 import Settings from './Settings.js';
 import DocSettings from './DocSettings.js';
+import PatientsViewAppt from './PatientsViewAppt.js';
 
 export default function App() {
   return (
     <Router>
       <div>
         <nav>
-          <ul>
+          {/* <ul>
             <li>
               <Link to="/Home">Home</Link>
             </li>
@@ -50,7 +51,7 @@ export default function App() {
             <li>
               <Link to="/Settings">Settings page</Link>
             </li>
-          </ul>
+          </ul> */}
         </nav>
 
         {/* A <Switch> looks through its children <Route>s and
@@ -82,6 +83,9 @@ export default function App() {
           </Route>
           <Route path="/DocHome">
             <DocHome />
+          </Route>
+          <Route path="/PatientsViewAppt">
+            <PatientsViewAppt />
           </Route>
           <Route path="/DocSettings">
             <DocSettings />
