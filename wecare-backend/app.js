@@ -96,13 +96,13 @@ app.get('/makeAccount', (req, res) => {
 
 app.get('/MedHistView', (req, res) => {
     let stupid = req.query;
-    let crap = "'" + stupid.email + "'";
+    let crap = "'%" + stupid.name + "%'";
     let crap2 = "" + stupid.variable;
-    console.log(crap);
-    console.log(crap2);
+    console.log(stupid);
+    //console.log(crap2);
     let statement = "SELECT name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
     if (crap != "''")
-        statement += " AND Patient.name=" + crap
+        statement += " AND Patient.name LIKE " + crap
     con.query(statement, function (error, results, fields) {
         if (error) throw error;
         else {

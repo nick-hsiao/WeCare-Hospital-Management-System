@@ -28,9 +28,9 @@ export class ViewMedHist extends Component {
     }
 
     getNames(value) {
-        let patEmail = value;
-        console.log(patEmail);
-        fetch('http://localhost:3001/MedHistView?email='+ patEmail + '&variable=words')
+        let patName = value;
+        console.log(patName);
+        fetch('http://localhost:3001/MedHistView?name='+ patName + '&variable=words')
         .then(res => res.json())
         .then(res => this.setState({ medhiststate: res.data }));
     }
