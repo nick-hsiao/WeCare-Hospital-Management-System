@@ -12,7 +12,7 @@ var con = mysql.createConnection({
   user: 'root',
   password: 'root',
   database: 'wecare',
-  multipleStatements:true
+  multipleStatements: true
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
 });
@@ -245,6 +245,34 @@ app.get('/checkDoclogin', (req, res) => {
   });
 });
 
+app.get('/addToPatientSeeAppt', (req, res) => {
+  let params = req.query;
+  let email = params.email;
+  let appt_uid = params.uid;
+  let concerns = params.concerns;
+  let symptoms = params.symptoms;
+
+  // console.log("back");
+  // console.log(time);
+  // console.log(endtime);
+  // console.log(date);
+  // console.log(concerns);
+  // console.log(symptoms);
+  // console.log(typeof date);
+  // console.log("ow");
+  // let generated_uid;
+
+  let sql_try = `INSERT INTO PatientsSeeAppointments (patient, appt, concerns, symptoms) VALUES ("${email}", ${appt_uid}, "${concerns}", "${symptoms}")`;
+  console.log(sql_try);
+  con.query(sql_try, function (error, results, fields) {
+    //console.log(query.sql);
+    if (error) throw error;
+    else {
+      console.log("im hippie");
+    }
+  });
+
+});
 
 
 app.get('/schedule', (req, res) => {
@@ -267,22 +295,23 @@ app.get('/schedule', (req, res) => {
   let generated_uid;
 
 
-    let ndate = date.substring(0,10);
+  let ndate = date.substring(0, 10);
 
-    let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
-    //sql to turn string to sql time obj
-    let sql_start = `CONVERT('${time}', TIME)`;
+  let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
+  //sql to turn string to sql time obj
+  let sql_start = `CONVERT('${time}', TIME)`;
 
-    //sql to turn string to sql time obj
-    let sql_end = `CONVERT('${endtime}', TIME)`;
-    let sql_try = `INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`;
-    console.log(sql_try);
-    con.query(sql_try, function (error, results, fields) {
-      //console.log(query.sql);
-      if (error) throw error;
-      else {
-        console.log("im hippie");
-      }});
+  //sql to turn string to sql time obj
+  let sql_end = `CONVERT('${endtime}', TIME)`;
+  let sql_try = `INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`;
+  console.log(sql_try);
+  con.query(sql_try, function (error, results, fields) {
+    //console.log(query.sql);
+    if (error) throw error;
+    else {
+      console.log("im hippie");
+    }
+  });
 
 });
 
@@ -298,9 +327,9 @@ app.get('/genApptUID', (req, res) => {
       console.log(generated_uid);
       console.log("die");
       return res.json({ uid: `${generated_uid}` });
-      };
-    });
-  
+    };
+  });
+
 
 });
 
@@ -321,6 +350,17 @@ app.get('/endSession', (req, res) => {
 });
 
 app.post('/insert', (req, res) => {
+  console.log("hello ive touched");
+  con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
+    //console.log(query.sql);
+    if (error) throw error;
+    else {
+      console.log("im hippie");
+    };
+  });
+});
+
+app.post('/scheduleAppt', (req, res) => {
   console.log("hello ive touched");
   con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
     //console.log(query.sql);

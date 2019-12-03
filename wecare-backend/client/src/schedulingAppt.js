@@ -293,35 +293,32 @@ export class SchedulingAppt extends Component {
               console.log("no");
               //probably fetch uid here, add one
 
-              fetch("http://localhost:3001/genApptUID")
+              fetch("http://localhost:3001/userInSession")
                 .then(res => res.json())
                 .then(res => {
                   var string_json = JSON.stringify(res);
-                  var uid_json = JSON.parse(string_json);
-                  let gen_uid = uid_json.uid;
-                  console.log(gen_uid);
+                  var email_json = JSON.parse(string_json);
+                  let email_in_use = email_json.email;
+                  console.log(email_in_use);
                   // console.log(JSON.stringify(res));
                   // console.log(res.data);
-                  //put uid+1 into the link and getch
-                  //go to app.js and parse /schedule for .uid
-                  fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
-                    "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms+ "&uid=" + gen_uid)
+                  console.log("eg");
+                  fetch("http://localhost:3001/genApptUID")
                     .then(res => res.json())
                     .then(res => {
-                      if (res.data.length === 0) {
-                        console.log("nope");
-                      } else {
-                        window.location = "DocHome";
-                        console.log(res.data);
-                      }
-                      // console.log(JSON.stringify(res.data));
+                      var string_json = JSON.stringify(res);
+                      var uid_json = JSON.parse(string_json);
+                      let gen_uid = uid_json.uid;
+                      console.log(gen_uid);
+                      // console.log(JSON.stringify(res));
                       // console.log(res.data);
-                      // console.log(typeof(res.data));
-                      // this.setState({
-                      //   data:res.data
-                      // });
+                      //put uid+1 into the link and getch
+                      //go to app.js and parse /schedule for .uid
+                      fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
+                        "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms + "&uid=" + gen_uid);
+                      fetch("http://localhost:3001/addToPatientSeeAppt?email=" + email_in_use + "&uid=" + gen_uid +
+                        "&concerns=" + theConcerns + "&symptoms=" + theSymptoms);
                     });
-                  console.log("eg");
                 });
 
 
