@@ -79,6 +79,7 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
     const close = () => {
       theDate = date;
       theTime = time;
+      console.log(typeof theTime);
       console.log(theDate);
       console.log(theTime);
       onClose(date || initialDate, time || initialTime);
@@ -104,6 +105,7 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
                 {
                   length: [1, 2],
                   options: [
+                    "0", 
                     "1",
                     "2",
                     "3",
@@ -115,7 +117,19 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
                     "9",
                     "10",
                     "11",
-                    "12"
+                    "12", 
+                    "13",
+                    "14",
+                    "15", 
+                    "16",
+                    "17",
+                    "18", 
+                    "19",
+                    "20",
+                    "21",
+                    "22",
+                    "23",
+ 
                   ],
                   regexp: /^1[1-2]$|^[0-9]$/,
                   placeholder: "hh"
@@ -126,14 +140,15 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
                   options: ["00"],
                   regexp: /^[0-5][0-9]$|^[0-9]$/,
                   placeholder: "mm"
-                },
-                { fixed: " " },
-                {
-                  length: 2,
-                  options: ["am", "pm"],
-                  regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
-                  placeholder: "ap"
                 }
+                // ,
+                // { fixed: " " },
+                // {
+                //   length: 2,
+                //   options: ["am", "pm"],
+                //   regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
+                //   placeholder: "ap"
+                // }
               ]}
               value={time || initialTime}
               name="maskedInput"
