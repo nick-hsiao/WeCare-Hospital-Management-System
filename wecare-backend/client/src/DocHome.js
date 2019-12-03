@@ -50,7 +50,7 @@ const SidebarButtons = () => {
         <Grommet full theme={theme}>
             <Box fill direction="row">
                 <Box background="brand">
-                    {["Appointments", "Medical History", "Settings"].map(label => (
+                    {["Appointments", "View Patients", "Settings"].map(label => (
                         <SidebarButton
                             key={label}
                             label={label}
@@ -64,6 +64,9 @@ const SidebarButtons = () => {
                                 }
                                 else if (label === "Settings") {
                                     window.location = "/to do"
+                                }
+                                else if (label === "View Patients") {
+                                    window.location = "/MedHistView"
                                 }
                                 setActive(label);
                             }}
@@ -142,7 +145,7 @@ export class DocHome extends Component {
 
         return (
             <Grommet full={true}
-            theme = {theme}>
+                theme={theme}>
                 <Box align="left">
                     <Header />
                     <Grid
@@ -165,17 +168,10 @@ export class DocHome extends Component {
                         </Box>
                         <Box
                             gridArea="main"
-                            justify="center"
+                            justify="top"
+                            pad = "large"
                             align="center">
-                            <Form
-                                onSubmit={({ value }) => {
-                                    console.log("Submit", value);
-                                    this.getNames(value.email);
-                                }}>
-                                <FormField name="email" label="Name" />
-                                <Button type="submit" primary label="Submit" />
-                            </Form>
-                            <Body />
+                                <Heading margin="none">Welcome, doc.</Heading>
                         </Box>
                     </Grid>
 
