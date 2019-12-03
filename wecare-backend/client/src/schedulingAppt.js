@@ -5,19 +5,19 @@
 import { grommet } from "grommet/themes";
 
 
-import React,{Component,Image,StyleSheet, useState} from 'react';
-import { 
-    FormClose, 
-    Notification,
-    FormDown, 
-    Schedule,
+import React, { Component, Image, StyleSheet, useState } from 'react';
+import {
+  FormClose,
+  Notification,
+  FormDown,
+  Schedule,
 } from 'grommet-icons';
 
 import logo from './logo.svg';
 
 import {
-  Collapsible, 
-  Layer, 
+  Collapsible,
+  Layer,
   Grid,
   ResponsiveContext,
   Box,
@@ -32,9 +32,9 @@ import {
   RadioButtonGroup,
   TextArea,
   RangeInput,
-  Grommet, 
-  Calendar, 
-  DropButton, 
+  Grommet,
+  Calendar,
+  DropButton,
   MaskedInput,
   Keyboard,
 
@@ -62,200 +62,200 @@ var theSymptoms;
 
 const AppBar = (props) => (
   <Box
-  tag='header'
-  direction='row'
-  align='center'
-  justify='between'
-  background='brand'
-  pad={{ left: 'medium', right: 'small', vertical: 'small' }}
+    tag='header'
+    direction='row'
+    align='center'
+    justify='between'
+    background='brand'
+    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
     //elevation='medium'
     style={{ zIndex: '1' }}
     {...props} />
 );
 
 const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
-    const [date, setDate] = React.useState();
-    const [time, setTime] = React.useState();
-  
-    const close = () => {
-      theDate = date;
-      theTime = time;
+  const [date, setDate] = React.useState();
+  const [time, setTime] = React.useState();
 
-      //time is string, store it as [hour, min]
-      let parsedTime = theTime.split(":");
+  const close = () => {
+    theDate = date;
+    theTime = time;
 
-      //parse hr string to in and add one hour to start hour
-      let startHour = parseInt(parsedTime[0],10);
-      let endHour = startHour + 1;
+    //time is string, store it as [hour, min]
+    let parsedTime = theTime.split(":");
 
-      //rejoin into string
-      endTime = `${endHour}:00`;
+    //parse hr string to in and add one hour to start hour
+    let startHour = parseInt(parsedTime[0], 10);
+    let endHour = startHour + 1;
 
-      console.log(endTime);
-      console.log(theDate);
-      console.log(theTime);
-      onClose(date || initialDate, time || initialTime);
-    };
-  
-    return (
-      <Box align="center">
-        <Calendar
-          animate={false}
-          date={date || initialDate}
-          onSelect={setDate}
-          showAdjacentDays={false}
-        />
-        <Box flex={false} pad="medium" gap="small">
-          <Keyboard
-            onEnter={event => {
-              event.preventDefault(); // so drop doesn't re-open
-              close();
-            }}
-          >
-            <MaskedInput
-              mask={[
-                {
-                  length: [1, 2],
-                  options: [
-                    "0", 
-                    "1",
-                    "2",
-                    "3",
-                    "4",
-                    "5",
-                    "6",
-                    "7",
-                    "8",
-                    "9",
-                    "10",
-                    "11",
-                    "12", 
-                    "13",
-                    "14",
-                    "15", 
-                    "16",
-                    "17",
-                    "18", 
-                    "19",
-                    "20",
-                    "21",
-                    "22",
-                    "23",
- 
-                  ],
-                  regexp: /^1[1-2]$|^[0-9]$/,
-                  placeholder: "hh"
-                },
-                { fixed: ":" },
-                {
-                  length: 2,
-                  options: ["00"],
-                  regexp: /^[0-5][0-9]$|^[0-9]$/,
-                  placeholder: "mm"
-                }
-                // ,
-                // { fixed: " " },
-                // {
-                //   length: 2,
-                //   options: ["am", "pm"],
-                //   regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
-                //   placeholder: "ap"
-                // }
-              ]}
-              value={time || initialTime}
-              name="maskedInput"
-              onChange={event => setTime(event.target.value)}
-            />
-          </Keyboard>
-          <Box flex={false}>
-            <Button label="Done" onClick={close} color="#00739D"/>
-          </Box>
+    //rejoin into string
+    endTime = `${endHour}:00`;
+
+    console.log(endTime);
+    console.log(theDate);
+    console.log(theTime);
+    onClose(date || initialDate, time || initialTime);
+  };
+
+  return (
+    <Box align="center">
+      <Calendar
+        animate={false}
+        date={date || initialDate}
+        onSelect={setDate}
+        showAdjacentDays={false}
+      />
+      <Box flex={false} pad="medium" gap="small">
+        <Keyboard
+          onEnter={event => {
+            event.preventDefault(); // so drop doesn't re-open
+            close();
+          }}
+        >
+          <MaskedInput
+            mask={[
+              {
+                length: [1, 2],
+                options: [
+                  "0",
+                  "1",
+                  "2",
+                  "3",
+                  "4",
+                  "5",
+                  "6",
+                  "7",
+                  "8",
+                  "9",
+                  "10",
+                  "11",
+                  "12",
+                  "13",
+                  "14",
+                  "15",
+                  "16",
+                  "17",
+                  "18",
+                  "19",
+                  "20",
+                  "21",
+                  "22",
+                  "23",
+
+                ],
+                regexp: /^1[1-2]$|^[0-9]$/,
+                placeholder: "hh"
+              },
+              { fixed: ":" },
+              {
+                length: 2,
+                options: ["00"],
+                regexp: /^[0-5][0-9]$|^[0-9]$/,
+                placeholder: "mm"
+              }
+              // ,
+              // { fixed: " " },
+              // {
+              //   length: 2,
+              //   options: ["am", "pm"],
+              //   regexp: /^[ap]m$|^[AP]M$|^[aApP]$/,
+              //   placeholder: "ap"
+              // }
+            ]}
+            value={time || initialTime}
+            name="maskedInput"
+            onChange={event => setTime(event.target.value)}
+          />
+        </Keyboard>
+        <Box flex={false}>
+          <Button label="Done" onClick={close} color="#00739D" />
         </Box>
       </Box>
-    );
-  };
-  
-  const DateTimeDropButton = () => {
-    const [date, setDate] = React.useState();
-    const [time, setTime] = React.useState("");
-    const [open, setOpen] = React.useState();
-  
-    const onClose = (nextDate, nextTime) => {
-      setDate(nextDate);
-      setTime(nextTime);
-      setOpen(false);
-      setTimeout(() => setOpen(undefined), 1);
-    };
-  
-    return (
-      <Grommet theme={theme}>
-        <Box align="center" pad="large">
-          <DropButton
-            open={open}
-            onClose={() => setOpen(false)}
-            onOpen={() => setOpen(true)}
-            dropContent={
-              <DropContent date={date} time={time} onClose={onClose} />
-            }
-          >
-            <Box direction="row" gap="small" align="center" pad="small">
-              <Text color={date ? undefined : "dark-5"}>
-                {date
-                  ? `${new Date(date).toLocaleDateString()} ${time}`
-                  : "Select date & time"}
-              </Text>
-              <Schedule />
-            </Box>
-          </DropButton>
-        </Box>
-      </Grommet>
-    );
+    </Box>
+  );
+};
+
+const DateTimeDropButton = () => {
+  const [date, setDate] = React.useState();
+  const [time, setTime] = React.useState("");
+  const [open, setOpen] = React.useState();
+
+  const onClose = (nextDate, nextTime) => {
+    setDate(nextDate);
+    setTime(nextTime);
+    setOpen(false);
+    setTimeout(() => setOpen(undefined), 1);
   };
 
-  const ConcernsTextArea = () => {
-    const [value, setValue] = React.useState("");
-  
-    const onChange = event => {
-      setValue(event.target.value);
-      theConcerns = value;
-    };
-  
-    return (
-      <Grommet theme={theme}>
-        <Box
-          width="medium"
-          height="xsmall"
-          border={{ color: "brand", size: "small" }}
+  return (
+    <Grommet theme={theme}>
+      <Box align="center" pad="large">
+        <DropButton
+          open={open}
+          onClose={() => setOpen(false)}
+          onOpen={() => setOpen(true)}
+          dropContent={
+            <DropContent date={date} time={time} onClose={onClose} />
+          }
         >
-          <TextArea placeholder="Enter your concerns..." value={value} onChange={onChange} fill />
-        </Box>
-      </Grommet>
-    );
+          <Box direction="row" gap="small" align="center" pad="small">
+            <Text color={date ? undefined : "dark-5"}>
+              {date
+                ? `${new Date(date).toLocaleDateString()} ${time}`
+                : "Select date & time"}
+            </Text>
+            <Schedule />
+          </Box>
+        </DropButton>
+      </Box>
+    </Grommet>
+  );
+};
+
+const ConcernsTextArea = () => {
+  const [value, setValue] = React.useState("");
+
+  const onChange = event => {
+    setValue(event.target.value);
+    theConcerns = value;
   };
 
-  const SymptomsTextArea = () => {
-    const [value, setValue] = React.useState("");
-  
-    const onChange = event =>{ 
-      setValue(event.target.value);
-      theSymptoms = value;
-    };
-  
-    return (
-      <Grommet theme={theme}>
-        <Box
-          width="medium"
-          height="xsmall"
-          border={{ color: "brand", size: "small" }}
-        >
-          <TextArea 
-          placeholder="Enter your symptoms..." 
-          value={value} 
+  return (
+    <Grommet theme={theme}>
+      <Box
+        width="medium"
+        height="xsmall"
+        border={{ color: "brand", size: "small" }}
+      >
+        <TextArea placeholder="Enter your concerns..." value={value} onChange={onChange} fill />
+      </Box>
+    </Grommet>
+  );
+};
+
+const SymptomsTextArea = () => {
+  const [value, setValue] = React.useState("");
+
+  const onChange = event => {
+    setValue(event.target.value);
+    theSymptoms = value;
+  };
+
+  return (
+    <Grommet theme={theme}>
+      <Box
+        width="medium"
+        height="xsmall"
+        border={{ color: "brand", size: "small" }}
+      >
+        <TextArea
+          placeholder="Enter your symptoms..."
+          value={value}
           onChange={onChange} fill />
-        </Box>
-      </Grommet>
-    );
-  };
+      </Box>
+    </Grommet>
+  );
+};
 
 const INITIAL_STATE = {
   email: "",
@@ -264,65 +264,82 @@ const INITIAL_STATE = {
 };
 
 
-export class SchedulingAppt extends Component{
+export class SchedulingAppt extends Component {
   constuctor() {
-      
+
   }
 
 
-  render(){
+  render() {
     return (
-        <Grommet theme={theme} full>
-            <AppBar>
-                <Heading level='3' margin='none'>WeCare</Heading>
-            </AppBar>
-            <Box align="center" pad="small" gap ="small">
-                <DateTimeDropButton>
-                </DateTimeDropButton>
-                <ConcernsTextArea>
-                </ConcernsTextArea> 
-                <SymptomsTextArea>
-                </SymptomsTextArea> 
-                <Form
-                 onSubmit={({ value }) => {
-                  console.log("hi");
-                  console.log(theTime);
-                  console.log(theDate);                  
-                  console.log(theConcerns);
-                  console.log(theSymptoms);
-                  console.log("no");
-                  fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
-                  "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms)
-                  .then(res => res.json())
-                  .then(res => {
-                    if (res.data.length === 0) {
-                      console.log("nope");
-                    } else {
-                      window.location = "DocHome";
-                      console.log(res.data);
-                    }
-                    // console.log(JSON.stringify(res.data));
-                    // console.log(res.data);
-                    // console.log(typeof(res.data));
-                    // this.setState({
-                    //   data:res.data
-                    // });
-                  });
-                  }}
-                 >
-                  
-                  <Button 
-                  label = "attempt to schedule"
-                  type = "submit"
-                  primary
-                  />
-                  
-                </Form>
-            </Box> 
-            
+      <Grommet theme={theme} full>
+        <AppBar>
+          <Heading level='3' margin='none'>WeCare</Heading>
+        </AppBar>
+        <Box align="center" pad="small" gap="small">
+          <DateTimeDropButton>
+          </DateTimeDropButton>
+          <ConcernsTextArea>
+          </ConcernsTextArea>
+          <SymptomsTextArea>
+          </SymptomsTextArea>
+          <Form
+            onSubmit={({ value }) => {
+              console.log("hi");
+              console.log(theTime);
+              console.log(theDate);
+              console.log(theConcerns);
+              console.log(theSymptoms);
+              console.log("no");
+              //probably fetch uid here, add one
 
-        </Grommet>
-        );
+              fetch("http://localhost:3001/genApptUID")
+                .then(res => res.json())
+                .then(res => {
+                  var string_json = JSON.stringify(res);
+                  var uid_json = JSON.parse(string_json);
+                  let gen_uid = uid_json.uid;
+                  console.log(gen_uid);
+                  // console.log(JSON.stringify(res));
+                  // console.log(res.data);
+                  //put uid+1 into the link and getch
+                  //go to app.js and parse /schedule for .uid
+                  fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
+                    "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms+ "&uid=" + gen_uid)
+                    .then(res => res.json())
+                    .then(res => {
+                      if (res.data.length === 0) {
+                        console.log("nope");
+                      } else {
+                        window.location = "DocHome";
+                        console.log(res.data);
+                      }
+                      // console.log(JSON.stringify(res.data));
+                      // console.log(res.data);
+                      // console.log(typeof(res.data));
+                      // this.setState({
+                      //   data:res.data
+                      // });
+                    });
+                  console.log("eg");
+                });
+
+
+            }}
+          >
+
+            <Button
+              label="attempt to schedule"
+              type="submit"
+              primary
+            />
+
+          </Form>
+        </Box>
+
+
+      </Grommet>
+    );
   }
 }
 

@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'i@mr00t!',
+  password: 'root',
   database: 'wecare',
   multipleStatements:true
   //port: 3001,
@@ -251,6 +251,7 @@ app.get('/schedule', (req, res) => {
   let params = req.query;
   let time = params.time;
   let date = params.date;
+  let uid = params.uid;
   let endtime = params.endTime;
   let concerns = params.concerns;
   let symptoms = params.symptoms;
@@ -303,8 +304,9 @@ app.get('/schedule', (req, res) => {
 
     //sql to turn string to sql time obj
     let sql_end = `CONVERT('${endtime}', TIME)`;
-    console.log(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`);
-    con.query(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (20, STR_TO_DATE('2019-12-03', '%Y-%m-%d'), CONVERT('10:00', TIME), CONVERT('11:00', TIME), "Not Done")`, function (error, results, fields) {
+    let sql_try = `INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`;
+    console.log(sql_try);
+    con.query(sql_try, function (error, results, fields) {
       //console.log(query.sql);
       if (error) throw error;
       else {
@@ -322,6 +324,25 @@ app.get('/schedule', (req, res) => {
   //   };
   // });
 });
+
+app.get('/genApptUID', (req, res) => {
+  //query current max uid
+  con.query('SELECT uid FROM Appointment ORDER BY uid DESC LIMIT 1;', function (error, results, fields) {
+    //console.log(query.sql);
+    if (error) throw error;
+    else {
+      console.log("im cool");
+      console.log(results[0].uid);
+      let generated_uid = results[0].uid + 1;
+      console.log(generated_uid);
+      console.log("die");
+      return res.json({ uid: `${generated_uid}` });
+      };
+    });
+  
+
+});
+
 
 app.get('/userInSession', (req, res) => {
   console.log("cowboy beep");
