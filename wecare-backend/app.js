@@ -12,6 +12,7 @@ var con = mysql.createConnection({
   user: 'root',
   password: 'i@mr00t!',
   database: 'wecare',
+  multipleStatements:true
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
 });
@@ -262,36 +263,55 @@ app.get('/schedule', (req, res) => {
   console.log(symptoms);
   console.log(typeof date);
   console.log("ow");
+  let generated_uid;
 
   //query current max uid
-  con.query('SELECT uid FROM Appointment ORDER BY uid DESC LIMIT 1;', function (error, results, fields) {
-    //console.log(query.sql);
-    if (error) throw error;
-    else {
-      console.log("im cool");
-      console.log(results[0].uid);
-      let generated_uid = results[0].uid + 1;
-      console.log(generated_uid);
-      console.log("die");
+  // con.query('SELECT uid FROM Appointment ORDER BY uid DESC LIMIT 1;', function (error, results, fields) {
+  //   //console.log(query.sql);
+  //   if (error) throw error;
+  //   else {
+  //     console.log("im cool");
+  //     console.log(results[0].uid);
+  //     let agenerated_uid = results[0].uid + 1;
+  //     generated_uid = agenerated_uid;
+  //     console.log(agenerated_uid);
+  //     console.log("die");
 
-      let ndate = date.substring(0,10);
+  //     let ndate = date.substring(0,10);
 
-      let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
-      //sql to turn string to sql time obj
-      let sql_start = `CONVERT('${time}', TIME)`;
+  //     let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
+  //     //sql to turn string to sql time obj
+  //     let sql_start = `CONVERT('${time}', TIME)`;
 
-      //sql to turn string to sql time obj
-      let sql_end = `CONVERT('${endtime}', TIME)`;
-      console.log(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`);
-      con.query(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES ("${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`, function (error, results, fields) {
-        //console.log(query.sql);
-        if (error) throw error;
-        else {
-          console.log("im hippie");
-        }});
+  //     //sql to turn string to sql time obj
+  //     let sql_end = `CONVERT('${endtime}', TIME)`;
+  //     // console.log(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`);
+  //     // con.query(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES ("${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`, function (error, results, fields) {
+  //     //   //console.log(query.sql);
+  //     //   if (error) throw error;
+  //     //   else {
+  //     //     console.log("im hippie");
+  //     //   }});
 
-      };
-    });
+  //     };
+  //   });
+    let ndate = date.substring(0,10);
+
+    let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
+    //sql to turn string to sql time obj
+    let sql_start = `CONVERT('${time}', TIME)`;
+
+    //sql to turn string to sql time obj
+    let sql_end = `CONVERT('${endtime}', TIME)`;
+    console.log(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`);
+    con.query(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (20, STR_TO_DATE('2019-12-03', '%Y-%m-%d'), CONVERT('10:00', TIME), CONVERT('11:00', TIME), "Not Done")`, function (error, results, fields) {
+      //console.log(query.sql);
+      if (error) throw error;
+      else {
+        console.log("im hippie");
+      }});
+
+    
   // let sql_statement = `INSERT INTO users (uid, date, starttime, endtime, status) VALUES 
   // ("9999, ${date}, ${time}, ${password}, ${password})`;
   // con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
