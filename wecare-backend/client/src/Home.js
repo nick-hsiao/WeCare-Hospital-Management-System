@@ -61,7 +61,7 @@ const SidebarButtons = () => {
                                   window.location = "/MedHist"
                               }
                               else if (label === "Settings") {
-                                  window.location = "/to do"
+                                  window.location = "/Settings"
                               }
                               setActive(label);
                           }}
