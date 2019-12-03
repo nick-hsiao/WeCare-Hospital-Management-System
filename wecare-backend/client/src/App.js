@@ -8,12 +8,13 @@ import {
 import MedHist from './MedHistory.js';
 import Home from './Home';
 import LogIn from './logIn.js';
-import NewMedHist from './newPatientMedHist.js'; 
-import CreateAccount from './CreateAccount.js'; 
-import SchedulingAppt from './schedulingAppt.js'; 
+import NewMedHist from './newPatientMedHist.js';
+import CreateAccount from './CreateAccount.js';
+import SchedulingAppt from './schedulingAppt.js';
 import ViewMedHist from './ViewMedHist.js';
 import DocHome from './DocHome.js';
-import ViewOneHistory from './ViewOneHistory.js'
+import ViewOneHistory from './ViewOneHistory.js';
+import Settings from './Settings.js';
 
 export default function App() {
   return (
@@ -43,7 +44,10 @@ export default function App() {
               <Link to="/MedHistView">Medical History View</Link>
             </li>
             <li>
-            <Link to="/DocHome">Doctor's home page</Link>
+              <Link to="/DocHome">Doctor's home page</Link>
+            </li>
+            <li>
+              <Link to="/Settings">Settings page</Link>
             </li>
           </ul>
         </nav>
@@ -53,10 +57,13 @@ export default function App() {
         <Switch>
           <Route path="/MedHist">
             <MedHist />
-                      </Route>
+          </Route>
+          <Route path="/Settings">
+            <Settings />
+          </Route>
           <Route path="/MedHistView">
-                          <ViewMedHist />
-                    </Route>
+            <ViewMedHist />
+          </Route>
           <Route path="/scheduleAppt">
             <SchedulingAppt />
           </Route>
