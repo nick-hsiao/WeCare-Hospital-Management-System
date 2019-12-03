@@ -1,10 +1,10 @@
-import React,{Component,Image,StyleSheet, useState} from 'react';
+import React, { Component, Image, StyleSheet, useState } from 'react';
 import { FormClose, Notification } from 'grommet-icons';
 import logo from './logo.svg';
 
 import {
-  Collapsible, 
-  Layer, 
+  Collapsible,
+  Layer,
   ResponsiveContext,
   Box,
   Button,
@@ -20,7 +20,7 @@ import {
   RadioButtonGroup,
   TextArea,
   RangeInput,
-  
+
 
 } from 'grommet';
 
@@ -40,14 +40,14 @@ const theme = {
 
 const AppBar = (props) => (
   <Box
-  tag='header'
-  direction='row'
-  align='center'
-  justify='between'
-  background='brand'
-  pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-  style={{ zIndex: '1' }}
-  {...props} />
+    tag='header'
+    direction='row'
+    align='center'
+    justify='between'
+    background='brand'
+    pad={{ left: 'medium', right: 'small', vertical: 'small' }}
+    style={{ zIndex: '1' }}
+    {...props} />
 );
 
 const INITIAL_STATE = {
@@ -56,70 +56,71 @@ const INITIAL_STATE = {
   error: null,
 };
 
-export class CreateAccount extends Component{
+export class CreateAccount extends Component {
   constuctor() {
   }
-  
-  render(){
 
-   return (
-    <Grommet theme={theme} full>
-    <AppBar>
-      <Heading level='3' margin='none'>WeCare</Heading>
-    </AppBar>
-    <Box fill align="center" justify="top">
-      <Box width="medium">
-      <Form 
-        onReset={event => console.log(event)}
-        method = "post"
-        onSubmit={({ value }) => {
-          console.log("Submit", value);
-          fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
-          + "&password=" + value.password + "&address=" + value.address);
-          window.location="/newPatientMedHist";
-          // var link = document.getElementById("/createAcc");
-          // link.setAttribute("href", "newPatientMedHist");}
-        }}
-        //action="/insert"
-        >
-          <FormField
-            label="First Name"
-            name="firstName"
-            required
-            validate={{ regexp: /^[a-z]/i }} />
-          <FormField
-            label="Last Name"
-            name="lastName"
-            required
-            validate={{ regexp: /^[a-z]/i }} />
-          <FormField
-            label="Address"
-            name="address"
-            required />
-          <FormField label="Email" name="email" type="email" required />
-          <FormField
-            label="Password"
-            name="password"
-            required
-            validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 digits, 2 nums" }} />
-          <Box direction="row" align="center" >
-            <Button 
-              label="cancel" 
-              fill = "horizontal" 
-              href="/" 
-              primary />
-            <Button 
-              label="Sign Up" 
-              fill = "horizontal" 
-              type="submit"
-              primary />
+  render() {
+
+    return (
+      <Grommet theme={theme} full>
+        <AppBar>
+          <Heading level='3' margin='none'>WeCare</Heading>
+        </AppBar>
+        <Box fill align="center" justify="top">
+          <Box width="medium">
+            <Form
+              onReset={event => console.log(event)}
+              method="post"
+              onSubmit={({ value }) => {
+                console.log("Submit", value);
+                fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
+                  + "&password=" + value.password + "&address=" + value.address);
+                window.location = "/Home";
+                // var link = document.getElementById("/createAcc");
+                // link.setAttribute("href", "newPatientMedHist");}
+              }}
+            //action="/insert"
+            >
+              <FormField
+                label="First Name"
+                name="firstName"
+                required
+                validate={{ regexp: /^[a-z]/i }} />
+              <FormField
+                label="Last Name"
+                name="lastName"
+                required
+                validate={{ regexp: /^[a-z]/i }} />
+              <FormField
+                label="Address"
+                name="address"
+                required />
+              <FormField label="Email" name="email" type="email" required />
+              <FormField
+                label="Password"
+                name="password"
+                required
+                validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 digits, 2 nums" }} />
+              <Box direction="row" align="center" >
+                <Button
+                  style={{ textAlign: 'center' }}
+                  label="Cancel"
+                  fill="horizontal"
+                  href="/"
+                  primary />
+                <Button
+                  label="Sign Up"
+                  fill="horizontal"
+                  type="submit"
+                  primary />
+              </Box>
+
+            </Form>
           </Box>
+        </Box>
 
-        </Form>
-      </Box>
-    </Box>
-
-    </Grommet>
+      </Grommet>
     );
   }
 }
