@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'i@mr00t!',
   database: 'wecare',
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
@@ -176,6 +176,24 @@ app.get('/checkDoclogin', (req, res) => {
   });
 });
 
+app.post('/schedule', (req, res) => {
+  let params = req.query;
+  let time = params.time;
+  let date = params.date;
+  let concerns = params.concerns;
+  let symptoms = params.symptoms;
+
+  let sql_statement = `INSERT INTO users (uid, date, starttime, endtime, status) VALUES 
+  ("9999, ${date}, ${time}, ${password}, ${password})`;
+  con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
+    //console.log(query.sql);
+    if (error) throw error;
+    else {
+      console.log("im hippie");
+    };
+  });
+});
+
 app.get('/userInSession', (req, res) => {
   console.log("cowboy beep");
   // var string=JSON.stringify(email_in_use);
@@ -188,6 +206,13 @@ app.get('/userInSession', (req, res) => {
   
 });
 
+app.get('/endSession', (req, res) => {
+  console.log("attempting to end session");
+  email_in_use = "";
+  password_in_use ="";
+  console.log("hit rock bottom");
+  
+});
 
 app.post('/insert', (req, res) => {
   console.log("hello ive touched");
