@@ -58,9 +58,9 @@ app.get('/names', (req, res) => {
 app.get('/OneHistory', (req, res) => {
     console.log("in one history");
     let params = req.query;
-    let uid = params.uid;
+    let uid = params.medHistUid;
     console.log(uid);
-    let statement = "SELECT name, gender, conditions, surgeries, medication FROM patientsfillhistory,patient,medicalhistory WHERE medhistory=uid AND patient=email"
+    let statement = "SELECT * FROM patientsfillhistory,patient,medicalhistory WHERE medhistory=uid AND patient=email"
     statement += " AND uid =" + uid;
     con.query(statement, function (error, results, fields) {
         if (error) throw error;

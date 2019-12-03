@@ -9,12 +9,31 @@ import {
     FormField,
     TextInput,
     Select,
-    Form
+    Form,
+    Grid,
+    Table,
+    TableBody,
+    TableCell,
+    TableFooter,
+    TableHeader,
+    TableRow,
+    Text
 
 } from 'grommet';
 
 import './App.css';
 import backdrop from './img/hmsbackdrop.jpg'
+
+const theme = {
+    global: {
+        colors: {
+            brand: '#00739D',
+        },
+        font: {
+            family: 'Lato',
+        },
+    },
+};
 
 export class ViewOneHistory extends Component {
 
@@ -28,7 +47,7 @@ export class ViewOneHistory extends Component {
     }
 
     getHistory(value) {
-        let uid = value;
+        let uid = '2';
         console.log(uid);
         fetch('http://localhost:3001/OneHistory?medHistUid='+ uid)
         .then(res => res.json())
@@ -59,24 +78,85 @@ export class ViewOneHistory extends Component {
         const Body = () => (
             <div className="container">
                 <div className="panel panel-default p50 uth-panel">
-                    <table className="table table-hover">
-                        <thead>
-                            <tr>
-                                <th>name</th>
-                                <th>email</th>
-                                <th>gender</th>
-                            </tr>
-                        </thead>
-                        <tbody>
                             {medhiststate.map(patient =>
-                                <tr key={patient.id}>
-                                    <td>{patient.name} </td>
-                                    <td>{patient.conditions}</td>
-                                    <td>{patient.gender}</td>
-                                </tr>
+                        <Table>
+                            <TableBody>
+                                <TableRow>
+                                    <TableCell scope="row">
+                                        <strong>Name</strong>
+                                    </TableCell>
+                                    <TableCell>{patient.name}</TableCell>
+                                    <TableCell></TableCell>
+                                    <TableCell></TableCell><TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell></TableCell><TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell><strong>Email</strong></TableCell>
+                                    <TableCell>{patient.email}</TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell scope="row">
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell scope="row">
+                                        <strong>Gender</strong>
+                                    </TableCell>
+                                    <TableCell>
+                                        {patient.gender}
+                                    </TableCell><TableCell></TableCell><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell /><TableCell /><TableCell /><TableCell /><TableCell /><TableCell />
+                                    <TableCell />
+                                    <TableCell />
+                                    <TableCell>
+                                        <strong>Address</strong>
+                                    </TableCell>
+                                    <TableCell>{patient.address}</TableCell>
+                                </TableRow>                                <TableRow>
+                                    <TableCell scope="row">
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <strong>Conditions</strong>
+                                    </TableCell>
+                                    <TableCell>{patient.conditions}
+                                        </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell scope="row">
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <strong>Surgeries</strong>
+                                    </TableCell>
+                                    <TableCell>{patient.surgeries}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell scope="row">
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>
+                                    <TableCell>
+                                        <strong>Medications</strong>
+                                    </TableCell>
+                                    <TableCell>{patient.medication}
+                                    </TableCell>
+                                </TableRow>
+                                <TableRow>                                    <TableCell>
+                                     
+                                    </TableCell>
+                                    <TableCell></TableCell>
+                                </TableRow>
+                            </TableBody>
+                        </Table>
                             )}
-                        </tbody>
-                    </table>
                 </div>
             </div>
 
@@ -84,7 +164,7 @@ export class ViewOneHistory extends Component {
 
 
         return (
-            <Grommet full={true}>
+            <Grommet full={true} theme={theme}>
                 <Box fill={true}>
 
                     
