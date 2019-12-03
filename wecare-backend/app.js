@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'i@mr00t!',
+  password: 'root',
   database: 'wecare',
   multipleStatements: true
   //port: 3001,
@@ -118,16 +118,17 @@ app.get('/MedHistView', (req, res) => {
 app.get('/patientViewAppt', (req, res) => {
   let kill_me = req.query;
   let email = kill_me.email;
-  let statement = `SELECT patient as user, concerns as theConcerns, symptoms as theSymptoms FROM PatientsSeeAppointments WHERE email = "${email_inuse}"`;
+  let statement = `SELECT patient as user, concerns as theConcerns, symptoms as theSymptoms FROM PatientsSeeAppointments WHERE patient = "${email}"`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
     if (error) throw error;
-    // else {
-    //   console.log(JSON.stringify(results));
-    //   return res.json({
-    //     data: results
-    //   })
-    // };
+    else {
+      console.log(results);
+      console.log(JSON.stringify(results));
+      return res.json({
+        data: results
+      })
+    };
   });
 });
 

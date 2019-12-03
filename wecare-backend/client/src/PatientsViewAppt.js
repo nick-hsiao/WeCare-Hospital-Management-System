@@ -103,13 +103,15 @@ export class PatientsViewAppointments extends Component {
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                                <th>name</th>
-                                <th>email</th>
+                                <th>An Appointment For</th>
+                                <th>conerns</th>
+                                <th>symptoms</th>
                             </tr>
                         </thead>
                         <tbody>
                             {medhiststate.map(patient =>
                                 <tr key={patient.user}>
+                                    <td>|____________________</td>
                                     <td>{patient.theConcerns} </td>
                                     <td>{patient.theSymptoms}
                                     </td>
