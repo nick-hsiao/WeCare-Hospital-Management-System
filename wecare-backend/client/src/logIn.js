@@ -167,6 +167,7 @@ class LogIn extends Component {
 
               <FormField label="Email" name="email" type="email" required />
               <FormField
+                type='password'
                 label="Password"
                 name="password"
                 required />
@@ -184,6 +185,7 @@ class LogIn extends Component {
               <Box direction="column" align="center" >
                 <Button type="submit" label="Log In" fill="horizontal" primary />
                 <Button label="Create Account"
+                  style = {{textAlign: 'center'}}
                   fill="horizontal"
                   href="/createAcc" />
               </Box>
