@@ -120,7 +120,7 @@ app.post('/resetPasswordPatient', (req, res) => {
   let oldPassword = "" + something.oldPassword;
   let newPassword = "" + something.newPassword;
 
-  let statement = `UPDATE Patient SET password = "${newPassword}" WHERE email = "${email}";`;
+  let statement = `UPDATE Patient SET password = "${newPassword}" WHERE email = "${email}" AND password = "${oldPassword}";`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
       if (error) throw error;
@@ -139,7 +139,7 @@ app.post('/resetPasswordDoctor', (req, res) => {
   let oldPassword = "" + something.oldPassword;
   let newPassword = "" + something.newPassword;
 
-  let statement = `UPDATE DoctorNurse SET password = "${newPassword}" WHERE email = "${email}";`;
+  let statement = `UPDATE DoctorNurse SET password = "${newPassword}" WHERE email = "${email}" AND password = "${oldPassword}";`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
       if (error) throw error;
