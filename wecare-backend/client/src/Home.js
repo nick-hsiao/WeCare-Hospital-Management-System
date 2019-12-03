@@ -20,60 +20,63 @@ import backdrop from './img/hmsbackdrop.jpg'
 
 const theme = {
   global: {
-      colors: {
-          brand: '#00739D',
-      },
-      font: {
-          family: 'Lato',
-      },
+    colors: {
+      brand: '#00739D',
+    },
+    font: {
+      family: 'Lato',
+    },
   },
 };
 
 const SidebarButton = ({ label, ...rest }) => (
   <Button plain {...rest}>
-      {({ hover }) => (
-          <Box
-              background={hover ? "#DADADA" : undefined}
-              pad={{ horizontal: "large", vertical: "medium" }}
-          >
-              <Text size="large">{label}</Text>
-          </Box>
-      )}
+    {({ hover }) => (
+      <Box
+        background={hover ? "#DADADA" : undefined}
+        pad={{ horizontal: "large", vertical: "medium" }}
+      >
+        <Text size="large">{label}</Text>
+      </Box>
+    )}
   </Button>
 );
 
 const SidebarButtons = () => {
   const [active, setActive] = useState();
   return (
-      <Grommet full theme={theme}>
-          <Box fill direction="row">
-              <Box background="brand">
-                  {["Appointments", "Medical History", "Settings", "Sign Out"].map(label => (
-                      <SidebarButton
-                          key={label}
-                          label={label}
-                          active={label === active}
-                          onClick={() => {
-                              if (label === "Appointments") {
-                                  window.location = "/to do"
-                              }
-                              else if (label === "Sign Out") {
-                                fetch("http://localhost:3001/endSession");
-                                window.location = "/"
-                            }
-                              else if (label === "Medical History") {
-                                  window.location = "/MedHist"
-                              }
-                              else if (label === "Settings") {
-                                  window.location = "/Settings"
-                              }
-                              setActive(label);
-                          }}
-                      />
-                  ))}
-              </Box>
-          </Box>
-      </Grommet>
+    <Grommet full theme={theme}>
+      <Box fill direction="row">
+        <Box background="brand">
+          {["View Medical History", "Appointments", "New Medical History", "Settings", "Sign Out"].map(label => (
+            <SidebarButton
+              key={label}
+              label={label}
+              active={label === active}
+              onClick={() => {
+                if (label === "Appointments") {
+                  window.location = "/scheduleAppt"
+                }
+                else if (label === "Sign Out") {
+                  fetch("http://localhost:3001/endSession");
+                  window.location = "/"
+                }
+                else if (label === "View Medical History") {
+                  window.location = "/ViewOneHistory"
+                }
+                else if (label === "New Medical History") {
+                  window.location = "/MedHist"
+                }
+                else if (label === "Settings") {
+                  window.location = "/Settings"
+                }
+                setActive(label);
+              }}
+            />
+          ))}
+        </Box>
+      </Box>
+    </Grommet>
   );
 };
 export class Home extends Component {
@@ -145,7 +148,7 @@ export class Home extends Component {
 
     return (
       <Grommet full={true}
-      theme = {theme} >
+        theme={theme} >
         <Box fill={true}>
           <Header />
           <Grid
