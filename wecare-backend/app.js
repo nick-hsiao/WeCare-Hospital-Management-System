@@ -101,7 +101,7 @@ app.get('/MedHistView', (req, res) => {
   let crap2 = "" + stupid.variable;
   console.log(stupid);
   //console.log(crap2);
-  let statement = "SELECT name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
+  let statement = "SELECT appt as UID, name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
   if (crap != "''")
     statement += " AND Patient.name LIKE " + crap
   con.query(statement, function (error, results, fields) {

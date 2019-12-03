@@ -64,7 +64,7 @@ const INITIAL_STATE = {
 };
 
 export class PatientsViewAppointments extends Component {
-    state = { medhiststate: [] }
+    state = { appointmentsState: [] }
 
     componentDidMount() {
 
@@ -88,14 +88,19 @@ export class PatientsViewAppointments extends Component {
                     console.log("eg");
                     fetch('http://localhost:3001/patientViewAppt?email=' + email_in_use)
                     .then(res => res.json())
-                    .then(res => this.setState({ medhiststate: res.data }));
+                    .then(res => {
+
+                        this.setState({ appointmentsState: res.data });
+                        //console.log(JSON.stringify);
+                });
                   });
+
 
 
     }
 
     render() {
-        const { medhiststate } = this.state;
+        const { appointmentsState } = this.state;
 
         const Body = () => (
             <div className="container">
@@ -109,12 +114,13 @@ export class PatientsViewAppointments extends Component {
                             </tr>
                         </thead>
                         <tbody>
-                            {medhiststate.map(patient =>
+                            {appointmentsState.map(patient =>
                                 <tr key={patient.user}>
                                     <td>|____________________</td>
                                     <td>{patient.theConcerns} </td>
                                     <td>{patient.theSymptoms}
                                     </td>
+
                                 </tr>
                             )}
                         </tbody>
@@ -131,7 +137,6 @@ export class PatientsViewAppointments extends Component {
                         <Heading level='3' margin='none'>WeCare</Heading>
                     </AppBar>
                     <Body />
-
                     <Form
                     // onSubmit={({ value }) => {
                     //     let email_in_use = "";
