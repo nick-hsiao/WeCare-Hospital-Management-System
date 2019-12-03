@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'i@mr00t!',
   database: 'wecare',
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
@@ -260,6 +260,7 @@ app.get('/schedule', (req, res) => {
   console.log(date);
   console.log(concerns);
   console.log(symptoms);
+  console.log(typeof date);
   console.log("ow");
 
   //query current max uid
@@ -273,10 +274,24 @@ app.get('/schedule', (req, res) => {
       console.log(generated_uid);
       console.log("die");
 
+      let ndate = date.substring(0,10);
 
-      
-    };
-  });
+      let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
+      //sql to turn string to sql time obj
+      let sql_start = `CONVERT('${time}', TIME)`;
+
+      //sql to turn string to sql time obj
+      let sql_end = `CONVERT('${endtime}', TIME)`;
+      console.log(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`);
+      con.query(`INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES ("${generated_uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`, function (error, results, fields) {
+        //console.log(query.sql);
+        if (error) throw error;
+        else {
+          console.log("im hippie");
+        }});
+
+      };
+    });
   // let sql_statement = `INSERT INTO users (uid, date, starttime, endtime, status) VALUES 
   // ("9999, ${date}, ${time}, ${password}, ${password})`;
   // con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
