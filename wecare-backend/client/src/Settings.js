@@ -92,7 +92,14 @@ export class Settings extends Component {
                             console.log("eg");
                           fetch("http://localhost:3001/resetPasswordPatient?email=" + 
                           email_in_use + "&oldPassword=" + value.oldPassword + "&newPassword=" + 
-                          value.newPassword, {method: 'POST'});
+                          value.newPassword, {method: 'POST'})
+                          .then(res => res.json())
+                          .then(res => {
+                            let didUpdate = res.data.affectedRows;
+                            if(didUpdate === 0) {
+                                window.alert("oops, you enetered your old email incorrectly");
+                            }
+                          });
                           });
                         //   fetch("http://localhost:3001/resetPasswordPatient?email=" + 
                         //   email_in_use + "&oldPassword=" + value.oldPassword + "&newPassword=" + 
