@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'i@mr00t!',
+  password: 'root',
   database: 'wecare',
   //port: 3001,
   //socketPath: '/private/tmp/mysql.sock'
@@ -113,6 +113,44 @@ app.get('/MedHistView', (req, res) => {
     });
 });
 
+
+app.post('/resetPasswordPatient', (req, res) => {
+  let something = req.query;
+  let email = something.email;
+  let oldPassword = "" + something.oldPassword;
+  let newPassword = "" + something.newPassword;
+
+  let statement = `UPDATE Patient SET password = "${newPassword}" WHERE email = "${email}";`;
+  console.log(statement);
+  con.query(statement, function (error, results, fields) {
+      if (error) throw error;
+      else {
+          return res.json({
+              data: results
+          })
+      };
+  });
+});
+
+
+app.post('/resetPasswordDoctor', (req, res) => {
+  let something = req.query;
+  let email = something.email;
+  let oldPassword = "" + something.oldPassword;
+  let newPassword = "" + something.newPassword;
+
+  let statement = `UPDATE DoctorNurse SET password = "${newPassword}" WHERE email = "${email}";`;
+  console.log(statement);
+  con.query(statement, function (error, results, fields) {
+      if (error) throw error;
+      else {
+          return res.json({
+              data: results
+          })
+      };
+  });
+});
+
 app.get('/checklogin', (req, res) => {
   let params = req.query;
   let email = params.email;
@@ -176,7 +214,9 @@ app.get('/checkDoclogin', (req, res) => {
   });
 });
 
-app.post('/schedule', (req, res) => {
+
+
+app.get('/schedule', (req, res) => {
   let params = req.query;
   let time = params.time;
   let date = params.date;

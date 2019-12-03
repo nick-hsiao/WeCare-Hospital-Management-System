@@ -15,6 +15,7 @@ import ViewMedHist from './ViewMedHist.js';
 import DocHome from './DocHome.js';
 import ViewOneHistory from './ViewOneHistory.js';
 import Settings from './Settings.js';
+import DocSettings from './DocSettings.js';
 
 export default function App() {
   return (
@@ -81,6 +82,9 @@ export default function App() {
           </Route>
           <Route path="/DocHome">
             <DocHome />
+          </Route>
+          <Route path="/DocSettings">
+            <DocSettings />
           </Route>
           <Route path="/">
             <LogIn />

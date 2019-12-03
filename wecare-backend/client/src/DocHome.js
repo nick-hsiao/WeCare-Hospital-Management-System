@@ -64,7 +64,7 @@ const SidebarButtons = () => {
                                     window.location = "/"
                                 }
                                 else if (label === "Settings") {
-                                    window.location = "/Settings"
+                                    window.location = "/DocSettings"
                                 }
                                 else if (label === "View Patients") {
                                     window.location = "/MedHistView"

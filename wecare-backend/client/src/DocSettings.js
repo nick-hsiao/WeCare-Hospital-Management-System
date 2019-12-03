@@ -63,7 +63,7 @@ const INITIAL_STATE = {
     error: null,
 };
 
-export class Settings extends Component {
+export class DocSettings extends Component {
     constuctor() {
     }
 
@@ -90,7 +90,7 @@ export class Settings extends Component {
                             email_in_use = email_json.email;
                             console.log(email_in_use);
                             console.log("eg");
-                          fetch("http://localhost:3001/resetPasswordPatient?email=" + 
+                          fetch("http://localhost:3001/resetPasswordDoctor?email=" + 
                           email_in_use + "&oldPassword=" + value.oldPassword + "&newPassword=" + 
                           value.newPassword, {method: 'POST'});
                           });
@@ -100,7 +100,7 @@ export class Settings extends Component {
 
 
                     }}>
-                        <Text>Change your password:</Text>
+                        <Text>Doc: change your password:</Text>
                         <FormField
                             type='password'
                             label="Old password"
@@ -126,4 +126,4 @@ export class Settings extends Component {
     }
 }
 
-export default Settings;
+export default DocSettings;
