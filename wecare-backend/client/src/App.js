@@ -13,6 +13,7 @@ import CreateAccount from './CreateAccount.js';
 import SchedulingAppt from './schedulingAppt.js'; 
 import ViewMedHist from './ViewMedHist.js';
 import DocHome from './DocHome.js';
+import ViewOneHistory from './ViewOneHistory.js'
 
 export default function App() {
   return (
@@ -27,7 +28,7 @@ export default function App() {
               <Link to="/MedHist">MedHist</Link>
             </li>
             <li>
-              <Link to="/users">Users</Link>
+              <Link to="/ViewOneHistory">ViewOneHistory</Link>
             </li>
             <li>
               <Link to="/newPatientMedHist">New Patient MedHist</Link>
@@ -59,8 +60,8 @@ export default function App() {
           <Route path="/scheduleAppt">
             <SchedulingAppt />
           </Route>
-          <Route path="/users">
-            <Users />
+          <Route path="/ViewOneHistory">
+            <ViewOneHistory />
           </Route>
           <Route path="/newPatientMedHist">
             <NewMedHist />

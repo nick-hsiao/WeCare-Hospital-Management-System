@@ -47,7 +47,7 @@ export class ViewOneHistory extends Component {
     }
 
     getHistory(value) {
-        let uid = '2';
+        let uid = '1';
         console.log(uid);
         fetch('http://localhost:3001/OneHistory?medHistUid='+ uid)
         .then(res => res.json())
