@@ -101,7 +101,7 @@ app.get('/MedHistView', (req, res) => {
   let crap2 = "" + stupid.variable;
   console.log(stupid);
   //console.log(crap2);
-  let statement = "SELECT appt as UID, name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
+  let statement = "SELECT name AS 'Name',patientsfillhistory.medhistory AS 'UID' FROM Patient,patientsfillhistory WHERE Patient.email = patientsfillhistory.patient";
   if (crap != "''")
     statement += " AND Patient.name LIKE " + crap
   con.query(statement, function (error, results, fields) {
@@ -118,7 +118,25 @@ app.get('/MedHistView', (req, res) => {
 app.get('/patientViewAppt', (req, res) => {
   let kill_me = req.query;
   let email = kill_me.email;
-  let statement = `SELECT patient as user, concerns as theConcerns, symptoms as theSymptoms FROM PatientsSeeAppointments WHERE patient = "${email}"`;
+  let statement = `SELECT appt as UID, patient as user, concerns as theConcerns, symptoms as theSymptoms FROM PatientsSeeAppointments WHERE patient = "${email}"`;
+  console.log(statement);
+  con.query(statement, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      console.log(results);
+      console.log(JSON.stringify(results));
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
+app.get('/getDateTimeOfAppt', (req, res) => {
+  console.log("sdhrhhrthrthryhr");
+  let dead = req.query;
+  let uid = dead.uid;
+  let statement = `SELECT starttime as start, endttime as end, date as theDate FROM Appointment WHERE uid = "${uid}"`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
     if (error) throw error;

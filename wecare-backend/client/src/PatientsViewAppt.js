@@ -75,25 +75,25 @@ export class PatientsViewAppointments extends Component {
     getNames(value) {
         let patName = value;
         console.log(patName);
-        
+
         fetch("http://localhost:3001/userInSession")
-                  .then(res => res.json())
-                  .then(res => {
-                    var string_json = JSON.stringify(res);
-                    var email_json = JSON.parse(string_json);
-                    let email_in_use = email_json.email;
-                    console.log(email_in_use);
-                    // console.log(JSON.stringify(res));
-                    // console.log(res.data);
-                    console.log("eg");
-                    fetch('http://localhost:3001/patientViewAppt?email=' + email_in_use)
+            .then(res => res.json())
+            .then(res => {
+                var string_json = JSON.stringify(res);
+                var email_json = JSON.parse(string_json);
+                let email_in_use = email_json.email;
+                console.log(email_in_use);
+                // console.log(JSON.stringify(res));
+                // console.log(res.data);
+                console.log("eg");
+                fetch('http://localhost:3001/patientViewAppt?email=' + email_in_use)
                     .then(res => res.json())
                     .then(res => {
 
                         this.setState({ appointmentsState: res.data });
                         //console.log(JSON.stringify);
-                });
-                  });
+                    });
+            });
 
 
 
@@ -116,7 +116,12 @@ export class PatientsViewAppointments extends Component {
                         <tbody>
                             {appointmentsState.map(patient =>
                                 <tr key={patient.user}>
-                                    <td>|____________________</td>
+                                    <td>|____________________
+                                        <script type="text/javascript">
+                                            fetch('http://localhost:3001/getDateTimeOfAppt?uid=' + patient.UID);
+
+                                        </script>
+                                    </td>
                                     <td>{patient.theConcerns} </td>
                                     <td>{patient.theSymptoms}
                                     </td>
