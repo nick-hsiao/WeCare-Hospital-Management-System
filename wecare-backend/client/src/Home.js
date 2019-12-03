@@ -168,9 +168,9 @@ export class Home extends Component {
             </Box>
             <Box
               gridArea="main"
-              justify="center"
+              justify="top"
               align="center">
-              <Body />
+              <Heading>Welcome, patient.</Heading>
             </Box>
           </Grid>
 
