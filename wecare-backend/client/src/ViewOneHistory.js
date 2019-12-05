@@ -162,10 +162,11 @@ export class ViewOneHistory extends Component {
                                     <TableCell>{patient.medication}
                                     </TableCell>
                                 </TableRow>
-                                <TableRow>                                    <TableCell>
+                                <TableRow><TableCell></TableCell></TableRow>
+                                <TableRow>                                    <TableCell><strong>Allergies</strong>
                                      
                                     </TableCell>
-                                    <TableCell></TableCell>
+                                    <TableCell>{patient.allergies}</TableCell>
                                 </TableRow>
                             </TableBody>
                         </Table>
