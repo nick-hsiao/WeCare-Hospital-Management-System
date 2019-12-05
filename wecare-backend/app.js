@@ -45,6 +45,22 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(cors());
 
+app.get('/checkIfPatientExists', (req, res) => {
+  let params = req.query;
+  let email = params.email;
+  con.query(`SELECT * 
+             FROM Patient  
+             WHERE email = "${email}"`, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      console.log(results);
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
 app.get('/names', (req, res) => {
   con.query('SELECT * FROM Patient', function (error, results, fields) {
     if (error) throw error;
