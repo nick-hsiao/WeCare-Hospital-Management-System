@@ -170,9 +170,16 @@ export class DocHome extends Component {
                         <Box
                             gridArea="main"
                             justify="top"
-                            pad = "large"
                             align="center">
-                                <Heading margin="none">Welcome, doc.</Heading>
+                            <Box align="center" pad="large">
+                                <img
+                                    height="100"
+                                    width="100"
+                                    src={require('./img/Asset 3.png')} />
+                                <Heading
+                                    color="#00739D">Welcome, doc.
+                                </Heading>
+                            </Box>
                         </Box>
                     </Grid>
 

@@ -66,18 +66,18 @@ const SidebarButtons = () => {
                 }
                 else if (label === "View Medical History") {
 
-                    let email_in_use = "";
-        fetch("http://localhost:3001/userInSession")
-            .then(res => res.json())
-            .then(res => {
-                var string_json = JSON.stringify(res);
-                var email_json = JSON.parse(string_json);
-                email_in_use = email_json.email;
-                console.log("email in use is :" + email_in_use);
-                window.location = "/ViewOneHistory/" + email_in_use; 
-            });
+                  let email_in_use = "";
+                  fetch("http://localhost:3001/userInSession")
+                    .then(res => res.json())
+                    .then(res => {
+                      var string_json = JSON.stringify(res);
+                      var email_json = JSON.parse(string_json);
+                      email_in_use = email_json.email;
+                      console.log("email in use is :" + email_in_use);
+                      window.location = "/ViewOneHistory/" + email_in_use;
+                    });
 
-                    
+
                 }
                 else if (label === "New Medical History") {
                   window.location = "/MedHist"
@@ -188,7 +188,16 @@ export class Home extends Component {
               gridArea="main"
               justify="top"
               align="center">
-              <Heading>Welcome, patient.</Heading>
+
+              <Box align="center" pad="large">
+                <img
+                  height="100"
+                  width="100"
+                  src={require('./img/Asset 3.png')} />
+                <Heading 
+                  color="#00739D">Welcome, patient.
+                </Heading>
+              </Box>
             </Box>
           </Grid>
 
