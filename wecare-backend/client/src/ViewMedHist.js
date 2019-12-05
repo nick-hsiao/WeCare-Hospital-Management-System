@@ -81,7 +81,8 @@ export class ViewMedHist extends Component {
                             {medhiststate.map(patient =>
                                 <tr key={patient.id}>
                                     <td>{patient.Name} </td>
-                                    <td>{patient.UID}
+                                    <td>
+                                        <Button label="Medical Profile" href={'/ViewOneHistory/' + patient.email}/>
                                     </td>
                                 </tr>
                             )}
@@ -98,7 +99,7 @@ export class ViewMedHist extends Component {
             theme = {theme}>
                 <Header />
                 <Box fill={true}>
-
+                    
                     <Form
                         onSubmit={({ value }) => {
                             console.log("Submit", value);

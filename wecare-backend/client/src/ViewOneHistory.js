@@ -41,21 +41,25 @@ export class ViewOneHistory extends Component {
     state = { medhiststate: [] }
 
     componentDidMount() {
+        const { email } = this.props.match.params;
+        console.log("Viewed patient profile email is : "+ email);
 
-        let email_in_use = "";
-        fetch("http://localhost:3001/userInSession")
-            .then(res => res.json())
-            .then(res => {
-                var string_json = JSON.stringify(res);
-                var email_json = JSON.parse(string_json);
-                email_in_use = email_json.email;
-                console.log("email in use is :" + email_in_use);
-                this.getHistory(email_in_use);
-            });
+        //let email_in_use = "";
+        //fetch("http://localhost:3001/userInSession")
+        //    .then(res => res.json())
+        //    .then(res => {
+        //        var string_json = JSON.stringify(res);
+        //        var email_json = JSON.parse(string_json);
+        //        email_in_use = email_json.email;
+        //        console.log("email in use is :" + email_in_use);
+        //        this.getHistory(email_in_use);
+        //    });
+
+        this.getHistory(email);
     }
 
     getHistory(value) {
-        let email = "'"+ value + "'";
+        let email = "'" + value + "'";
         console.log(email);
         fetch('http://localhost:3001/OneHistory?patientEmail='+ email)
         .then(res => res.json())
