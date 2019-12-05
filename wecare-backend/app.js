@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'nickhsiao',
   database: 'wecare',
   multipleStatements: true
   //port: 3001,
@@ -422,6 +422,24 @@ app.post('/scheduleAppt', (req, res) => {
   });
 });
 
+app.get('/doctorViewAppt', (req, res) => {
+  let a = req.query;
+  let email = a.email;
+  let statement = `SELECT a.date, a.starttime, a.status, p.name, psa.concerns, psa.symptoms
+  FROM Appointment a, PatientsSeeAppointments psa, Patient p
+  WHERE a.uid = psa.appt AND psa.patient = p.email`;
+  console.log(statement);
+  con.query(statement, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      console.log(results);
+      console.log(JSON.stringify(results));
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
 // 
 // var query = con.query('INSERT INTO users (first, last) VALUES ("hello", "there")', 
 //   function (error, results, fields){  

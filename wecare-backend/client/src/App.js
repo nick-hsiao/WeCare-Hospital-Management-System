@@ -17,6 +17,7 @@ import ViewOneHistory from './ViewOneHistory.js';
 import Settings from './Settings.js';
 import DocSettings from './DocSettings.js';
 import PatientsViewAppt from './PatientsViewAppt.js';
+import DocViewAppt from './DocViewAppt.js';
 
 export default function App() {
   return (
@@ -88,9 +89,13 @@ export default function App() {
           <Route path="/DocSettings">
             <DocSettings />
           </Route>
+          <Route path="/ApptList">
+            <DocViewAppt />
+          </Route>
           <Route path="/">
             <LogIn />
           </Route>
+          
         </Switch>
       </div>
     </Router>

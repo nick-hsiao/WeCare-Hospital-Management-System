@@ -57,7 +57,7 @@ const SidebarButtons = () => {
                             active={label === active}
                             onClick={() => {
                                 if (label === "Appointments") {
-                                    window.location = "/to do"
+                                    window.location = "/ApptList"
                                 }
                                 else if (label === "Sign Out") {
                                     fetch("http://localhost:3001/endSession");
