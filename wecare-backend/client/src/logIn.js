@@ -96,9 +96,20 @@ class LogIn extends Component {
         <AppBar>
           <Heading level='3' margin='none'>WeCare</Heading>
         </AppBar>
-        <Box fill align="center" justify="top" pad = "medium">
-        <Box align = "center"><img height = "100" width = "100" src={require('./img/Asset 3.png')}/></Box>
-          <Box width="medium" pad = "medium">
+        <Box
+          fill
+          align="center"
+          justify="top"
+          pad="medium">
+          <Box align="center">
+            <img
+              height="100"
+              width="100"
+              src={require('./img/Asset 3.png')} />
+          </Box>
+          <Box 
+            width="medium" 
+            pad="medium">
             <Form
               onReset={event => console.log(event)}
               onSubmit={({ value }) => {
@@ -178,7 +189,7 @@ class LogIn extends Component {
               <FormField
                 component={CheckBox}
                 checked={isDoctor}
-                margin = "small"
+                margin="small"
                 label="I'm a doctor"
                 name="isDoc"
                 onChange={(event) => {
@@ -190,7 +201,7 @@ class LogIn extends Component {
               <Box direction="column" align="center" >
                 <Button type="submit" label="Log In" fill="horizontal" primary />
                 <Button label="Create Account"
-                  style = {{textAlign: 'center'}}
+                  style={{ textAlign: 'center' }}
                   fill="horizontal"
                   href="/createAcc" />
               </Box>
