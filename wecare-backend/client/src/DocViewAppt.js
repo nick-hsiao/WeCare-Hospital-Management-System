@@ -27,27 +27,25 @@ const theme = {
     },
   };
 
-export class ViewMedHist extends Component {
+export class DocViewAppt extends Component {
 
 
-    state = { medhiststate: [] }
+    state = { apptlist: [] }
 
     componentDidMount() {
-
-        this.getNames("");
-        console.log(this.state.names);
+        this.getNames();
+      
     }
 
-    getNames(value) {
-        let patName = value;
-        console.log(patName);
-        fetch('http://localhost:3001/MedHistView?name='+ patName + '&variable=words')
+    getNames() {
+        
+        fetch('http://localhost:3001/doctorviewappt')
         .then(res => res.json())
-        .then(res => this.setState({ medhiststate: res.data }));
+        .then(res => this.setState({ apptlist: res.data }));
     }
 
     render() {
-        const { medhiststate } = this.state;
+        const { apptlist } = this.state;
 
         const Header = () => (
             <Box
@@ -74,16 +72,30 @@ export class ViewMedHist extends Component {
                         <thead>
                             <tr>
                                 <th>name</th>
-                                <th>email</th>
+                                <th>date</th>
+                                <th>start time</th>
+                                <th>concerns</th>
+                                <th>symptoms</th>
+                                <th>status</th>
+
                             </tr>
                         </thead>
                         <tbody>
-                            {medhiststate.map(patient =>
-                                <tr key={patient.id}>
-                                    <td>{patient.Name} </td>
+                            {apptlist.map(appt =>
+                                <tr key={appt.name}>
+                                    <td>{appt.name}</td>
+                                    <td>{appt.date.substring(0,10)} </td>
+                                    <td>{appt.starttime}</td>
+                                    <td>{appt.concerns}</td>
+                                    <td>{appt.symptoms}</td>
+                                    <td>{appt.status}</td>
                                     <td>
-                                        <Button label="Medical Profile" href={'/ViewOneHistory/' + patient.email}/>
+                                        <Button label="Add"></Button>
                                     </td>
+                                    <td>
+                                        <Button label="Delete"></Button>
+                                    </td>
+                                    
                                 </tr>
                             )}
                         </tbody>
@@ -99,7 +111,8 @@ export class ViewMedHist extends Component {
             theme = {theme}>
                 <Header />
                 <Box fill={true}>
-        
+                    
+
                     <Body />
 
                 </Box>
@@ -112,4 +125,4 @@ export class ViewMedHist extends Component {
     }
 }
 
-export default ViewMedHist;
+export default DocViewAppt;
