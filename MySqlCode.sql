@@ -127,7 +127,7 @@ INSERT INTO Patient(email,password,name,address)
 VALUES
 ('imsosick@gmail.com','wowzers','Ai Minh Payne','1212 Twelve Rd, San Jose, CA'),
 ('pikachugrrl83@gmail.com','kentucky','King Kong','3151 Spam, Milpitas, CA'),
-('Spam&Rice@hotmail.com','nashville','Bert N. Ernie', '1000 Sesame Street'),
+('SpamNRice@hotmail.com','nashville','Bert N. Ernie', '1000 Sesame Street'),
 ('jonisthebest@yahoo.com','ilovejon','Jon Jon', '2400 Jon Ct, Reno, CA'),
 ('lightning2456@gmail.com','kachow', 'Steve Mcqueen', '1111 Washington, Forks, WA'),
 ('honeybunches@gmail.com','OFOATS','Post Alone', '949 Wild Ave, San Francisco, CA'),
