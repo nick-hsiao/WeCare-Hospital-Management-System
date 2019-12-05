@@ -56,6 +56,7 @@ export class ViewOneHistory extends Component {
         //    });
 
         this.getHistory(email);
+        
     }
 
     getHistory(value) {
@@ -90,7 +91,7 @@ export class ViewOneHistory extends Component {
         const Body = () => (
             <div className="container">
                 <div className="panel panel-default p50 uth-panel">
-                            {medhiststate.map(patient =>
+                    {medhiststate.map(patient =>
                         <Table>
                             <TableBody>
                                 <TableRow>

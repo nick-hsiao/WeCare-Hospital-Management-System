@@ -93,7 +93,7 @@ export class CreateAccount extends Component {
                   } else {
                     fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
                    + "&password=" + value.password + "&address=" + value.address);
-
+                      window.location = "/Home";
                   }
                 });
 
