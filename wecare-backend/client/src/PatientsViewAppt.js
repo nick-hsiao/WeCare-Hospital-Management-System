@@ -108,22 +108,51 @@ export class PatientsViewAppointments extends Component {
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                                <th>An Appointment For</th>
-                                <th>conerns</th>
-                                <th>symptoms</th>
+                            <th>Date of Appointment:</th>
+                                <th>Start Time:</th>
+                                <th>End Time:</th>
+                                <th>Concerns</th>
+                                <th>Symptoms</th>
                             </tr>
                         </thead>
                         <tbody>
                             {appointmentsState.map(patient =>
                                 <tr key={patient.user}>
-                                    <td>|____________________
+                                    {/* <td>|____________________
                                         <script type="text/javascript">
                                             fetch('http://localhost:3001/getDateTimeOfAppt?uid=' + patient.UID);
 
                                         </script>
+                                    </td> */}
+                                    <td align="center" >
+
+                                        {patient.theDate.substring(0, 10)
+                                            // (async function () {
+                                            //     let me = "dd";
+                                            //     return fetch('http://localhost:3001/getDateTimeOfAppt?uid=' + patient.UID)
+                                            //         .then(res => res.json())
+                                            //         .then(res => {
+                                            //             console.log("sasa");
+                                            //             console.log(me);
+                                            //             console.log("sasa");
+
+                                            //             me = res.data[0].end;
+                                            //          ß   console.log(res.data[0].end);
+                                            //             console.log(res.data[0]);
+                                            //             me = res.data[0].end;
+                                            //             console.log(me);
+                                            //             return res.data[0].end
+                                            //         });
+                                            //         // console.log("here");
+
+                                            //         // return me;
+                                            // })()
+                                        }
                                     </td>
-                                    <td>{patient.theConcerns} </td>
-                                    <td>{patient.theSymptoms}
+                                    <td align="center" >{patient.theStart.substring(0, 5)}</td>
+                                    <td align="center" >{patient.theEnd.substring(0, 5)}</td>
+                                    <td align="center">{patient.theConcerns} </td>
+                                    <td align="center">{patient.theSymptoms}
                                     </td>
 
                                 </tr>

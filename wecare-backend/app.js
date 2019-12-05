@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'nickhsiao',
+  password: 'root',
   database: 'wecare',
   multipleStatements: true
   //port: 3001,
@@ -133,7 +133,16 @@ app.get('/MedHistView', (req, res) => {
 app.get('/patientViewAppt', (req, res) => {
   let kill_me = req.query;
   let email = kill_me.email;
-  let statement = `SELECT appt as UID, patient as user, concerns as theConcerns, symptoms as theSymptoms FROM PatientsSeeAppointments WHERE patient = "${email}"`;
+  let statement = `SELECT PatientsSeeAppointments.appt as UID, 
+                          PatientsSeeAppointments.patient as user, 
+                          PatientsSeeAppointments.concerns as theConcerns, 
+                          PatientsSeeAppointments.symptoms as theSymptoms, 
+                          Appointment.date as theDate,
+                          Appointment.starttime as theStart,
+                          Appointment.endtime as theEnd
+                          FROM PatientsSeeAppointments, Appointment
+                          WHERE PatientsSeeAppointments.patient = "${email}" AND
+                          PatientsSeeAppointments.appt = Appointment.uid`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
     if (error) throw error;
@@ -151,7 +160,11 @@ app.get('/getDateTimeOfAppt', (req, res) => {
   console.log("sdhrhhrthrthryhr");
   let dead = req.query;
   let uid = dead.uid;
-  let statement = `SELECT starttime as start, endttime as end, date as theDate FROM Appointment WHERE uid = "${uid}"`;
+  let statement = `SELECT starttime as start, 
+                          endttime as end, 
+                          date as theDate 
+                   FROM Appointment 
+                   WHERE uid = "${uid}"`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
     if (error) throw error;
@@ -188,7 +201,10 @@ app.post('/resetPasswordPatient', (req, res) => {
   let oldPassword = "" + something.oldPassword;
   let newPassword = "" + something.newPassword;
 
-  let statement = `UPDATE Patient SET password = "${newPassword}" WHERE email = "${email}" AND password = "${oldPassword}";`;
+  let statement = `UPDATE Patient 
+                   SET password = "${newPassword}" 
+                   WHERE email = "${email}" 
+                   AND password = "${oldPassword}";`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
     if (error) throw error;
@@ -207,7 +223,10 @@ app.post('/resetPasswordDoctor', (req, res) => {
   let oldPassword = "" + something.oldPassword;
   let newPassword = "" + something.newPassword;
 
-  let statement = `UPDATE DoctorNurse SET password = "${newPassword}" WHERE email = "${email}" AND password = "${oldPassword}";`;
+  let statement = `UPDATE DoctorNurse 
+                   SET password = "${newPassword}" 
+                   WHERE email = "${email}" 
+                   AND password = "${oldPassword}";`;
   console.log(statement);
   con.query(statement, function (error, results, fields) {
     if (error) throw error;
@@ -223,7 +242,9 @@ app.get('/checklogin', (req, res) => {
   let params = req.query;
   let email = params.email;
   let password = params.password;
-  let sql_statement = `SELECT * FROM Patient WHERE email="${email}" AND password="${password}"`;
+  let sql_statement = `SELECT * FROM Patient 
+                       WHERE email="${email}" 
+                       AND password="${password}"`;
   console.log(sql_statement);
   con.query(sql_statement, function (error, results, fields) {
     if (error) {
@@ -254,7 +275,9 @@ app.get('/checkAppt', (req, res) => {
   let params = req.query;
   let email = params.email;
   let password = params.password;
-  let sql_statement = `SELECT * FROM Patient WHERE email="${email}" AND password="${password}"`;
+  let sql_statement = `SELECT * FROM 
+                       Patient WHERE email="${email}" 
+                       AND password="${password}"`;
   console.log(sql_statement);
   con.query(sql_statement, function (error, results, fields) {
     if (error) {
