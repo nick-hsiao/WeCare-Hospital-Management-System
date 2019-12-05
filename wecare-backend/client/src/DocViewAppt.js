@@ -89,12 +89,12 @@ export class DocViewAppt extends Component {
                                     <td>{appt.concerns}</td>
                                     <td>{appt.symptoms}</td>
                                     <td>{appt.status}</td>
-                                    <td>
+                                   {/*  <td>
                                         <Button label="Add"></Button>
                                     </td>
                                     <td>
                                         <Button label="Delete"></Button>
-                                    </td>
+                                    </td> */}
                                     
                                 </tr>
                             )}
