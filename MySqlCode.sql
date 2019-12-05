@@ -408,5 +408,10 @@ VALUES
 (9,'red meat'),
 (13,'ibuprofen'),
 (13,'penicillin'),
-(15,'corn')
+(15,'corn'),
+(2,'none'),
+(7,'none'),
+(10,'none'),
+(12,'none'),
+(14,'none')
 ;

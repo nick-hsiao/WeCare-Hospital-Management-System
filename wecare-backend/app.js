@@ -77,8 +77,7 @@ app.get('/OneHistory', (req, res) => {
   let params = req.query;
   let email = params.patientEmail;
   console.log(email);
-    let statement = "SELECT medication,gender,name,email,address,conditions,surgeries,GROUP_CONCAT(allergy SEPARATOR ', ') AS allergies FROM patientsfillhistory,patient,medicalhistory,allergy WHERE allergy.medhistory=uid AND patientsfillhistory.medhistory=uid AND patient=email"
-  statement += " AND email = " + email + " GROUP BY email";
+    let statement = "SELECT medication,gender,name,email,address,conditions,surgeries,GROUP_CONCAT(allergy SEPARATOR ', ') AS allergies FROM patientsfillhistory,patient,medicalhistory,allergy WHERE allergy.medhistory=uid AND patientsfillhistory.medhistory=uid AND patient=email AND email = " + email + " GROUP BY email";
   con.query(statement, function (error, results, fields) {
     if (error) throw error;
     else {
