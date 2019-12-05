@@ -55,8 +55,22 @@ export class ViewOneHistory extends Component {
         //        this.getHistory(email_in_use);
         //    });
 
-        this.getHistory(email);
+
+            this.checkEmail(email);
+            this.getHistory(email);
+
         
+    }
+
+    checkEmail(email) {
+        email = "'" + email + "'";
+        console.log(email);
+        fetch('http://localhost:3001/checkIfHistory?email=' + email)
+            .then(res => res.json())
+            .then(res => {
+                if (res.data.length === 0)
+                    window.location = "/NoMedHistFound";// "/NoMedHistFound"
+            });
     }
 
     getHistory(value) {
@@ -64,7 +78,7 @@ export class ViewOneHistory extends Component {
         console.log(email);
         fetch('http://localhost:3001/OneHistory?patientEmail='+ email)
         .then(res => res.json())
-        .then(res => this.setState({ medhiststate: res.data }));
+            .then(res => this.setState({ medhiststate: res.data }));
     }
 
     render() {

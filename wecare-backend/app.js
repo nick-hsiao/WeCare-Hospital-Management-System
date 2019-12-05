@@ -165,6 +165,22 @@ app.get('/getDateTimeOfAppt', (req, res) => {
   });
 });
 
+app.get('/checkIfHistory', (req, res) => {
+    let params = req.query;
+    let email = params.email;
+    let statement = "SELECT patient FROM patientsfillhistory WHERE patient = " + email;
+    con.query(statement, function (error, results, fields) {
+        if (error) throw error;
+        else {
+            console.log(results);
+            console.log(JSON.stringify(results));
+            return res.json({
+                data: results
+            })
+        };
+    });
+});
+
 
 app.post('/resetPasswordPatient', (req, res) => {
   let something = req.query;

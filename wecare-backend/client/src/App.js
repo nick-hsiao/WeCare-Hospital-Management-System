@@ -17,6 +17,7 @@ import ViewOneHistory from './ViewOneHistory.js';
 import Settings from './Settings.js';
 import DocSettings from './DocSettings.js';
 import PatientsViewAppt from './PatientsViewAppt.js';
+import NoMedHistFound from './NoMedHistFound.js';
 
 export default function App() {
   return (
@@ -56,7 +57,10 @@ export default function App() {
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-        <Switch>
+              <Switch>
+                  <Route path="/NoMedHistFound">
+                      <NoMedHistFound />
+                  </Route>
           <Route path="/MedHist">
             <MedHist />
           </Route>
@@ -90,7 +94,8 @@ export default function App() {
           </Route>
           <Route path="/">
             <LogIn />
-          </Route>
+                  </Route>
+          
         </Switch>
       </div>
     </Router>
