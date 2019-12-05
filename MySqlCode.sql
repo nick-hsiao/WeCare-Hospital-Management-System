@@ -395,5 +395,18 @@ VALUES
 (6,'nuts'),
 (8,'dairy'),
 (11,'alcohol'),
-(15,'red meat')
+(15,'red meat'),
+(1,'sun exposure'),
+(1,'rice'),
+(4,'gluten'),
+(5,'methylphenidate'),
+(6,'coconut'),
+(6,'chocolate'),
+(9,'olives'),
+(9,'mint'),
+(9,'alcohol'),
+(9,'red meat'),
+(13,'ibuprofen'),
+(13,'penicillin'),
+(15,'corn')
 ;
