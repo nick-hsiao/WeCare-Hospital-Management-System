@@ -1,9 +1,5 @@
-############ Database and Schema Creation ###################
-
-CREATE DATABASE HospitalManagementSystem;
-
-\u HospitalManagementSystem
-
+CREATE DATABASE wecare;
+USE wecare;
 CREATE TABLE Patient(
 email varchar(50) PRIMARY KEY,
 password varchar(30) NOT NULL,
@@ -258,7 +254,7 @@ INSERT INTO PatientsFillHistory(patient,medhistory)
 VALUES
 ('imsosick@gmail.com',1),
 ('pikachugrrl83@gmail.com',2),
-('Spam&Rice@hotmail.com',3),
+('SpamNRice@hotmail.com',3),
 ('jonisthebest@yahoo.com',4),
 ('lightning2456@gmail.com',5),
 ('honeybunches@gmail.com',6),
@@ -372,7 +368,7 @@ INSERT INTO PatientsSeeAppointments(patient,appt,concerns,symptoms)
 VALUES
 ('imsosick@gmail.com',1, 'none', 'itchy throat'),
 ('pikachugrrl83@gmail.com',2, 'infection', 'fever'),
-('Spam&Rice@hotmail.com',3, 'none','none'),
+('SpamNRice@hotmail.com',3, 'none','none'),
 ('jonisthebest@yahoo.com',4,'none','none'),
 ('lightning2456@gmail.com',5,'none','itchy palms'),
 ('honeybunches@gmail.com',6,'none','heat risk'),
