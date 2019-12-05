@@ -74,9 +74,43 @@ export class CreateAccount extends Component {
               method="post"
               onSubmit={({ value }) => {
                 console.log("Submit", value);
-                fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
-                  + "&password=" + value.password + "&address=" + value.address);
-                window.location = "/Home";
+                // fetch("http://localhost:3001/makeAccount?email=" + value.email)
+                // .then(res => res.json())
+                // .then(res => {
+                //   console.log(res.length);
+                //   console.log("yee haw");
+                // });
+                fetch("http://localhost:3001/checkIfPatientExists?email=" + value.email)
+                .then(res => res.json())
+                .then(res => {
+                  console.log("uoo");
+                  console.log(res.data[0]);
+                  console.log("sdadsada");
+
+                  if ((res.data[0])) {
+                    window.alert("An account is already associated with that email.");
+                    console.log("no user founds");
+                  } else {
+                    fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
+                   + "&password=" + value.password + "&address=" + value.address);
+
+                  }
+                });
+
+                // let signed = true;
+                // fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
+                //   + "&password=" + value.password + "&address=" + value.address).catch(signed = false);
+
+                // console.log(signed);
+                // if (signed === true) {
+                //   window.location  = "/Home";
+                // } else {
+                //   window.alert("Email is already associated with an account.");
+                // }
+                
+
+
+
                 // var link = document.getElementById("/createAcc");
                 // link.setAttribute("href", "newPatientMedHist");}
               }}
