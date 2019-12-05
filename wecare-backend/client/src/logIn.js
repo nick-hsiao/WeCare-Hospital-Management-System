@@ -57,17 +57,6 @@ const AppBar = (props) => (
     {...props} />
 );
 
-// const FormFieldToggle = props => (
-//   <Grommet theme={grommet}>
-//     <Box align="center" pad="large">
-//       <FormField label="Are you a doctor?" htmlFor="check-box" {...props}>
-//         <Box pad={{ horizontal: "small", vertical: "xsmall" }}>
-//           <CheckBox id="check-box" label="Doctor" toggle />
-//         </Box>
-//       </FormField>
-//     </Box>
-//   </Grommet>);
-
 const INITIAL_STATE = {
   email: "",
   password: "",
@@ -107,8 +96,8 @@ class LogIn extends Component {
               width="100"
               src={require('./img/Asset 3.png')} />
           </Box>
-          <Box 
-            width="medium" 
+          <Box
+            width="medium"
             pad="medium">
             <Form
               onReset={event => console.log(event)}
@@ -126,12 +115,6 @@ class LogIn extends Component {
                         window.location = "DocHome";
                         console.log(res.data);
                       }
-                      // console.log(JSON.stringify(res.data));
-                      // console.log(res.data);
-                      // console.log(typeof(res.data));
-                      // this.setState({
-                      //   data:res.data
-                      // });
                     });
                 } else {
                   fetch("http://localhost:3001/checklogin?email=" + value.email +
@@ -145,39 +128,9 @@ class LogIn extends Component {
                         window.location = "/Home";
                         console.log(res.data);
                       }
-                      // console.log(JSON.stringify(res.data));
-                      // console.log(res.data);
-                      // console.log(typeof(res.data));
-                      // this.setState({
-                      //   data:res.data
-                      // });
                     });
                 }
-
-
               }
-
-                //{"data":[]}
-                //.then(response => console.log(JSON.stringify(response))
-                // {
-                // if (data.length === 0) {
-                //   console.log("fail");
-                // }
-                // else {
-                //   console.log(JSON.stringify(data))
-                //   console.log(data.email);
-                //   console.log(data.password);
-                //   console.log(data.name);
-                // }
-
-                // }
-
-                // console.log("sca");
-                // console.log(resp);
-                // if (resp === []){
-                //   console.log("mission failed");
-                // }
-                // );}
               }>
 
               <FormField label="Email" name="email" type="email" required />
