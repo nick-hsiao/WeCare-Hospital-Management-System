@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'nickhsiao',
   database: 'wecare',
   multipleStatements: true
   //port: 3001,
