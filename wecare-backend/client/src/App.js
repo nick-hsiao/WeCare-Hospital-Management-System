@@ -73,9 +73,11 @@ export default function App() {
           </Route>
           <Route path="/scheduleAppt">
             <SchedulingAppt />
-          </Route>
-                  <Route name="onehist" path="/ViewOneHistory/:email" component={ViewOneHistory} />
-          <Route path="/newPatientMedHist">
+                  </Route>
+
+          <Route name="onehist" path="/ViewOneHistory/:email" component={ViewOneHistory} />
+
+                  <Route path="/newPatientMedHist">
             <NewMedHist />
           </Route>
           <Route path="/Home">
