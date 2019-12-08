@@ -3,25 +3,12 @@ import { FormClose, Notification } from 'grommet-icons';
 import logo from './logo.svg';
 
 import {
-    Collapsible,
-    Layer,
-    ResponsiveContext,
     Box,
     Button,
     Heading,
     Grommet,
-    Menu,
     FormField,
     Form,
-    TextInput,
-    Select,
-    Text,
-    CheckBox,
-    RadioButtonGroup,
-    TextArea,
-    RangeInput,
-
-
 } from 'grommet';
 
 import './App.css';
@@ -82,12 +69,7 @@ export class MakeDoc extends Component {
                             method="post"
                             onSubmit={({ value }) => {
                                 console.log("Submit", value);
-                                // fetch("http://localhost:3001/makeAccount?email=" + value.email)
-                                // .then(res => res.json())
-                                // .then(res => {
-                                //   console.log(res.length);
-                                //   console.log("yee haw");
-                                // });
+
                                 fetch("http://localhost:3001/checkIfDocExists?email=" + value.email)
                                     .then(res => res.json())
                                     .then(res => {
@@ -104,48 +86,29 @@ export class MakeDoc extends Component {
                                             window.location = "/DocHome";
                                         }
                                     });
-
-                                // let signed = true;
-                                // fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
-                                //   + "&password=" + value.password + "&address=" + value.address).catch(signed = false);
-
-                                // console.log(signed);
-                                // if (signed === true) {
-                                //   window.location  = "/Home";
-                                // } else {
-                                //   window.alert("Email is already associated with an account.");
-                                // }
-
-
-
-
-                                // var link = document.getElementById("/createAcc");
-                                // link.setAttribute("href", "newPatientMedHist");}
-                            }}
-                        //action="/insert"
-                        >
+                            }} >
                             <FormField
                                 label="First Name"
                                 name="firstName"
                                 required
-                                placeholder = "Please enter your first name."
+                                placeholder="Please enter your first name."
                                 validate={{ regexp: /^[a-z]/i }} />
                             <FormField
                                 label="Last Name"
                                 name="lastName"
                                 required
-                                placeholder = "Please enter your last name."
+                                placeholder="Please enter your last name."
                                 validate={{ regexp: /^[a-z]/i }} />
                             <FormField
                                 label="Employee ID"
                                 name="uid"
-                                placeholder = "Please enter your employee id."
+                                placeholder="Please enter your employee id."
                                 required />
                             <FormField
                                 label="Email"
                                 name="email"
                                 type="email"
-                                placeholder = "Please enter your email."
+                                placeholder="Please enter your email."
                                 required />
                             <FormField
                                 label="Gender"
@@ -156,7 +119,7 @@ export class MakeDoc extends Component {
                                 label="Password"
                                 name="password"
                                 required
-                                placeholder = "Please enter your password."
+                                placeholder="Please enter your password."
                                 validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 digits, 2 nums" }} />
                             <Box direction="row" align="center" >
                                 <Button

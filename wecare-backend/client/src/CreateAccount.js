@@ -82,12 +82,7 @@ export class CreateAccount extends Component {
               method="post"
               onSubmit={({ value }) => {
                 console.log("Submit", value);
-                // fetch("http://localhost:3001/makeAccount?email=" + value.email)
-                // .then(res => res.json())
-                // .then(res => {
-                //   console.log(res.length);
-                //   console.log("yee haw");
-                // });
+
                 fetch("http://localhost:3001/checkIfPatientExists?email=" + value.email)
                   .then(res => res.json())
                   .then(res => {
@@ -104,26 +99,7 @@ export class CreateAccount extends Component {
                       window.location = "/Home";
                     }
                   });
-
-                // let signed = true;
-                // fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
-                //   + "&password=" + value.password + "&address=" + value.address).catch(signed = false);
-
-                // console.log(signed);
-                // if (signed === true) {
-                //   window.location  = "/Home";
-                // } else {
-                //   window.alert("Email is already associated with an account.");
-                // }
-
-
-
-
-                // var link = document.getElementById("/createAcc");
-                // link.setAttribute("href", "newPatientMedHist");}
-              }}
-            //action="/insert"
-            >
+              }}>
               <FormField
                 label="First Name"
                 name="firstName"
@@ -156,7 +132,6 @@ export class CreateAccount extends Component {
                   type="submit"
                   primary />
               </Box>
-
               <Box
               align = "center" pad = "small">
                 <Text>Are you a doctor?</Text>
@@ -168,7 +143,6 @@ export class CreateAccount extends Component {
             </Form>
           </Box>
         </Box>
-
       </Grommet>
     );
   }
