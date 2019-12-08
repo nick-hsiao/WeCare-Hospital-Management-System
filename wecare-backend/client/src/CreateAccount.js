@@ -3,24 +3,13 @@ import { FormClose, Notification } from 'grommet-icons';
 import logo from './logo.svg';
 
 import {
-  Collapsible,
-  Layer,
-  ResponsiveContext,
   Box,
   Button,
   Heading,
   Grommet,
-  Menu,
   FormField,
   Form,
-  TextInput,
-  Select,
   Text,
-  CheckBox,
-  RadioButtonGroup,
-  TextArea,
-  RangeInput,
-
 
 } from 'grommet';
 
@@ -77,6 +66,7 @@ export class CreateAccount extends Component {
               src={require('./img/Asset 3.png')} />
           </Box>
           <Box width="medium">
+          <Text color = "#AAAAAA">Patient's registration form:</Text>
             <Form
               onReset={event => console.log(event)}
               method="post"
@@ -103,23 +93,32 @@ export class CreateAccount extends Component {
               <FormField
                 label="First Name"
                 name="firstName"
+                placeholder="Please enter your first name."
                 required
                 validate={{ regexp: /^[a-z]/i }} />
               <FormField
                 label="Last Name"
                 name="lastName"
                 required
+                placeholder="Please enter your last name."
                 validate={{ regexp: /^[a-z]/i }} />
               <FormField
                 label="Address"
                 name="address"
+                placeholder="Please enter your address."
                 required />
-              <FormField label="Email" name="email" type="email" required />
+              <FormField
+                label="Email"
+                name="email"
+                type="email"
+                placeholder="Please enter your email."
+                required />
               <FormField
                 label="Password"
                 name="password"
+                placeholder="Please enter your password."
                 required
-                validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 digits, 2 nums" }} />
+                validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 characters containing 2 digits" }} />
               <Box direction="row" align="center" >
                 <Button
                   style={{ textAlign: 'center' }}
@@ -133,7 +132,7 @@ export class CreateAccount extends Component {
                   primary />
               </Box>
               <Box
-              align = "center" pad = "small">
+                align="center" pad="small">
                 <Text>Are you a doctor?</Text>
                 <Button
                   primary

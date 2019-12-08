@@ -9,6 +9,8 @@ import {
     Grommet,
     FormField,
     Form,
+    Text,
+
 } from 'grommet';
 
 import './App.css';
@@ -64,6 +66,8 @@ export class MakeDoc extends Component {
                             src={require('./img/Asset 3.png')} />
                     </Box>
                     <Box width="medium">
+                    <Text color = "#AAAAAA">Doctor's registration form:</Text>
+
                         <Form
                             onReset={event => console.log(event)}
                             method="post"
@@ -120,7 +124,7 @@ export class MakeDoc extends Component {
                                 name="password"
                                 required
                                 placeholder="Please enter your password."
-                                validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 digits, 2 nums" }} />
+                                validate={{ regexp: /^(?=.{8,})(?=.*[0-9]{2})/, message: "@ least 8 characters containing 2 digits" }} />
                             <Box direction="row" align="center" >
                                 <Button
                                     style={{ textAlign: 'center' }}
