@@ -1,7 +1,3 @@
-
-// import { FormDown } from "grommet-icons";
-
-// import { Grommet, Box, Calendar, DropButton, Text } from "grommet";
 import { grommet } from "grommet/themes";
 
 
@@ -47,6 +43,8 @@ const theme = {
   global: {
     colors: {
       brand: '#00739D',
+      focus: "#00739D",
+      active: "#00739D",
     },
     font: {
       family: 'Lato',
@@ -104,9 +102,11 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
         date={date || initialDate}
         onSelect={setDate}
         showAdjacentDays={false}
+        required
       />
       <Box flex={false} pad="medium" gap="small">
         <Keyboard
+          required
           onEnter={event => {
             event.preventDefault(); // so drop doesn't re-open
             close();
@@ -165,6 +165,7 @@ const DropContent = ({ date: initialDate, time: initialTime, onClose }) => {
             value={time || initialTime}
             name="maskedInput"
             onChange={event => setTime(event.target.value)}
+            required
           />
         </Keyboard>
         <Box flex={false}>
@@ -227,7 +228,12 @@ const ConcernsTextArea = () => {
         height="xsmall"
         border={{ color: "brand", size: "small" }}
       >
-        <TextArea placeholder="Enter your concerns..." value={value} onChange={onChange} fill />
+        <TextArea
+          placeholder="Enter your concerns..."
+          value={value}
+          onChange={onChange}
+          fill
+          required />
       </Box>
     </Grommet>
   );
@@ -251,7 +257,8 @@ const SymptomsTextArea = () => {
         <TextArea
           placeholder="Enter your symptoms..."
           value={value}
-          onChange={onChange} fill />
+          onChange={onChange} fill
+          required />
       </Box>
     </Grommet>
   );
@@ -277,12 +284,6 @@ export class SchedulingAppt extends Component {
           <Heading level='3' margin='none'>WeCare</Heading>
         </AppBar>
         <Box align="center" pad="small" gap="small">
-          <DateTimeDropButton>
-          </DateTimeDropButton>
-          <ConcernsTextArea>
-          </ConcernsTextArea>
-          <SymptomsTextArea>
-          </SymptomsTextArea>
           <Form
             onSubmit={({ value }) => {
               console.log("hi");
@@ -303,27 +304,42 @@ export class SchedulingAppt extends Component {
                   // console.log(JSON.stringify(res));
                   // console.log(res.data);
                   console.log("eg");
-                  fetch("http://localhost:3001/genApptUID")
+                  fetch("http://localhost:3001/checkIfApptExists?email=" + email_in_use + "&startTime=" + theTime + "&date=" + theDate)
                     .then(res => res.json())
                     .then(res => {
-                      var string_json = JSON.stringify(res);
-                      var uid_json = JSON.parse(string_json);
-                      let gen_uid = uid_json.uid;
-                      console.log(gen_uid);
-                      // console.log(JSON.stringify(res));
-                      // console.log(res.data);
-                      //put uid+1 into the link and getch
-                      //go to app.js and parse /schedule for .uid
-                      fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
-                        "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms + "&uid=" + gen_uid);
-                      fetch("http://localhost:3001/addToPatientSeeAppt?email=" + email_in_use + "&uid=" + gen_uid +
-                        "&concerns=" + theConcerns + "&symptoms=" + theSymptoms);
+                      if ((res.data[0])) {
+                        window.alert("You've already scheduled an appointment at this time.");
+                      } else {
+                        fetch("http://localhost:3001/genApptUID")
+                          .then(res => res.json())
+                          .then(res => {
+                            var string_json = JSON.stringify(res);
+                            var uid_json = JSON.parse(string_json);
+                            let gen_uid = uid_json.uid;
+                            console.log(gen_uid);
+                            fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
+                              "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms + "&uid=" + gen_uid);
+                            fetch("http://localhost:3001/addToPatientSeeAppt?email=" + email_in_use + "&uid=" + gen_uid +
+                              "&concerns=" + theConcerns + "&symptoms=" + theSymptoms);
+                            window.alert("Appointment successfully scheduled!");
+                            //window.location = "/PatientsViewAppt";
+                          });
+
+
+
+                      }
                     });
                 });
 
 
             }}
           >
+            <DateTimeDropButton>
+            </DateTimeDropButton>
+            <ConcernsTextArea>
+            </ConcernsTextArea>
+            <SymptomsTextArea>
+            </SymptomsTextArea>
 
             <Button
               label="attempt to schedule"

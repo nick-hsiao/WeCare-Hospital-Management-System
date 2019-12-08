@@ -61,6 +61,49 @@ app.get('/checkIfPatientExists', (req, res) => {
   });
 });
 
+app.get('/checkIfDocExists', (req, res) => {
+  let params = req.query;
+  let email = params.email;
+  con.query(`SELECT * 
+             FROM DoctorNurse  
+             WHERE email = "${email}"`, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      console.log(results);
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
+app.get('/checkIfApptExists', (req, res) => {
+  let params = req.query;
+  let email = params.email;
+  let startTime = params.startTime;
+  let date = params.date;
+
+  let ndate = date.substring(0, 10);
+  let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
+  //sql to turn string to sql time obj
+  let sql_start = `CONVERT('${startTime}', TIME)`;
+
+  con.query(`SELECT * 
+             FROM PatientsSeeAppointments, Appointment  
+             WHERE patient = "${email}" AND
+             appt = uid AND
+             date = ${sql_date} AND
+             starttime = ${sql_start}`, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      console.log(results);
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
 app.get('/names', (req, res) => {
   con.query('SELECT * FROM Patient', function (error, results, fields) {
     if (error) throw error;
@@ -95,13 +138,40 @@ app.get('/OneHistory', (req, res) => {
 app.get('/makeAccount', (req, res) => {
   console.log("hi");
   let ah = req.query;
-  let name = ah.name;
+  let name = ah.name + " " + ah.lastname;
   let email = ah.email;
   let password = ah.password;
   let address = ah.address;
 
-  let sql_statement = "INSERT INTO Patient (email, password, name, address) VALUES " + `("${email}", "${password}", "${name}", "${address}")`;
+  let sql_statement = `INSERT INTO Patient (email, password, name, address) 
+                       VALUES ` + `("${email}", "${password}", "${name}", "${address}")`;
   console.log(sql_statement);
+
+  con.query(sql_statement, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      email_in_use = email;
+      password_in_use = password;
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
+app.get('/makeDocAccount', (req, res) => {
+  console.log("trying to make a doctor");
+  let params = req.query;
+  let name = params.name + " " + params.lastname;
+  let email = params.email;
+  let password = params.password;
+  let gender = params.gender;
+  let uid = params.uid;
+
+  let sql_statement = `INSERT INTO DoctorNurse (email, gender, password, uid, name) 
+                       VALUES ` + `("${email}", "${gender}", "${password}", "${uid}", "${name}")`;
+  console.log(sql_statement);
+
   con.query(sql_statement, function (error, results, fields) {
     if (error) throw error;
     else {
@@ -135,7 +205,6 @@ app.get('/MedHistView', (req, res) => {
     };
   });
 });
-
 
 app.get('/patientViewAppt', (req, res) => {
   let kill_me = req.query;
@@ -315,7 +384,9 @@ app.get('/checkDoclogin', (req, res) => {
   let params = req.query;
   let email = params.email;
   let password = params.password;
-  let sql_statement = `SELECT * FROM DoctorNurse WHERE email="${email}" AND password="${password}"`;
+  let sql_statement = `SELECT * 
+                       FROM DoctorNurse 
+                       WHERE email="${email}" AND password="${password}"`;
   console.log(sql_statement);
   con.query(sql_statement, function (error, results, fields) {
     if (error) {
@@ -349,17 +420,8 @@ app.get('/addToPatientSeeAppt', (req, res) => {
   let concerns = params.concerns;
   let symptoms = params.symptoms;
 
-  // console.log("back");
-  // console.log(time);
-  // console.log(endtime);
-  // console.log(date);
-  // console.log(concerns);
-  // console.log(symptoms);
-  // console.log(typeof date);
-  // console.log("ow");
-  // let generated_uid;
-
-  let sql_try = `INSERT INTO PatientsSeeAppointments (patient, appt, concerns, symptoms) VALUES ("${email}", ${appt_uid}, "${concerns}", "${symptoms}")`;
+  let sql_try = `INSERT INTO PatientsSeeAppointments (patient, appt, concerns, symptoms) 
+                 VALUES ("${email}", ${appt_uid}, "${concerns}", "${symptoms}")`;
   console.log(sql_try);
   con.query(sql_try, function (error, results, fields) {
     //console.log(query.sql);
@@ -371,7 +433,6 @@ app.get('/addToPatientSeeAppt', (req, res) => {
 
 });
 
-
 app.get('/schedule', (req, res) => {
   let params = req.query;
   let time = params.time;
@@ -381,17 +442,6 @@ app.get('/schedule', (req, res) => {
   let concerns = params.concerns;
   let symptoms = params.symptoms;
 
-  console.log("back");
-  console.log(time);
-  console.log(endtime);
-  console.log(date);
-  console.log(concerns);
-  console.log(symptoms);
-  console.log(typeof date);
-  console.log("ow");
-  let generated_uid;
-
-
   let ndate = date.substring(0, 10);
 
   let sql_date = `STR_TO_DATE('${ndate}', '%Y-%m-%d')`;
@@ -400,7 +450,8 @@ app.get('/schedule', (req, res) => {
 
   //sql to turn string to sql time obj
   let sql_end = `CONVERT('${endtime}', TIME)`;
-  let sql_try = `INSERT INTO Appointment (uid, date, starttime, endtime, status) VALUES (${uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`;
+  let sql_try = `INSERT INTO Appointment (uid, date, starttime, endtime, status) 
+                 VALUES (${uid}, ${sql_date}, ${sql_start}, ${sql_end}, "Not Done")`;
   console.log(sql_try);
   con.query(sql_try, function (error, results, fields) {
     //console.log(query.sql);
@@ -409,7 +460,6 @@ app.get('/schedule', (req, res) => {
       console.log("im hippie");
     }
   });
-
 });
 
 app.get('/genApptUID', (req, res) => {
@@ -426,16 +476,11 @@ app.get('/genApptUID', (req, res) => {
       return res.json({ uid: `${generated_uid}` });
     };
   });
-
-
 });
-
 
 app.get('/userInSession', (req, res) => {
   console.log("cowboy beep");
-
   return res.json({ email: `${email_in_use}` });
-
 });
 
 app.get('/endSession', (req, res) => {
@@ -443,7 +488,6 @@ app.get('/endSession', (req, res) => {
   email_in_use = "";
   password_in_use = "";
   console.log("hit rock bottom");
-
 });
 
 app.post('/insert', (req, res) => {
@@ -457,7 +501,7 @@ app.post('/insert', (req, res) => {
   });
 });
 
-app.post('/scheduleAppt', (req, res) => {
+app.post('/scheduleAppt', (req, res) => { // probably delete later
   console.log("hello ive touched");
   con.query('INSERT INTO users (first, last) VALUES ("ok", "ok")', function (error, results, fields) {
     //console.log(query.sql);
