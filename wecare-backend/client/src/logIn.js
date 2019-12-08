@@ -2,9 +2,12 @@ import React, { Component, Image, StyleSheet, useState } from 'react';
 import logo from './logo.svg';
 import brandImage from './img/Asset 3.png';
 import { withRouter } from 'react-router-dom';
+
 import {
   FormClose,
   Notification,
+  User,
+
 
 } from 'grommet-icons';
 
@@ -37,6 +40,8 @@ const theme = {
   global: {
     colors: {
       brand: '#00739D',
+      focus: "#00739D",
+      active: "#00739D",
     },
     font: {
       family: 'Lato',
@@ -52,7 +57,6 @@ const AppBar = (props) => (
     justify='between'
     background='brand'
     pad={{ left: 'medium', right: 'small', vertical: 'small' }}
-    //elevation='medium'
     style={{ zIndex: '1' }}
     {...props} />
 );
@@ -76,15 +80,14 @@ class LogIn extends Component {
   }
 
   render() {
-    const {
-      isDoctor
-    } = this.state;
-    //[isDoc, setChecked] = React.useState(true);
+    const { isDoctor } = this.state; // If doctor, will wuery from doctor table
+
     return (
       <Grommet theme={theme} full>
         <AppBar>
           <Heading level='3' margin='none'>WeCare</Heading>
         </AppBar>
+
         <Box
           fill
           align="center"
@@ -100,6 +103,7 @@ class LogIn extends Component {
             width="medium"
             pad="medium">
             <Form
+
               onReset={event => console.log(event)}
               onSubmit={({ value }) => {
                 console.log("Submit", value);
@@ -133,11 +137,19 @@ class LogIn extends Component {
               }
               }>
 
-              <FormField label="Email" name="email" type="email" required />
               <FormField
+                color="#00739D"
+                label="Email"
+                name="email"
+                type="email"
+                placeholder = "Please enter your email."
+                required />
+              <FormField
+                color="#00739D"
                 type='password'
                 label="Password"
                 name="password"
+                placeholder = "Please enter your password."
                 required />
               <FormField
                 component={CheckBox}
@@ -161,7 +173,6 @@ class LogIn extends Component {
             </Form>
           </Box>
         </Box>
-
       </Grommet>
     );
   }

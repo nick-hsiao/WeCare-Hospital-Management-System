@@ -10,7 +10,7 @@ var port = 3001; //process.env.PORT || was 3000
 var con = mysql.createConnection({
   host: 'localhost',
   user: 'root',
-  password: 'root',
+  password: 'i@mr00t!',
   database: 'wecare',
   multipleStatements: true
   //port: 3001,
@@ -61,6 +61,22 @@ app.get('/checkIfPatientExists', (req, res) => {
   });
 });
 
+app.get('/checkIfDocExists', (req, res) => {
+  let params = req.query;
+  let email = params.email;
+  con.query(`SELECT * 
+             FROM DoctorNurse  
+             WHERE email = "${email}"`, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      console.log(results);
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
 app.get('/names', (req, res) => {
   con.query('SELECT * FROM Patient', function (error, results, fields) {
     if (error) throw error;
@@ -95,13 +111,40 @@ app.get('/OneHistory', (req, res) => {
 app.get('/makeAccount', (req, res) => {
   console.log("hi");
   let ah = req.query;
-  let name = ah.name;
+  let name = ah.name + " " + ah.lastname;
   let email = ah.email;
   let password = ah.password;
   let address = ah.address;
 
-  let sql_statement = "INSERT INTO Patient (email, password, name, address) VALUES " + `("${email}", "${password}", "${name}", "${address}")`;
+  let sql_statement = `INSERT INTO Patient (email, password, name, address) 
+                       VALUES ` + `("${email}", "${password}", "${name}", "${address}")`;
   console.log(sql_statement);
+
+  con.query(sql_statement, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      email_in_use = email;
+      password_in_use = password;
+      return res.json({
+        data: results
+      })
+    };
+  });
+});
+
+app.get('/makeDocAccount', (req, res) => {
+  console.log("trying to make a doctor");
+  let params = req.query;
+  let name = params.name + " " + params.lastname;
+  let email = params.email;
+  let password = params.password;
+  let gender = params.gender;
+  let uid = params.uid;
+
+  let sql_statement = `INSERT INTO DoctorNurse (email, gender, password, uid, name) 
+                       VALUES ` + `("${email}", "${gender}", "${password}", "${uid}", "${name}")`;
+  console.log(sql_statement);
+
   con.query(sql_statement, function (error, results, fields) {
     if (error) throw error;
     else {
@@ -135,7 +178,6 @@ app.get('/MedHistView', (req, res) => {
     };
   });
 });
-
 
 app.get('/patientViewAppt', (req, res) => {
   let kill_me = req.query;

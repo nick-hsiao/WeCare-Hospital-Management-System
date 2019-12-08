@@ -19,6 +19,7 @@ import DocSettings from './DocSettings.js';
 import PatientsViewAppt from './PatientsViewAppt.js';
 import NoMedHistFound from './NoMedHistFound.js';
 import DocViewAppt from './DocViewAppt.js';
+import MakeDoc from './MakeDoc.js';
 
 export default function App() {
   return (
@@ -58,10 +59,13 @@ export default function App() {
 
         {/* A <Switch> looks through its children <Route>s and
             renders the first one that matches the current URL. */}
-              <Switch>
-                  <Route path="/NoMedHistFound">
-                      <NoMedHistFound />
-                  </Route>
+        <Switch>
+          <Route path="/NoMedHistFound">
+            <NoMedHistFound />
+          </Route>
+          <Route path="/MakeDoc">
+            <MakeDoc />
+          </Route>
           <Route path="/MedHist">
             <MedHist />
           </Route>
@@ -73,11 +77,11 @@ export default function App() {
           </Route>
           <Route path="/scheduleAppt">
             <SchedulingAppt />
-                  </Route>
+          </Route>
 
           <Route name="onehist" path="/ViewOneHistory/:email" component={ViewOneHistory} />
 
-                  <Route path="/newPatientMedHist">
+          <Route path="/newPatientMedHist">
             <NewMedHist />
           </Route>
           <Route path="/Home">
@@ -100,7 +104,7 @@ export default function App() {
           </Route>
           <Route path="/">
             <LogIn />
-                  </Route>
+          </Route>
         </Switch>
       </div>
     </Router>

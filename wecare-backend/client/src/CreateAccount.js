@@ -31,6 +31,8 @@ const theme = {
   global: {
     colors: {
       brand: '#00739D',
+      focus: "#00739D",
+      active: "#00739D",
     },
     font: {
       family: 'Lato',
@@ -68,6 +70,12 @@ export class CreateAccount extends Component {
           <Heading level='3' margin='none'>WeCare</Heading>
         </AppBar>
         <Box fill align="center" justify="top">
+          <Box align="center" pad="medium">
+            <img
+              height="100"
+              width="100"
+              src={require('./img/Asset 3.png')} />
+          </Box>
           <Box width="medium">
             <Form
               onReset={event => console.log(event)}
@@ -81,21 +89,21 @@ export class CreateAccount extends Component {
                 //   console.log("yee haw");
                 // });
                 fetch("http://localhost:3001/checkIfPatientExists?email=" + value.email)
-                .then(res => res.json())
-                .then(res => {
-                  console.log("uoo");
-                  console.log(res.data[0]);
-                  console.log("sdadsada");
+                  .then(res => res.json())
+                  .then(res => {
+                    console.log("uoo");
+                    console.log(res.data[0]);
+                    console.log("sdadsada");
 
-                  if ((res.data[0])) {
-                    window.alert("An account is already associated with that email.");
-                    console.log("no user founds");
-                  } else {
-                    fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
-                   + "&password=" + value.password + "&address=" + value.address);
+                    if ((res.data[0])) {
+                      window.alert("An account is already associated with that email.");
+                      console.log("no user founds");
+                    } else {
+                      fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&lastname=" + value.lastName + "&email=" + value.email
+                        + "&password=" + value.password + "&address=" + value.address);
                       window.location = "/Home";
-                  }
-                });
+                    }
+                  });
 
                 // let signed = true;
                 // fetch("http://localhost:3001/makeAccount?name=" + value.firstName + "&email=" + value.email
@@ -107,7 +115,7 @@ export class CreateAccount extends Component {
                 // } else {
                 //   window.alert("Email is already associated with an account.");
                 // }
-                
+
 
 
 
@@ -141,8 +149,7 @@ export class CreateAccount extends Component {
                   style={{ textAlign: 'center' }}
                   label="Cancel"
                   fill="horizontal"
-                  href="/"
-                  primary />
+                  href="/" />
                 <Button
                   label="Sign Up"
                   fill="horizontal"
@@ -150,6 +157,14 @@ export class CreateAccount extends Component {
                   primary />
               </Box>
 
+              <Box
+              align = "center" pad = "small">
+                <Text>Are you a doctor?</Text>
+                <Button
+                  primary
+                  label="I'm a doctor"
+                  href="/MakeDoc" />
+              </Box>
             </Form>
           </Box>
         </Box>
