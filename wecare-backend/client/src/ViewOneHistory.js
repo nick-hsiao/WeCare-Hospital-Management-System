@@ -44,18 +44,6 @@ export class ViewOneHistory extends Component {
         const { email } = this.props.match.params;
         console.log("Viewed patient profile email is : "+ email);
 
-        //let email_in_use = "";
-        //fetch("http://localhost:3001/userInSession")
-        //    .then(res => res.json())
-        //    .then(res => {
-        //        var string_json = JSON.stringify(res);
-        //        var email_json = JSON.parse(string_json);
-        //        email_in_use = email_json.email;
-        //        console.log("email in use is :" + email_in_use);
-        //        this.getHistory(email_in_use);
-        //    });
-
-
             this.checkEmail(email);
             this.getHistory(email);
 
@@ -69,7 +57,7 @@ export class ViewOneHistory extends Component {
             .then(res => res.json())
             .then(res => {
                 if (res.data.length === 0)
-                    window.location = "/NoMedHistFound";// "/NoMedHistFound"
+                    window.location = "/NoMedHistFound";
             });
     }
 
