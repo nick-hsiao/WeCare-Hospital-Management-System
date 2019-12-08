@@ -75,8 +75,8 @@ export class ViewMedHist extends Component {
                     <table className="table table-hover">
                         <thead>
                             <tr>
-                                <th>name</th>
-                                <th>email</th>
+                                <th>Name</th>
+                                <th>Profile</th>
                             </tr>
                         </thead>
                         <tbody>
