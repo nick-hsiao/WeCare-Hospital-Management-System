@@ -1,7 +1,3 @@
-
-// import { FormDown } from "grommet-icons";
-
-// import { Grommet, Box, Calendar, DropButton, Text } from "grommet";
 import { grommet } from "grommet/themes";
 
 
@@ -311,13 +307,8 @@ export class SchedulingAppt extends Component {
                   fetch("http://localhost:3001/checkIfApptExists?email=" + email_in_use + "&startTime=" + theTime + "&date=" + theDate)
                     .then(res => res.json())
                     .then(res => {
-                      console.log("uoo");
-                      console.log(res.data[0]);
-                      console.log("sdadsada");
-
                       if ((res.data[0])) {
-                        window.alert("Appointment exists");
-                        console.log("no user founds");
+                        window.alert("You've already scheduled an appointment at this time.");
                       } else {
                         fetch("http://localhost:3001/genApptUID")
                           .then(res => res.json())
@@ -326,10 +317,6 @@ export class SchedulingAppt extends Component {
                             var uid_json = JSON.parse(string_json);
                             let gen_uid = uid_json.uid;
                             console.log(gen_uid);
-                            // console.log(JSON.stringify(res));
-                            // console.log(res.data);
-                            //put uid+1 into the link and getch
-                            //go to app.js and parse /schedule for .uid
                             fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
                               "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms + "&uid=" + gen_uid);
                             fetch("http://localhost:3001/addToPatientSeeAppt?email=" + email_in_use + "&uid=" + gen_uid +
@@ -342,24 +329,6 @@ export class SchedulingAppt extends Component {
 
                       }
                     });
-                  // fetch("http://localhost:3001/genApptUID")
-                  //   .then(res => res.json())
-                  //   .then(res => {
-                  //     var string_json = JSON.stringify(res);
-                  //     var uid_json = JSON.parse(string_json);
-                  //     let gen_uid = uid_json.uid;
-                  //     console.log(gen_uid);
-                  //     // console.log(JSON.stringify(res));
-                  //     // console.log(res.data);
-                  //     //put uid+1 into the link and getch
-                  //     //go to app.js and parse /schedule for .uid
-                  //     fetch("http://localhost:3001/schedule?time=" + theTime + "&endTime=" + endTime +
-                  //       "&date=" + theDate + "&concerns=" + theConcerns + "&symptoms=" + theSymptoms + "&uid=" + gen_uid);
-                  //     fetch("http://localhost:3001/addToPatientSeeAppt?email=" + email_in_use + "&uid=" + gen_uid +
-                  //       "&concerns=" + theConcerns + "&symptoms=" + theSymptoms);
-                  //     window.alert("Appointment successfully scheduled!");
-                  //     window.location = "/PatientsViewAppt";
-                  //   });
                 });
 
 
