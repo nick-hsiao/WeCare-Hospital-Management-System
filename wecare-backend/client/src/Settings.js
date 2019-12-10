@@ -97,13 +97,12 @@ export class Settings extends Component {
                           .then(res => {
                             let didUpdate = res.data.affectedRows;
                             if(didUpdate === 0) {
-                                window.alert("oops, you enetered your old email incorrectly");
+                                window.alert("oops, you enetered your old password incorrectly");
+                            } else {
+                                window.alert("congrats! password reset was a success :)");
                             }
                           });
                           });
-                        //   fetch("http://localhost:3001/resetPasswordPatient?email=" + 
-                        //   email_in_use + "&oldPassword=" + value.oldPassword + "&newPassword=" + 
-                        //   value.newPassword, {method: 'POST'});
 
 
                     }}>
