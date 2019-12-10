@@ -515,7 +515,7 @@ app.post('/scheduleAppt', (req, res) => { // probably delete later
 app.get('/doctorViewAppt', (req, res) => {
   let a = req.query;
   let email = a.email;
-  let statement = `SELECT a.date, a.starttime, a.status, p.name, psa.concerns, psa.symptoms
+  let statement = `SELECT a.uid,a.date, a.starttime, a.status, p.name, psa.concerns, psa.symptoms
   FROM Appointment a, PatientsSeeAppointments psa, Patient p
   WHERE a.uid = psa.appt AND psa.patient = p.email`;
   console.log(statement);
@@ -529,6 +529,53 @@ app.get('/doctorViewAppt', (req, res) => {
       })
     };
   });
+});
+
+app.get('/deleteAppt', (req, res) => {
+  let a = req.query;
+  let uid = a.uid;
+  let statement = `DELETE FROM PatientsSeeAppointments p WHERE p.appt = ${uid}`;
+  console.log(statement);
+  con.query(statement, function (error, results, fields) {
+    if (error) throw error;
+    else {
+      console.log('hi');
+      let statement2 = `DELETE FROM ApptInRoom a WHERE a.appt = ${uid}`;
+      console.log(statement2);
+      con.query(statement, function (error, results, fields) {
+      if (error) throw error;
+          else {
+      console.log('hi');
+            let statement1 = `DELETE FROM Diagnose d WHERE d.appt = ${uid}`;
+            console.log(statement1);
+            con.query(statement, function (error, results, fields) {
+              if (error) throw error;
+              else {
+                console.log('hi');
+                let statement3 = `DELETE FROM ApptsToSchedules a WHERE a.appt = ${uid}`;
+                console.log(statement3);
+                con.query(statement, function (error, results, fields) {
+                  if (error) throw error;
+                  else {
+                    console.log('hi');
+                    return res.json({
+                      data: results
+                    })
+                    
+                    
+                    
+                  };
+          });
+
+      };
+  });
+      
+    };
+  });
+      
+    };
+  });
+
 });
 // 
 // var query = con.query('INSERT INTO users (first, last) VALUES ("hello", "there")', 

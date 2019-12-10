@@ -71,6 +71,7 @@ export class DocViewAppt extends Component {
                     <table className="table table-hover">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>name</th>
                                 <th>date</th>
                                 <th>start time</th>
@@ -83,6 +84,7 @@ export class DocViewAppt extends Component {
                         <tbody>
                             {apptlist.map(appt =>
                                 <tr key={appt.name}>
+                                    <td>{appt.uid}</td>
                                     <td>{appt.name}</td>
                                     <td>{appt.date.substring(0,10)} </td>
                                     <td>{appt.starttime}</td>
@@ -91,10 +93,18 @@ export class DocViewAppt extends Component {
                                     <td>{appt.status}</td>
                                    {/*  <td>
                                         <Button label="Add"></Button>
-                                    </td>
+                                   </td>*/}
                                     <td>
-                                        <Button label="Delete"></Button>
-                                    </td> */}
+                                        <Button label="Delete"
+                                        onClick = {() => {
+                                            fetch('http://localhost:3001/deleteAppt?uid='+ appt.uid)
+                                            .then(res => res.json())
+                                            
+
+                                        }}
+                                        ></Button>
+                                        
+                                    </td> 
                                     
                                 </tr>
                             )}
